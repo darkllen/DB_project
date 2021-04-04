@@ -20,4 +20,15 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
         String getTotal();
     }
 
+    @Query(value = "SELECT Employee.empl_name AS empl_name, Employee.empl_surname AS empl_surname, Employee.id_employee AS id_employee, COUNT(Recipe.card_number) AS cust_number " +
+            "FROM Employee INNER JOIN Recipe ON Employee.id_employee=Recipe.id_employee " +
+            "GROUP BY Employee.id_employee", nativeQuery = true)
+    List<EmployeeCustInfo> getEmployeesClientsNum();
+    interface EmployeeCustInfo {
+        String getEmpl_surname();
+        String getEmpl_name();
+        String getId_employee();
+        String getCust_number();
+    }
+
 }

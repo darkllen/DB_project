@@ -64,6 +64,11 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeRepo.getEmployeesSalesSum());
     }
 
+    @RequestMapping(value = {"/get_employees_clients_num"}, method = RequestMethod.GET)
+    public ResponseEntity<List<EmployeeRepo.EmployeeCustInfo>> get_employees_clients_num(){
+        return ResponseEntity.status(HttpStatus.OK).body(employeeRepo.getEmployeesClientsNum());
+    }
+
 
     @RequestMapping(value = {"/get_all_cities"}, method = RequestMethod.POST)
     public ResponseEntity<List<String>> get_all_cities(){
@@ -73,7 +78,7 @@ public class RestController {
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
-        employeeRepo.getEmployeesSalesSum().forEach(x -> System.out.println(x.getTotal()));
+        employeeRepo.getEmployeesClientsNum().forEach(x -> System.out.println(x.getCust_number()));
         return "index";
     }
 }
