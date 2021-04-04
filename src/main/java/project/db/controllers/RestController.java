@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import project.db.dto.Customer_Card;
 import project.db.dto.Product;
 import project.db.repos.CategoryRepo;
 import project.db.repos.CustomerRepo;
@@ -33,7 +34,6 @@ public class RestController {
 
     @RequestMapping(value = {"/get_customer_spends"}, method = RequestMethod.GET)
     public ResponseEntity<List<CustomerRepo.CustomerSpends>> get_customer_spends(){
-        customerRepo.getCustomersSpends().forEach(x->System.out.println(x.getCust_name()));
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getCustomersSpends());
     }
 
@@ -42,10 +42,25 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatClientsFromCityNBuy(city));
     }
 
+    @RequestMapping(value = {"/get_all_products_that_all_clients_from_city_buy"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> get_all_products_that_all_clients_from_city_buy(@RequestBody final String city){
+        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatAllClientsFromCityNBuy(city));
+    }
+
+    @RequestMapping(value = {"/get_clients_who_buys_only_promo_products"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Customer_Card>> get_clients_who_buys_only_promo_products(){
+        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getClientsWhoBuysOnlyPromoProducts());
+    }
+
+    @RequestMapping(value = {"/get_all_cities"}, method = RequestMethod.GET)
+    public ResponseEntity<List<String>> get_all_cities(){
+        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities());
+    }
+
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
-        productRepo.getAllProductsThatClientsFromCityNBuy("K").forEach(System.out::println);
+        customerRepo.getClientsWhoBuysOnlyPromoProducts().forEach(System.out::println);
         return "index";
     }
 }

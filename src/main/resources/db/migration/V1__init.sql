@@ -42,7 +42,7 @@ create table Customer_Card
 );
 
 insert into Customer_Card (card_number, cust_surname, cust_name, cust_patronymic, phone_number, percent, city) values
-('aaa', 'Yankin', 'Ihor', 'Serhiyovich', '0661534986', '5', 'O'),
+('aaa', 'Yankin', 'Ihor', 'Serhiyovich', '0661534986', '5', 'K'),
 ('bbb', 'Hinkul', 'Anna', 'Oleksandrivna', '0666666666', '10', 'K');
 
 create table Product
@@ -91,7 +91,7 @@ create table Store_Product
 
 insert into Store_Product (UPC, id_product, selling_price, products_number, promotional_product) values
 ('1',1,50, 200, 0),
-('2',2, 20, 100, 0),
+('2',2, 20, 100, 1),
 ('3',3, 30, 50, 1);
 
 create table Sale
@@ -106,6 +106,6 @@ create table Sale
 );
 
 insert into Sale (UPC, check_number, product_number, selling_price) values
-('1','1',4, 200),
+('2','1',4, 200),
 ('2','2', 3, 60),
-('3','3', 5, 150);
+('1','3', 5, 150);
