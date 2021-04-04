@@ -54,6 +54,11 @@
             document.getElementById("table").style.visibility = 'visible';
             $products.empty();
 
+            console.log(JSON.stringify({
+                city: $(this).find('[name=city]').val()
+            }));
+
+
 
             $.ajax({
                 type: 'GET',
