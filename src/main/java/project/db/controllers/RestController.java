@@ -14,6 +14,7 @@ import project.db.repos.CustomerRepo;
 import project.db.repos.ProductRepo;
 
 import java.util.List;
+import java.util.Map;
 
 @org.springframework.web.bind.annotation.RestController
 @RequiredArgsConstructor
@@ -38,13 +39,13 @@ public class RestController {
     }
 
     @RequestMapping(value = {"/get_all_products_that_clients_from_city_buy"}, method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> get_all_products_that_clients_from_city_buy(@RequestBody final String city){
-        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatClientsFromCityNBuy(city));
+    public ResponseEntity<List<Product>> get_all_products_that_clients_from_city_buy(@RequestBody Map<String, String> city){
+        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatClientsFromCityNBuy(city.get("city")));
     }
 
     @RequestMapping(value = {"/get_all_products_that_all_clients_from_city_buy"}, method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> get_all_products_that_all_clients_from_city_buy(@RequestBody final String city){
-        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatAllClientsFromCityNBuy(city));
+    public ResponseEntity<List<Product>> get_all_products_that_all_clients_from_city_buy(@RequestBody Map<String, String> city){
+        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatAllClientsFromCityNBuy(city.get("city")));
     }
 
     @RequestMapping(value = {"/get_clients_who_buys_only_promo_products"}, method = RequestMethod.GET)
