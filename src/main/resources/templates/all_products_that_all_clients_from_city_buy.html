@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="/table_style.css" type="text/css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="/select2-develop/dist/js/select2.min.js" defer></script>
+
 </head>
 <body>
 
@@ -15,10 +21,23 @@
 <div class="col2">
     <h1>Products that all clients from city buy</h1>
 
+    <label for="city">Choose city:</label>
+    <select id="city" name="city" form="city_form">
+        <!--<option value="audi">Audi</option>-->
+    </select>
+
+    <div class = "input_container">Street:
+        <div class= "input_info" id="street_container" >
+            <select id='selCity' style="width: 100%;">
+                <!-- <option value='0'>Select City</option>  -->
+            </select>
+        </div>
+    </div>
+
     <form id="city_form">
-        <p>City: </p>
-        <input type="text" placeholder="City" name="city">
-        <br>
+
+        <!--<p>City: </p>-->
+        <!--<input type="text" placeholder="City" name="city">-->
         <button type="submit">Search</button>
     </form>
 
@@ -62,11 +81,8 @@
 
             $.ajax({
                 type: 'GET',
-                url: '/get_all_products_that_all_clients_from_city_buy',
-                dataType: 'json',
-                data: JSON.stringify({
-                    city: $(this).find('[name=city]').val()
-                }),
+                url: '/get_all_products_that_all_clients_from_city_buy/'+$(this).find('[name=city]').val(),
+
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
@@ -80,7 +96,34 @@
                 }
             });
         });
+
+
+    $("#selCity").select2({
+        // minimumInputLength: 2,
+        multiple: false,
+        ajax: {
+            url: '/get_all_cities',
+            type: "post",//post
+            dataType: 'json',
+            delay: 250,
+
+            data: function (params) {
+                return {
+                    searchTerm: params.term // search term
+
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
     });
+    });
+
+
 
 
 </script>

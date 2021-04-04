@@ -27,3 +27,23 @@ h1{
     padding-bottom: 40px;
     padding-top: 30px;
 }
+
+.input_container{
+    height:30px;
+    margin:10px;
+    margin-left: 5%;
+    width:80%;
+    display: inline-block;
+}
+
+.input_info{
+    width: 60%;
+    float: right;
+    display: inline-block;
+}
+
+#selCity{
+    width: 100%;
+    float: right;
+
+}
