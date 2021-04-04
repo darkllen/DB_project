@@ -79,6 +79,11 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.ClientsWhoBuysAllCategoriesProducts());
     }
 
+    @RequestMapping(value = {"/get_all_checks_with_promo_products_from_category/{category}"}, method = RequestMethod.GET)
+    public ResponseEntity<List<CheckRepo.ChecksInfo>> get_all_checks_with_promo_products_from_category(@PathVariable String category){
+        return ResponseEntity.status(HttpStatus.OK).body(checkRepo.AllChecksWithAllPromoProductsFromCategory(category));
+    }
+
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
