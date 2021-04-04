@@ -55,9 +55,9 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getClientsWhoBuysOnlyPromoProducts());
     }
 
-    @RequestMapping(value = {"/get_all_cities/{city}"}, method = RequestMethod.POST)
-    public ResponseEntity<List<CustomerRepo.City>> get_all_cities(@RequestBody CustomerRepo.City city){
-        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities(city.getText()));
+    @RequestMapping(value = {"/get_all_cities"}, method = RequestMethod.POST)
+    public ResponseEntity<List<String>> get_all_cities(){
+        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities());
     }
 
 

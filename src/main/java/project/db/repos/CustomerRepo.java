@@ -21,12 +21,10 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
         double getTotal();
     }
 
-    @Query(value = "SELECT DISTINCT (Customer_Card.city) as text " +
-            "FROM Customer_Card WHERE Customer_Card.city like :city limit 5", nativeQuery = true)
-    List<City> getAllCities(@Param("city") String city);
-    interface City{
-        String getText();
-    }
+    @Query(value = "SELECT DISTINCT (Customer_Card.city) as city " +
+            "       FROM Customer_Card", nativeQuery = true)
+    List<String> getAllCities();
+
 
 
     @Query(value = "SELECT *" +
