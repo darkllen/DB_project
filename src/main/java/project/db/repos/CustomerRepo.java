@@ -2,6 +2,7 @@ package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import project.db.dto.Customer_Card;
 
 
@@ -21,8 +22,8 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
     }
 
     @Query(value = "SELECT DISTINCT (Customer_Card.city) as city " +
-            "FROM Customer_Card ", nativeQuery = true)
-    List<String> getAllCities();
+            "FROM Customer_Card WHERE Customer_Card.city like :city limit 5", nativeQuery = true)
+    List<String> getAllCities(@Param("city") String city);
 
 
     @Query(value = "SELECT *" +
