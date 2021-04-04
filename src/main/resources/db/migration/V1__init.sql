@@ -46,6 +46,10 @@ create table Product
     characteristics     varchar(100) not null
 );
 
+insert into Product (category_number, product_name, characteristics) values
+(1,'a','a'),
+(2,'b','b');
+
 
 create table Recipe
 (
