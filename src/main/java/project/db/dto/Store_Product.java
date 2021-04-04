@@ -2,8 +2,6 @@ package project.db.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.Date;
 
 public class Store_Product {
 

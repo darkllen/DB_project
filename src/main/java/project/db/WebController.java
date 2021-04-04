@@ -2,11 +2,15 @@ package project.db;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.db.repos.CategoryRepo;
 import project.db.repos.ProductRepo;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,23 +30,8 @@ public class WebController {
         return "index";
     }
 
-    /**
-     *
-     * @return main page
-     */
-    @RequestMapping(value = {"/all_categories"}, method = RequestMethod.GET)
-    public String all_categories(Model model){
-        model.addAttribute("categories", categoryRepo.getAllCategories());
-        return "index";
-    }
-
-    /**
-     *
-     * @return main page
-     */
-    @RequestMapping(value = {"/all_products"}, method = RequestMethod.GET)
-    public String all_products(Model model){
-        model.addAttribute("products", productRepo.getAllProducts());
-        return "index";
+    @RequestMapping(value = {"/get_categories_count"}, method = RequestMethod.GET)
+    public ResponseEntity<List<CategoryRepo.CategoriesProductsCounted>> get_categories_count(){
+        return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategoriesProductsCount());
     }
 }
