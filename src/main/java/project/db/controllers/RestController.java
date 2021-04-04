@@ -41,6 +41,11 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatClientsFromCityNBuy(city));
     }
 
+    @RequestMapping(value = {"/get_all_products_that_all_clients_from_city_buy"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> get_all_products_that_all_clients_from_city_buy(@RequestBody final String city){
+        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProductsThatAllClientsFromCityNBuy(city));
+    }
+
     @RequestMapping(value = {"/get_all_cities"}, method = RequestMethod.GET)
     public ResponseEntity<List<String>> get_all_cities(){
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities());
@@ -49,7 +54,7 @@ public class RestController {
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
-//        productRepo.getAllProductsThatAllClientsFromCityNBuy("K").forEach(System.out::println);
+        productRepo.getAllProductsThatAllClientsFromCityNBuy("S").forEach(System.out::println);
         return "index";
     }
 }

@@ -20,7 +20,10 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
                                                                                 "                    INNER JOIN Sale ON Recipe.check_number=Sale.check_number" +
                                                                                 "                    INNER JOIN Store_Product ON Sale.UPC=Store_Product.UPC" +
                                                                                 "                    INNER JOIN Product ON Store_Product.id_product=Product.id_product) " +
-                                                                                "WHERE Customer_Card.card_number=C1.card_number))", nativeQuery = true)
+                                                                                "WHERE Customer_Card.card_number=C1.card_number))" +
+            "             AND EXISTS (SELECT * " +
+            "                         FROM Customer_Card AS C2 " +
+            "                         WHERE C2.city=:city) ", nativeQuery = true)
     List<Product> getAllProductsThatAllClientsFromCityNBuy(@Param("city") String city);
 
 
