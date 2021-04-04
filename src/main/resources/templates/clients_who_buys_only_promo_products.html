@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients who buy only promo products</title>
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Clients who buy only promo products</h1>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <th>CUSTOMER SURNAME</th>
+        <th>CUSTOMER NAME</th>
+        <th>PATRONYMIC</th>
+        <th>PHONE NUMBER</th>
+        <th>CARD NUMBER</th>
+        <th>PERCENT</th>
+
+
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+    var $customers = $('#table_body');
+    getAll($customers);
+
+    function formTableRow(customer){
+        return '<tr class = "table_row"><td>' + customer.cust_surname + '</td>'
+            +'<td>' + customer.cust_name + '</td>'
+            +'<td>' + customer.cust_patronymic + '</td>'
+            +'<td>' + customer.phone_number + '</td>'
+            +'<td>' + customer.card_number + '</td>'
+            +'<td>' + customer.percent + '</td>'
+
+            +'</tr>';
+    }
+
+    function getAll($customers){
+        $.ajax({
+            type: 'GET',
+            url: '/get_clients_who_buys_only_promo_products',
+
+            success: function (response) {
+                response.forEach(function (customer) {
+                    $customers.append(formTableRow(customer));
+                });
+
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>
