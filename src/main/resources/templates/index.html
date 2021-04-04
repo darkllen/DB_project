@@ -27,6 +27,14 @@
 <br>
 <button id="from_city">Products that all clients from city buy</button>
 
+<br>
+<button id="empl_sales">Employee sales sum</button>
+<br>
+<button id="empl_cl">Employee clients number</button>
+<br>
+<button id="checks_cat">All checks with promo products from category</button>
+<br>
+<button id="cl_all_cat">Clients who buy all category products</button>
 
 <script>
 
@@ -44,6 +52,22 @@
     });
     $(document).on('click','#from_city',function(){
         var url= "/all_products_that_all_clients_from_city_buy";
+        window.location = url;
+    });
+    $(document).on('click','#empl_sales',function(){
+        var url= "/employees_sales_sum";
+        window.location = url;
+    });
+    $(document).on('click','#empl_cl',function(){
+        var url= "/employees_clients_num";
+        window.location = url;
+    });
+    $(document).on('click','#checks_cat',function(){
+        var url= "/all_checks_with_all_promo_products_from_category";
+        window.location = url;
+    });
+    $(document).on('click','#cl_all_cat',function(){
+        var url= "/all_clients_who_buys_all_categories_products";
         window.location = url;
     });
 

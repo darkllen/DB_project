@@ -38,4 +38,25 @@ public class WebController {
         return "clients_who_buys_only_promo_products";
     }
 
+    @RequestMapping(value = {"/employees_sales_sum"}, method = RequestMethod.GET)
+    public String employees_sales_sum(){
+        return "employees_sales_sum";
+    }
+
+    @RequestMapping(value = {"/employees_clients_num"}, method = RequestMethod.GET)
+    public String employees_clients_num(){
+        return "employees_clients_num";
+    }
+
+    @RequestMapping(value = {"/all_checks_with_all_promo_products_from_category"}, method = RequestMethod.GET)
+    public String all_checks_with_all_promo_products_from_category(){
+        return "all_checks_with_all_promo_products_from_category";
+    }
+
+    @RequestMapping(value = {"/all_clients_who_buys_all_categories_products"}, method = RequestMethod.GET)
+    public String all_clients_who_buys_all_categories_products(){
+        return "all_clients_who_buys_all_categories_products";
+    }
+
+
 }

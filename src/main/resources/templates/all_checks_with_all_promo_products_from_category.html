@@ -1,9 +1,9 @@
-<!--заперечення + параметр-->
+<!--складний + параметр-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Products that all clients from city buy</title>
+    <title>All checks with all promo products from category</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/table_style.css" type="text/css">
@@ -15,21 +15,22 @@
 
 
 <div class="col2">
-    <h1>Products that all clients from city buy</h1>
+    <h1>All checks with all promo products from category</h1>
 
-    <form id="city_form">
+    <form id="cat_form">
 
-        <p>City: </p>
-        <input type="text" placeholder="City" name="city">
+        <p>Category: </p>
+        <input type="text" placeholder="Category" name="category">
         <button type="submit">Search</button>
     </form>
 
 
     <table id="table" class="table table-hover table-bordered" style="visibility: hidden;">
         <thead>
-        <th>PRODUCT ID</th>
-        <th>PRODUCT NAME</th>
-        <th>PRODUCT CHARACTERISTICS</th>
+        <th>CHECK_NUMBER</th>
+        <th>PRINT DATE</th>
+        <th>SUM TOTAL</th>
+        <th>VAT NUMBER</th>
 
         </thead>
         <tbody id="table_body">
@@ -46,23 +47,27 @@
 
 
 <script>
-    var $products = $('#table_body');
+    var $checks = $('#table_body');
 
-    function formTableRow(product){
-        return '<tr class = "table_row"><td>\' + product.product_id + \'</td><td>' + product.product_name + '</td><td>' + product.characteristics + '</td></tr>';
+    function formTableRow(check){
+        return '<tr class = "table_row"><td>\' + check.check_number + \'</td>' +
+            '<td>' + check.print_date + '</td>' +
+            '<td>' + check.sum_total + '</td>' +
+            '<td>' + check.vat + '</td>' +
+            '</tr>';
     }
 
     $(function() {
 
-        $('#city_form').submit(function(e) {
+        $('#cat_form').submit(function(e) {
             e.preventDefault();
 
-            $products.empty();
+            $checks.empty();
 
 
             $.ajax({
                 type: 'GET',
-                url: '/get_all_products_that_all_clients_from_city_buy/'+$(this).find('[name=city]').val(),
+                url: '/get_all_checks_with_promo_products_from_category/'+$(this).find('[name=category]').val(),
 
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
@@ -76,8 +81,8 @@
                     else {
                         document.getElementById("table").style.visibility = 'visible';
                         document.getElementById("no_results").style.visibility = 'hidden';
-                        response.forEach(function (prod) {
-                            $products.append(formTableRow(prod));
+                        response.forEach(function (check) {
+                            $checks.append(formTableRow(check));
                         });
                     }
 

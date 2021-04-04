@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Categories product count</title>
+    <title>Employees sales</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/table_style.css" type="text/css">
@@ -15,13 +15,15 @@
 
 
 <div class="col2">
-    <h1>Number of products in each category</h1>
+    <h1>Amount of money employee got from selling products</h1>
 
     <table class="table table-hover table-bordered">
         <thead>
-        <th>CATEGORY NUMBER</th>
-        <th>CATEGORY NAME</th>
-        <th>PRODUCT COUNT</th>
+        <th>EMPLOYEE SURNAME</th>
+        <th>EMPLOYEE NAME</th>
+        <th>EMPLOYEE ID</th>
+        <th>TOTAL</th>
+
 
         </thead>
         <tbody id="table_body">
@@ -35,21 +37,21 @@
 
 
 <script>
-    var $categories = $('#table_body');
-    getAll($categories);
+    var $empl = $('#table_body');
+    getAll($empl);
 
-    function formTableRow(cat){
-        return '<tr class = "table_row"><td>\' + cat.category_number + \'</td><td>' + cat.category_name + '</td><td>' + cat.products_count + '</td></tr>';
+    function formTableRow(empl){
+        return '<tr class = "table_row"><td>' + empl.empl_surname + '</td><td>' + empl.empl_name + '</td><td>\' + empl.id_employee + \'</td><td>' + customer.total + '</td></tr>';
     }
 
-    function getAll($categories){
+    function getAll($customers){
         $.ajax({
             type: 'GET',
-            url: '/get_categories_count',
+            url: '/get_employees_sales_sum',
 
             success: function (response) {
-                response.forEach(function (cat) {
-                    $categories.append(formTableRow(cat));
+                response.forEach(function (empl) {
+                    $empl.append(formTableRow(empl));
                 });
 
             }

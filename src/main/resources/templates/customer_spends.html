@@ -1,3 +1,4 @@
+<!--групування-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
@@ -20,6 +21,7 @@
         <thead>
         <th>CUSTOMER SURNAME</th>
         <th>CUSTOMER NAME</th>
+        <th>CARD NUMBER</th>
         <th>TOTAL</th>
 
 
@@ -39,7 +41,7 @@
     getAll($customers);
 
     function formTableRow(customer){
-        return '<tr class = "table_row"><td>' + customer.cust_surname + '</td><td>' + customer.cust_name + '</td><td>' + customer.total + '</td></tr>';
+        return '<tr class = "table_row"><td>' + customer.cust_surname + '</td><td>' + customer.cust_name + '</td><td>\' + customer.card_number + \'</td><td>' + customer.total + '</td></tr>';
     }
 
     function getAll($customers){
