@@ -30,5 +30,9 @@ public class WebController {
         return "categories_count";
     }
 
+    @RequestMapping(value = {"/customer_spends"}, method = RequestMethod.GET)
+    public String customer_spends(){
+        return "customer_spends";
+    }
 
 }
