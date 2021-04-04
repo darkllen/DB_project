@@ -93,12 +93,14 @@ create table Store_Product
 );
 
 insert into Store_Product (UPC, UPC_prom, id_product, selling_price, products_number, promotional_product) values
-('1','2', 1,50, 200, 0);
+('1','2', 1,50, 200, 0),
+('4','5', 3,30, 200, 0);
+
 
 insert into Store_Product (UPC, id_product, selling_price, products_number, promotional_product) values
 ('2',1,40, 100, 1),
 ('3',2, 20, 100, 0),
-('4',3, 30, 50, 0);
+('5',3, 20, 50, 1);
 
 
 
@@ -116,6 +118,7 @@ create table Sale
 insert into Sale (UPC, check_number, product_number, selling_price) values
 ('1','1',3, 40),
 ('4','1',2, 30),
+('5','1',1, 20),
 ('2','2', 3, 35),
 ('3','2', 4, 20),
 ('1','3', 1, 50),
