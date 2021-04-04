@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories product count</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<style>
+    .col2{
+        float: left;
+    }
+
+    .col2{
+        width: 90%;
+    }
+    p, input, button, h1{
+        margin-left: 30px;
+    }
+
+    h1{
+        margin-top: 30px;
+    }
+
+
+</style>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<div class="col2">
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <th>NAME</th>
+        <th>PRODUCT COUNT</th>
+
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+            <!--th:each="category: ${categories}">-->
+            <!--<td th:text="${category.category_number}"></td>-->
+            <!--<td th:text="${book.isbn}"></td>-->
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+    function formTableRow(cat){
+        return '<tr class = "table_row"><td>' + cat.category_name + '</td><td>' + cat.products_count + '</td></tr>';
+    }
+
+    function getAll($categories){
+        $.ajax({
+            type: 'GET',
+            url: '/get_categories_count',
+            // contentType: 'application/json',
+
+            success: function (response) {
+                response.forEach(function (cat) {
+                    $categories.append(formTableRow(cat));
+                });
+
+            }
+        });
+    }
+
+    getAll($categories);
+
+</script>
+
+
+</body>
+</html>

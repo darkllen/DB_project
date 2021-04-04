@@ -29,6 +29,11 @@ public class WebController {
         return "index";
     }
 
+    @RequestMapping(value = {"/categories_count"}, method = RequestMethod.GET)
+    public String categories_count(){
+        return "categories_count";
+    }
+
     @RequestMapping(value = {"/get_categories_count"}, method = RequestMethod.GET)
     public ResponseEntity<List<CategoryRepo.CategoriesProductsCounted>> get_categories_count(){
         return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategoriesProductsCount());
