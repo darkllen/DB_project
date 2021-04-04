@@ -91,7 +91,7 @@ create table Store_Product
 
 insert into Store_Product (UPC, id_product, selling_price, products_number, promotional_product) values
 ('1',1,50, 200, 0),
-('2',2, 20, 100, 0),
+('2',2, 20, 100, 1),
 ('3',3, 30, 50, 1);
 
 create table Sale
