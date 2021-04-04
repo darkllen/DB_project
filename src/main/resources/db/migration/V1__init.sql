@@ -6,7 +6,8 @@ create table Category
 
 insert into Category (category_name) values
 ('Fruits'),
-('Vegetables');
+('Vegetables'),
+('Cars');
 
 create table Employee
 (
