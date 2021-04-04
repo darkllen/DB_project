@@ -15,11 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebController {
 
-    @Autowired
-    private CategoryRepo categoryRepo;
 
-    @Autowired
-    private CustomerRepo customerRepo;
     /**
      *
      * @return main page
@@ -34,14 +30,5 @@ public class WebController {
         return "categories_count";
     }
 
-    @RequestMapping(value = {"/get_categories_count"}, method = RequestMethod.GET)
-    public ResponseEntity<List<CategoryRepo.CategoriesProductsCounted>> get_categories_count(){
-        return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategoriesProductsCount());
-    }
 
-    @RequestMapping(value = {"/get_customer_spends"}, method = RequestMethod.GET)
-    public ResponseEntity<List<CustomerRepo.CustomerSpends>> get_customer_spends(){
-        customerRepo.getCustomersSpends().forEach(x->System.out.println(x.getCust_name()));
-        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getCustomersSpends());
-    }
 }
