@@ -5,8 +5,8 @@ create table Category
 );
 
 insert into Category (category_name) values
-('aaa'),
-('bbb');
+('Fruits'),
+('Vegetables');
 
 create table Employee
 (
@@ -25,8 +25,8 @@ create table Employee
 );
 
 insert into Employee (id_employee, empl_surname, empl_name, empl_patronymic, role, salary, date_of_birth, date_of_start, phone_number, city, street, zip_code) values
-('a', 'A', 'A', 'A', 'kassir', '5000', CURDATE(), CURDATE(), '0123', 'K', 'L', 'L'),
-('b', 'B', 'B', 'B', 'kassir', '10000', CURDATE(), CURDATE(), '1234', 'A', 'F', 'S');
+('aaaa', 'Cvetkova', 'Marina', 'Vladislavivna', 'kassir', '5000', CURDATE(), CURDATE(), '0660123590', 'Kyiv', 'Skovorodi', '03903'),
+('bbbb', 'Sirov', 'Volodimir', 'Tarasovich', 'kassir', '10000', CURDATE(), CURDATE(), '0661234243', 'Odessa', 'Deribasivska', '93402');
 
 create table Customer_Card
 (
@@ -42,8 +42,9 @@ create table Customer_Card
 );
 
 insert into Customer_Card (card_number, cust_surname, cust_name, cust_patronymic, phone_number, percent, city) values
-('aaa', 'Yankin', 'Ihor', 'Serhiyovich', '0661534986', '5', 'K'),
-('bbb', 'Hinkul', 'Anna', 'Oleksandrivna', '0666666666', '10', 'K');
+('0001', 'Yankin', 'Ihor', 'Serhiyovich', '0661534986', '5', 'Kyiv'),
+('0002', 'Hinkul', 'Anna', 'Oleksandrivna', '0666666666', '10', 'Odessa'),
+('0003', 'Ivanov', 'Bohdan', 'Olegovich', '0668937821', '15', 'Kyiv');
 
 create table Product
 (
@@ -55,9 +56,9 @@ create table Product
 );
 
 insert into Product (category_number, product_name, characteristics) values
-(1,'a','a'),
-(2,'b','b'),
-(2,'c','c');
+(1,'Apple','Sour'),
+(2,'Red apple','Sweet'),
+(3,'Cucumber','Green');
 
 
 create table Recipe
@@ -73,9 +74,11 @@ create table Recipe
 );
 
 insert into Recipe (check_number, id_employee, card_number, print_date, sum_total, vat) values
-('1','a','aaa',CURDATE(), 200.2, 10.3),
-('2','b','bbb', CURDATE(), 100, 9.2),
-('3','a','aaa', CURDATE(), 50.2, 11);
+('1','a','0001',CURDATE(), 180, 10),
+('2','b','0002', CURDATE(), 185, 9),
+('3','a','0001', CURDATE(), 50, 11),
+('4','a','0003', CURDATE(), 283.5, 12);
+
 
 create table Store_Product
 (
@@ -89,10 +92,15 @@ create table Store_Product
     promotional_product bit not null
 );
 
+insert into Store_Product (UPC, UPC_prom, id_product, selling_price, products_number, promotional_product) values
+('1','2', 1,50, 200, 0);
+
 insert into Store_Product (UPC, id_product, selling_price, products_number, promotional_product) values
-('1',1,50, 200, 0),
-('2',2, 20, 100, 1),
-('3',3, 30, 50, 1);
+('2',1,40, 100, 1),
+('3',2, 20, 100, 0),
+('4',3, 30, 50, 0);
+
+
 
 create table Sale
 (
@@ -106,6 +114,9 @@ create table Sale
 );
 
 insert into Sale (UPC, check_number, product_number, selling_price) values
-('2','1',4, 200),
-('2','2', 3, 60),
-('1','3', 5, 150);
+('1','1',3, 40),
+('4','1',2, 30),
+('2','2', 3, 35),
+('3','2', 4, 20),
+('1','3', 1, 50),
+('2','4', 7, 40.5);
