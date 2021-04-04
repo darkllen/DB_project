@@ -7,7 +7,7 @@ create table Category
 insert into Category (category_name) values
 ('Fruits'),
 ('Vegetables'),
-('Cars');
+('Cakes');
 
 create table Employee
 (
@@ -59,7 +59,8 @@ create table Product
 insert into Product (category_number, product_name, characteristics) values
 (1,'Apple','Sour'),
 (1,'Red apple','Sweet'),
-(2,'Cucumber','Green');
+(2,'Cucumber','Green'),
+(3,'Napoleon','Not chocolate cake');
 
 
 create table Recipe
@@ -75,7 +76,7 @@ create table Recipe
 );
 
 insert into Recipe (check_number, id_employee, card_number, print_date, sum_total, vat) values
-('1','aaaa','0001',CURDATE(), 180, 10),
+('1','aaaa','0001',CURDATE(), 300, 10),
 ('2','bbbb','0002', CURDATE(), 185, 9),
 ('3','aaaa','0001', CURDATE(), 50, 11),
 ('4','aaaa','0003', CURDATE(), 283.5, 12);
@@ -101,7 +102,8 @@ insert into Store_Product (UPC, UPC_prom, id_product, selling_price, products_nu
 insert into Store_Product (UPC, id_product, selling_price, products_number, promotional_product) values
 ('2',1,40, 100, 1),
 ('3',2, 20, 100, 0),
-('5',3, 20, 50, 1);
+('5',3, 20, 50, 1),
+('6',4, 120, 10, 0);
 
 
 
@@ -119,6 +121,7 @@ create table Sale
 insert into Sale (UPC, check_number, product_number, selling_price) values
 ('1','1',3, 40),
 ('5','1',2, 30),
+('6','1',1, 120),
 ('2','2', 3, 35),
 ('3','2', 4, 20),
 ('1','3', 1, 50),
