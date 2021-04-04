@@ -14,7 +14,7 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
             "GROUP BY Customer_Card.card_number", nativeQuery = true)
     List<CustomerSpends> getCustomersSpends();
     interface CustomerSpends {
-        int getCard_number();
+        String getCard_number();
         String getCust_surname();
         String getCust_name();
         double getTotal();
