@@ -1,4 +1,4 @@
-package project.db;
+package project.db.security;
 
 import lombok.RequiredArgsConstructor;
 
