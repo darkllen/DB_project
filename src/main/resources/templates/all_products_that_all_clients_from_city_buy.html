@@ -7,11 +7,6 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <link href="/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="/select2-develop/dist/js/select2.min.js" defer></script>
-
 </head>
 <body>
 
@@ -21,23 +16,10 @@
 <div class="col2">
     <h1>Products that all clients from city buy</h1>
 
-    <label for="city">Choose city:</label>
-    <select id="city" name="city" form="city_form">
-        <!--<option value="audi">Audi</option>-->
-    </select>
-
-    <div class = "input_container">Street:
-        <div class= "input_info" id="street_container" >
-            <select id='selCity' style="width: 100%;">
-                <!-- <option value='0'>Select City</option>  -->
-            </select>
-        </div>
-    </div>
-
     <form id="city_form">
 
-        <!--<p>City: </p>-->
-        <!--<input type="text" placeholder="City" name="city">-->
+        <p>City: </p>
+        <input type="text" placeholder="City" name="city">
         <button type="submit">Search</button>
     </form>
 
@@ -60,8 +42,8 @@
 <script>
     var $products = $('#table_body');
 
-    function formTableRow(cat){
-        return '<tr class = "table_row"><td>' + cat.category_name + '</td><td>' + cat.products_count + '</td></tr>';
+    function formTableRow(product){
+        return '<tr class = "table_row"><td>' + product.product_name + '</td><td>' + product.characteristics + '</td></tr>';
     }
 
     $(function() {
@@ -75,11 +57,6 @@
             document.getElementById("table").style.visibility = 'visible';
             $products.empty();
 
-            console.log(JSON.stringify({
-                city: $(this).find('[name=city]').val()
-            }));
-
-
 
             $.ajax({
                 type: 'GET',
@@ -89,8 +66,7 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    $('input').val('');
-
+                    // $('input').val('');
 
                     response.forEach(function (prod) {
                         $products.append(formTableRow(prod));
@@ -101,29 +77,7 @@
 
 
 
-    $("#selCity").select2({
-        // minimumInputLength: 2,
-        multiple: false,
-        ajax: {
-            url: '/get_all_cities',
-            type: "post",//post
-            dataType: 'json',
-            delay: 250,
 
-            data: function (params) {
-                return {
-                    text: params.term // search term
-
-                };
-            },
-            processResults: function (response) {
-                return {
-                    results: response
-                };
-            },
-            cache: true
-        }
-    });
     });
 
 
