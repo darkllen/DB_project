@@ -24,6 +24,10 @@ create table Employee
     zip_code        varchar (9) not null
 );
 
+insert into Employee (id_employee, empl_surname, empl_name, empl_patronymic, role, salary, date_of_birth, date_of_start, phone_number, city, street, zip_code) values
+('a', 'A', 'A', 'A', 'kassir', '5000', CURDATE(), CURDATE(), '0123', 'K', 'L', 'L'),
+('b', 'B', 'B', 'B', 'kassir', '10000', CURDATE(), CURDATE(), '1234', 'A', 'F', 'S');
+
 create table Customer_Card
 (
     card_number     varchar (13) primary key,
@@ -37,6 +41,10 @@ create table Customer_Card
     percent         int not null
 );
 
+insert into Customer_Card (card_number, cust_surname, cust_name, cust_patronymic, phone_number, percent) values
+('aaa', 'Yankin', 'Ihor', 'Serhiyovich', '0661534986', '5'),
+('bbb', 'Hinkul', 'Anna', 'Oleksandrivna', '0666666666', '10');
+
 create table Product
 (
     id_product          int primary key auto_increment,
@@ -48,7 +56,8 @@ create table Product
 
 insert into Product (category_number, product_name, characteristics) values
 (1,'a','a'),
-(2,'b','b');
+(2,'b','b'),
+(2,'c','c');
 
 
 create table Recipe
@@ -63,6 +72,10 @@ create table Recipe
   vat               decimal (13,4) not null
 );
 
+insert into Recipe (check_number, id_employee, card_number, print_date, sum_total, vat) values
+('1','a','aaa',CURDATE(), 200.2, 10.3),
+('2','b','bbb', CURDATE(), 100, 9.2),
+('3','a','aaa', CURDATE(), 50.2, 11);
 
 create table Store_Product
 (

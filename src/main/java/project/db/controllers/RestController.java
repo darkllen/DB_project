@@ -30,4 +30,10 @@ public class RestController {
         customerRepo.getCustomersSpends().forEach(x->System.out.println(x.getCust_name()));
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getCustomersSpends());
     }
+
+    @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
+    public String test(){
+        customerRepo.getCustomersSpends().forEach(x->System.out.println(x.getTotal()));
+        return "index";
+    }
 }
