@@ -117,8 +117,7 @@ create table Sale
 
 insert into Sale (UPC, check_number, product_number, selling_price) values
 ('1','1',3, 40),
-('4','1',2, 30),
-('5','1',1, 20),
+('5','1',2, 30),
 ('2','2', 3, 35),
 ('3','2', 4, 20),
 ('1','3', 1, 50),
