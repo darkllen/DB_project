@@ -2,10 +2,8 @@ package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import project.db.dto.Category;
 import project.db.dto.Customer_Card;
-import project.db.dto.Product;
+
 
 import java.util.List;
 
