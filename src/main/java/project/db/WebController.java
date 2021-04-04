@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.db.dto.Product;
 import project.db.repos.CategoryRepo;
 import project.db.repos.ProductRepo;
 
