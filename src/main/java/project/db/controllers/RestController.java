@@ -82,7 +82,7 @@ public class RestController {
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
-        customerRepo.ClientsWhoBuysAllCategoriesProducts().forEach(System.out::println);
+        checkRepo.AllChecksWithAllPromoProductsFromCategory("Fruits").forEach(System.out::println);
         return "index";
     }
 }
