@@ -34,6 +34,9 @@
 
 
 <script>
+    var $customers = $('#table_body');
+    getAll($customers);
+
     function formTableRow(customer){
         return '<tr class = "table_row"><td>' + customer.cust_surname + '</td><td>' + customer.cust_name + '</td><td>' + customer.total + '</td></tr>';
     }
@@ -51,10 +54,6 @@
             }
         });
     }
-
-
-    var $customers = $('#table_body');
-    getAll($customers);
 
 </script>
 

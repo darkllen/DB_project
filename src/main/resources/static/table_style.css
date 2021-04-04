@@ -1,14 +1,29 @@
+body {
+}
+
 .col2{
     float: left;
     width: 90%;
     margin-left: 5%;
 }
 
-p, input, button, h1{
+input, button, h1{
     margin-left: 30px;
-    margin-bottom: 40px;
+    display: inline-block;
+}
+
+p{
+    padding-bottom: 5px;
+    display: inline-block;
+
+}
+
+button{
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 h1{
-    margin-top: 30px;
+    padding-bottom: 40px;
+    padding-top: 30px;
 }

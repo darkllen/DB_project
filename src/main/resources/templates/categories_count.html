@@ -32,6 +32,9 @@
 
 
 <script>
+    var $categories = $('#table_body');
+    getAll($categories);
+
     function formTableRow(cat){
         return '<tr class = "table_row"><td>' + cat.category_name + '</td><td>' + cat.products_count + '</td></tr>';
     }
@@ -49,10 +52,6 @@
             }
         });
     }
-
-
-    var $categories = $('#table_body');
-    getAll($categories);
 
 </script>
 

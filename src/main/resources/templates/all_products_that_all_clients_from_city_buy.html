@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products that all clients from city buy</title>
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Products that all clients from city buy</h1>
+
+    <form id="city_form">
+        <p>City: </p>
+        <input type="text" placeholder="City" name="city">
+        <br>
+        <button type="submit">Search</button>
+    </form>
+
+    <table id="table" class="table table-hover table-bordered" style="visibility: hidden;">
+        <thead>
+        <th>PRODUCT NAME</th>
+        <th>PRODUCT CHARACTERISTICS</th>
+
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+    var $products = $('#table_body');
+
+    function formTableRow(cat){
+        return '<tr class = "table_row"><td>' + cat.category_name + '</td><td>' + cat.products_count + '</td></tr>';
+    }
+
+    $(function() {
+
+        $('#city_form').submit(function(e) {
+            e.preventDefault();
+
+
+            document.getElementById("table").style.visibility = 'visible';
+            $products.empty();
+
+
+            $.ajax({
+                type: 'GET',
+                url: '/get_all_products_that_all_clients_from_city_buy',
+                dataType: 'json',
+                data: JSON.stringify({
+                    city: $(this).find('[name=city]').val()
+                }),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    $('input').val('');
+
+
+                    response.forEach(function (prod) {
+                        $products.append(formTableRow(prod));
+                    });
+                }
+            });
+        });
+    });
+
+
+</script>
+
+
+</body>
+</html>

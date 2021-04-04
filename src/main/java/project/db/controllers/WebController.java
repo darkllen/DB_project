@@ -35,4 +35,9 @@ public class WebController {
         return "customer_spends";
     }
 
+    @RequestMapping(value = {"/all_products_that_all_clients_from_city_buy"}, method = RequestMethod.GET)
+    public String all_products_that_clients_from_city_buy(){
+        return "all_products_that_all_clients_from_city_buy";
+    }
+
 }
