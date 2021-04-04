@@ -13,6 +13,7 @@ import project.db.dto.Customer_Card;
 import project.db.dto.Product;
 import project.db.repos.CategoryRepo;
 import project.db.repos.CustomerRepo;
+import project.db.repos.EmployeeRepo;
 import project.db.repos.ProductRepo;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public class RestController {
 
     @Autowired
     private ProductRepo productRepo;
+
+    @Autowired
+    private EmployeeRepo employeeRepo;
 
     @RequestMapping(value = {"/get_categories_count"}, method = RequestMethod.GET)
     public ResponseEntity<List<CategoryRepo.CategoriesProductsCounted>> get_categories_count(){
@@ -51,9 +55,20 @@ public class RestController {
     }
 
     @RequestMapping(value = {"/get_clients_who_buys_only_promo_products"}, method = RequestMethod.GET)
-    public ResponseEntity<List<Customer_Card>> get_clients_who_buys_only_promo_products(){
+    public ResponseEntity<List<CustomerRepo.Customer_info>> get_clients_who_buys_only_promo_products(){
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getClientsWhoBuysOnlyPromoProducts());
     }
+
+    @RequestMapping(value = {"/get_employees_sales_sum"}, method = RequestMethod.GET)
+    public ResponseEntity<List<EmployeeRepo.EmployeeTotalInfo>> get_employees_sales_sum(){
+        return ResponseEntity.status(HttpStatus.OK).body(employeeRepo.getEmployeesSalesSum());
+    }
+
+    @RequestMapping(value = {"/get_employees_clients_num"}, method = RequestMethod.GET)
+    public ResponseEntity<List<EmployeeRepo.EmployeeCustInfo>> get_employees_clients_num(){
+        return ResponseEntity.status(HttpStatus.OK).body(employeeRepo.getEmployeesClientsNum());
+    }
+
 
     @RequestMapping(value = {"/get_all_cities"}, method = RequestMethod.POST)
     public ResponseEntity<List<String>> get_all_cities(){
@@ -63,7 +78,7 @@ public class RestController {
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
-        customerRepo.getClientsWhoBuysOnlyPromoProducts().forEach(System.out::println);
+        employeeRepo.getEmployeesClientsNum().forEach(x -> System.out.println(x.getCust_number()));
         return "index";
     }
 }
