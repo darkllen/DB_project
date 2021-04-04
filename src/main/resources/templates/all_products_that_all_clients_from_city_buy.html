@@ -67,6 +67,8 @@
     $(function() {
 
         $('#city_form').submit(function(e) {
+
+
             e.preventDefault();
 
 
@@ -98,6 +100,7 @@
         });
 
 
+
     $("#selCity").select2({
         // minimumInputLength: 2,
         multiple: false,
@@ -109,7 +112,7 @@
 
             data: function (params) {
                 return {
-                    searchTerm: params.term // search term
+                    text: params.term // search term
 
                 };
             },
