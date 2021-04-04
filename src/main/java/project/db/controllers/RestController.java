@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.db.dto.Customer_Card;
 import project.db.dto.Product;
-import project.db.repos.CategoryRepo;
-import project.db.repos.CustomerRepo;
-import project.db.repos.EmployeeRepo;
-import project.db.repos.ProductRepo;
+import project.db.repos.*;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +30,9 @@ public class RestController {
 
     @Autowired
     private EmployeeRepo employeeRepo;
+
+    @Autowired
+    private CheckRepo checkRepo;
 
     @RequestMapping(value = {"/get_categories_count"}, method = RequestMethod.GET)
     public ResponseEntity<List<CategoryRepo.CategoriesProductsCounted>> get_categories_count(){
@@ -69,16 +69,20 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeRepo.getEmployeesClientsNum());
     }
 
-
     @RequestMapping(value = {"/get_all_cities"}, method = RequestMethod.POST)
     public ResponseEntity<List<String>> get_all_cities(){
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities());
     }
 
+    @RequestMapping(value = {"/get_all_clients_who_buys_all_categories_products"}, method = RequestMethod.POST)
+    public ResponseEntity<List<CustomerRepo.Customer_info>> get_all_clients_who_buys_all_categories_products(){
+        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.ClientsWhoBuysAllCategoriesProducts());
+    }
+
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
-        employeeRepo.getEmployeesClientsNum().forEach(x -> System.out.println(x.getCust_number()));
+        customerRepo.ClientsWhoBuysAllCategoriesProducts().forEach(System.out::println);
         return "index";
     }
 }
