@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Categories product count</title>
+    <title>Customer spends</title>
     <link rel="stylesheet" href="/table_style.css" type="text/css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,12 +13,14 @@
 
 
 <div class="col2">
-    <h1>Number of products in each category</h1>
+    <h1>Amount that customers spent</h1>
 
     <table class="table table-hover table-bordered">
         <thead>
-        <th>CATEGORY NAME</th>
-        <th>PRODUCT COUNT</th>
+        <th>CUSTOMER SURNAME</th>
+        <th>CUSTOMER NAME</th>
+        <th>TOTAL</th>
+
 
         </thead>
         <tbody id="table_body">
@@ -32,18 +34,18 @@
 
 
 <script>
-    function formTableRow(cat){
-        return '<tr class = "table_row"><td>' + cat.category_name + '</td><td>' + cat.products_count + '</td></tr>';
+    function formTableRow(customer){
+        return '<tr class = "table_row"><td>' + customer.cust_surname + '</td><td>' + customer.cust_name + '</td><td>\' + customer.total + \'</td></tr>';
     }
 
-    function getAll($categories){
+    function getAll($customers){
         $.ajax({
             type: 'GET',
-            url: '/get_categories_count',
+            url: '/get_customer_spends',
 
             success: function (response) {
-                response.forEach(function (cat) {
-                    $categories.append(formTableRow(cat));
+                response.forEach(function (customer) {
+                    $customers.append(formTableRow(customer));
                 });
 
             }
@@ -51,8 +53,8 @@
     }
 
 
-    var $categories = $('#table_body');
-    getAll($categories);
+    var $customers = $('#table_body');
+    getAll($customers);
 
 </script>
 
