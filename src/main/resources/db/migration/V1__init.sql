@@ -4,6 +4,10 @@ create table Category
     category_name       varchar (50) not null
 );
 
+insert into Category (category_name) values
+('aaa'),
+('bbb');
+
 create table Employee
 (
     id_employee     varchar (10) primary key,

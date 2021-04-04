@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-aaa
+<p th:each="c: ${categories}" th:text="${c.category_name}"></p>
 </body>
 </html>
