@@ -56,7 +56,7 @@ public class RestController {
     }
 
     @RequestMapping(value = {"/get_all_cities/{city}"}, method = RequestMethod.POST)
-    public ResponseEntity<List<String>> get_all_cities(@PathVariable String city){
+    public ResponseEntity<List<CustomerRepo.City>> get_all_cities(@PathVariable String city){
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities(city));
     }
 
