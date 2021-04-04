@@ -19,4 +19,8 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
         String getCust_name();
         double getTotal();
     }
+
+    @Query(value = "SELECT DISTINCT (Customer_Card.city) as city " +
+            "FROM Customer_Card ", nativeQuery = true)
+    List<String> getAllCities();
 }
