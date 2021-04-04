@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import project.db.repos.CategoryRepo;
-import project.db.repos.ProductRepo;
+import project.db.repos.CustomerRepo;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class WebController {
     private CategoryRepo categoryRepo;
 
     @Autowired
-    private ProductRepo productRepo;
+    private CustomerRepo customerRepo;
     /**
      *
      * @return main page
@@ -32,5 +32,11 @@ public class WebController {
     @RequestMapping(value = {"/get_categories_count"}, method = RequestMethod.GET)
     public ResponseEntity<List<CategoryRepo.CategoriesProductsCounted>> get_categories_count(){
         return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategoriesProductsCount());
+    }
+
+    @RequestMapping(value = {"/get_customer_spends"}, method = RequestMethod.GET)
+    public ResponseEntity<List<CustomerRepo.CustomerSpends>> get_customer_spends(){
+        customerRepo.getCustomersSpends().forEach(x->System.out.println(x.getCust_name()));
+        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getCustomersSpends());
     }
 }
