@@ -74,7 +74,7 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities());
     }
 
-    @RequestMapping(value = {"/get_all_clients_who_buys_all_categories_products"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/get_all_clients_who_buys_all_categories_products"}, method = RequestMethod.GET)
     public ResponseEntity<List<CustomerRepo.Customer_info>> get_all_clients_who_buys_all_categories_products(){
         return ResponseEntity.status(HttpStatus.OK).body(customerRepo.ClientsWhoBuysAllCategoriesProducts());
     }
