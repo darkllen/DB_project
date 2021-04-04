@@ -27,7 +27,7 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
 
 
 
-    @Query(value = "SELECT C1.cust_surname as cust_surname, C1.cust_name as cust_name, C1.cust_patronymic as cust_patronymic, C1.phone_number as phone_number, C1.card_number as card_number, C1.percent as percent" +
+    @Query(value = "SELECT C1.cust_surname AS cust_surname, C1.cust_name AS cust_name, C1.cust_patronymic AS cust_patronymic, C1.phone_number AS phone_number, C1.card_number AS card_number, C1.percent AS percent" +
             "       FROM Customer_Card AS C1" +
             "       WHERE NOT EXISTS (" +
             "                          SELECT * " +
