@@ -57,8 +57,8 @@ create table Product
 
 insert into Product (category_number, product_name, characteristics) values
 (1,'Apple','Sour'),
-(2,'Red apple','Sweet'),
-(3,'Cucumber','Green');
+(1,'Red apple','Sweet'),
+(2,'Cucumber','Green');
 
 
 create table Recipe
@@ -74,10 +74,10 @@ create table Recipe
 );
 
 insert into Recipe (check_number, id_employee, card_number, print_date, sum_total, vat) values
-('1','a','0001',CURDATE(), 180, 10),
-('2','b','0002', CURDATE(), 185, 9),
-('3','a','0001', CURDATE(), 50, 11),
-('4','a','0003', CURDATE(), 283.5, 12);
+('1','aaaa','0001',CURDATE(), 180, 10),
+('2','bbbb','0002', CURDATE(), 185, 9),
+('3','aaaa','0001', CURDATE(), 50, 11),
+('4','aaaa','0003', CURDATE(), 283.5, 12);
 
 
 create table Store_Product
