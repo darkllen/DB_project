@@ -9,11 +9,14 @@ body {
 
 input, button, h1{
     margin-left: 30px;
-    display: inline-block;
 }
 
+
 p{
-    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+p, button{
     display: inline-block;
 
 }
@@ -26,24 +29,4 @@ button{
 h1{
     padding-bottom: 40px;
     padding-top: 30px;
-}
-
-.input_container{
-    height:30px;
-    margin:10px;
-    margin-left: 5%;
-    width:80%;
-    display: inline-block;
-}
-
-.input_info{
-    width: 60%;
-    float: right;
-    display: inline-block;
-}
-
-#selCity{
-    width: 100%;
-    float: right;
-
 }

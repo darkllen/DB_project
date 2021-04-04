@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Index</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
 </head>
 <body>
-main
+<style>
+    button{
+        /*margin-left: 50px;*/
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<h1>Main page</h1>
+
+<button id="cat_count">Categories product count</button>
+<br>
+<button id="cust_spends">Customer spends</button>
+<br>
+<button id="promo">Clients who buy only promo products</button>
+<br>
+<button id="from_city">Products that all clients from city buy</button>
+
+
+<script>
+
+    $(document).on('click','#cat_count',function(){
+        var url= "/categories_count";
+        window.location = url;
+    });
+    $(document).on('click','#cust_spends',function(){
+        var url= "/customer_spends";
+        window.location = url;
+    });
+    $(document).on('click','#promo',function(){
+        var url= "/clients_who_buys_only_promo_products";
+        window.location = url;
+    });
+    $(document).on('click','#from_city',function(){
+        var url= "/all_products_that_all_clients_from_city_buy";
+        window.location = url;
+    });
+
+</script>
+
+
 </body>
 </html>
