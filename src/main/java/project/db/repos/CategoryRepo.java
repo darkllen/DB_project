@@ -8,7 +8,7 @@ import java.util.List;
 public interface CategoryRepo extends JpaRepository<Category, Integer> {
 
 
-    @Query(value = "SELECT Category.category_number as category_number, category_name, COUNT(id_product) as products_count " +
+    @Query(value = "SELECT Category.category_number AS category_number, category_name, COUNT(id_product) AS products_count " +
             "FROM (Category INNER JOIN Product ON Category.category_number=Product.category_number) " +
             "GROUP BY Category.category_number", nativeQuery = true)
     List<CategoriesProductsCounted> getCategoriesProductsCount();
