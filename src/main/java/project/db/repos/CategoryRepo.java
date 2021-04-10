@@ -2,6 +2,7 @@ package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import project.db.dto.Category;
 import java.util.List;
 
@@ -15,6 +16,21 @@ public interface CategoryRepo extends JpaRepository<Category, Integer> {
 
     interface CategoriesProductsCounted {
         int getProducts_count();
+        int getCategory_number();
+        String getCategory_name();
+    }
+
+    @Query(value = "SELECT category_number, category_name " +
+            "FROM Category  " +
+            "WHERE category_name LIKE :name% " +
+            "LIMIT 5", nativeQuery = true)
+    List<CategoriesInfo> getCategoriesLike(@Param("name") String name);
+
+    @Query(value = "SELECT category_number, category_name " +
+            "FROM Category  ", nativeQuery = true)
+    List<CategoriesInfo> getCategories();
+
+    interface CategoriesInfo {
         String getCategory_number();
         String getCategory_name();
     }

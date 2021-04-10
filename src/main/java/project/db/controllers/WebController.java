@@ -14,6 +14,26 @@ public class WebController {
      * @return main page
      */
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String main(){
+        return "main";
+    }
+
+    @RequestMapping(value = {"/add"}, method = RequestMethod.GET)
+    public String add(){
+        return "add/add";
+    }
+
+    @RequestMapping(value = {"/edit"}, method = RequestMethod.GET)
+    public String edit(){
+        return "edit";
+    }
+
+    @RequestMapping(value = {"/remove"}, method = RequestMethod.GET)
+    public String remove(){
+        return "remove";
+    }
+
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
     public String index(){
         return "index";
     }

@@ -84,6 +84,16 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(checkRepo.AllChecksWithAllPromoProductsFromCategory(category));
     }
 
+    @RequestMapping(value = {"/get_categories_like/{category}"}, method = RequestMethod.POST)
+    public ResponseEntity<List<CategoryRepo.CategoriesInfo>> get_categories_like(@PathVariable String category){
+        return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategoriesLike(category));
+    }
+
+    @RequestMapping(value = {"/get_categories"}, method = RequestMethod.GET)
+    public ResponseEntity<List<CategoryRepo.CategoriesInfo>> get_categories(){
+        return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategories());
+    }
+
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){
