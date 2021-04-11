@@ -11,6 +11,7 @@ import project.db.repos.EmployeeRepo;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -122,6 +123,7 @@ public class EmployeeService {
 
     @Transactional
     public List<EmployeeRepo.EmployeeContacts> get_phone_address_by_empl_surname(String empl_surname) {
+        empl_surname = empl_surname.toLowerCase(Locale.ROOT);
         return employeeRepo.get_phone_address_by_empl_surname(empl_surname);
     }
 }

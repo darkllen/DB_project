@@ -42,6 +42,11 @@ public interface StoreProductRepo  extends JpaRepository<Store_Product, String> 
     @Query(value = "INSERT INTO Store_Product VALUES (?1, ?2, ?3, ?4, ?5, ?6)", nativeQuery = true)
     void addStoreProduct(String upc, String upc_prom, Integer id_product, double selling_price, Integer products_number, boolean is_promo);
 
+    @Query(value = "SELECT  * " +
+            "FROM Store_Product " +
+            "WHERE id_product=?1", nativeQuery = true)
+    List<Store_Product> get_all_products_in_store_by_product(int id_product);
+
     interface StoreProductWithName {
         String getProduct_name();
         String getUPC();
