@@ -20,12 +20,14 @@
     <a id="button_category" class="btn btn-warning">Add category</a>
     <a id="button_employee" class="btn btn-warning">Add employee</a>
     <a id="button_cust_card" class="btn btn-warning">Add customer card</a>
+    <a id="button_product" class="btn btn-warning">Add product</a>
+
 </div>
 
 <div class="my-group-2 btn-group btn-group-justified">
-    <a id="button_product" class="btn btn-warning">Add product</a>
     <a id="button_product_store" class="btn btn-warning">Add product in store</a>
     <a id="button_check" class="btn btn-warning">Add check</a>
+    <a id="button_sale" class="btn btn-warning">Add sale</a>
 </div>
 </div>
 
@@ -58,10 +60,11 @@
         </select>
         <p>Salary : </p>
         <input type="number" placeholder="Salary" name="em_salary">
-        <p>Date of birth : </p>
-        <input type="date" placeholder="Date of birth" name="em_date_birth">
+
     </div>
     <div class="col2">
+        <p>Date of birth : </p>
+        <input type="date" placeholder="Date of birth" name="em_date_birth">
         <p>Date of start : </p>
         <input type="date" placeholder="Date of start" name="em_date_start">
         <p>Phone number : </p>
@@ -148,10 +151,36 @@
 
 </form>
 
+
+
+
 <form id="check" style="visibility: hidden; display: none;">
     <h2>Add check</h2>
-    <p>Category name : </p>
-    <input type="text" placeholder="Category name" name="cat_name">
+    <p>Check number : </p>
+    <input class="big_input" type="text" placeholder="Check number" name="check_number">
+    <p>Employee : </p>
+    <select class="big_input" id='ch_empl' name='ch_empl'>
+    </select>
+    <p>Customer's card number : </p>
+    <select class="big_input" id='ch_card' name='ch_card'>
+    </select>
+    <p>Print date : </p>
+    <input class="big_input" type="date" placeholder="Print date" name="ch_date">
+    <button class="btn btn-success" type="submit">Add</button>
+
+</form>
+
+
+<form id="sale" style="visibility: hidden; display: none;">
+    <h2>Add sale to check</h2>
+    <p>Check number : </p>
+    <select class="big_input" id='sale_ch' name='sale_ch'>
+    </select>
+    <p>Product name and UPC : </p>
+    <select class="big_input" id='sale_pr' name='sale_pr'>
+    </select>
+    <p>Product number : </p>
+    <input class="big_input" type="number" min="1" placeholder="Product number" name="sale_pr_number">
     <button class="btn btn-success" type="submit">Add</button>
 
 </form>
@@ -256,6 +285,85 @@
             makeAllFormsHidden();
             document.getElementById("check").style.visibility = 'visible';
             document.getElementById("check").style.display = 'block';
+
+            $.ajax({
+                url: '/get_all_employees',
+                type: "get",
+                success: function (response) {
+                    var i = 0;
+                    document.getElementById("ch_empl").innerHTML= '';
+                    response.forEach(function (em) {
+                        if(i==0)
+                            document.getElementById("ch_empl").innerHTML+= '<option selected="selected" value="'+em.id_employee+'">'+em.empl_surname+' '+em.empl_name+' (id = '+em.id_employee+') '+'</option>';
+                        else
+                            document.getElementById("ch_empl").innerHTML+= '<option value="'+em.id_employee+'">'+em.empl_surname+' '+em.empl_name+' (id = '+em.id_employee+') '+'</option>';
+                        i++;
+                    });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+            $.ajax({
+                url: '/get_all_customer_cards',
+                type: "get",
+                success: function (response) {
+                    var i = 0;
+                    document.getElementById("ch_card").innerHTML= '';
+                    response.forEach(function (c) {
+                        if(i==0)
+                            document.getElementById("ch_card").innerHTML+= '<option selected="selected" value="'+c.card_number+'">'+c.cust_surname+' '+c.cust_name+' (card number = '+c.card_number+') '+'</option>';
+                        else
+                            document.getElementById("ch_card").innerHTML+= '<option value="'+c.card_number+'">'+c.cust_surname+' '+c.cust_name+' (card number = '+c.card_number+') '+'</option>';
+                        i++;
+                    });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+        $('#button_sale').click(function(e) {
+            makeAllFormsHidden();
+            document.getElementById("sale").style.visibility = 'visible';
+            document.getElementById("sale").style.display = 'block';
+
+            $.ajax({
+                url: '/get_all_checks',
+                type: "get",
+                success: function (response) {
+                    var i = 0;
+                    document.getElementById("sale_ch").innerHTML= '';
+                    response.forEach(function (ch) {
+                        if(i==0)
+                            document.getElementById("sale_ch").innerHTML+= '<option selected="selected" value="'+ch.check_number+'">'+ch.check_number+'</option>';
+                        else
+                            document.getElementById("sale_ch").innerHTML+= '<option value="'+ch.check_number+'">'+ch.check_number+'</option>';
+                        i++;
+                    });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+            $.ajax({
+                url: '/get_all_store_product_with_name',
+                type: "get",
+                success: function (response) {
+                    var i = 0;
+                    document.getElementById("sale_pr").innerHTML= '';
+                    response.forEach(function (pr) {
+                        if(i==0)
+                            document.getElementById("sale_pr").innerHTML+= '<option selected="selected" value="'+pr.upc+'">'+pr.product_name+' (UPC = '+pr.upc+') '+'</option>';
+                        else
+                            document.getElementById("sale_pr").innerHTML+= '<option value="'+c.card_number+'">'+pr.upc+'">'+pr.product_name+' (UPC = '+pr.upc+') '+'</option>';
+                        i++;
+                    });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
         });
 
 
@@ -275,11 +383,11 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    console.log(response);
+                    alert("Success");
 
                 },
                 error: function(err){
-                    console.log(err);
+                    alert(err);
                 }
             });
         });
@@ -310,13 +418,13 @@
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
-                success: function (response) {
-                    console.log(response);
+                    success: function (response) {
+                        alert("Success");
 
-                },
-                error: function(err){
-                    console.log(err);
-                }
+                    },
+                    error: function(err){
+                        alert(err);
+                    }
             });
         });
 
@@ -344,11 +452,11 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    console.log(response);
+                    alert("Success");
 
                 },
                 error: function(err){
-                    console.log(err);
+                    alert(err);
                 }
             });
         });
@@ -372,16 +480,16 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    console.log(response);
+                    alert("Success");
 
                 },
                 error: function(err){
-                    console.log(err);
+                    alert(err);
                 }
             });
         });
 
-        $('#product').submit(function(e) {
+        $('#product_store').submit(function(e) {
             e.preventDefault();
 
             var is_prom = true;
@@ -406,15 +514,69 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    console.log(response);
+                    alert("Success");
 
                 },
                 error: function(err){
-                    console.log(err);
+                    alert(err);
                 }
             });
         });
 
+        $('#check').submit(function(e) {
+            e.preventDefault();
+
+            var data = {check_number : $(this).find('[name=check_number]').val()
+                , id_employee: $(this).find('[name=ch_empl]').val()
+                , card_number: $(this).find('[name=ch_card]').val()
+                , print_date: $(this).find('[name=ch_date]').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/add_check',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    alert("Success");
+
+                },
+                error: function(err){
+                    alert(err);
+                }
+            });
+        });
+
+        $('#sale').submit(function(e) {
+            e.preventDefault();
+
+            var data = {upc : $(this).find('[name=sale_pr]').val()
+                , check_number : $(this).find('[name=sale_ch]').val()
+                , product_number: $(this).find('[name=sale_pr_number]').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/add_sale',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    alert("Success");
+
+                },
+                error: function(err){
+                    alert(err);
+                }
+            });
+        });
 
     });
 
