@@ -62,4 +62,9 @@ public class StoreProductService {
     public List<Store_Product> get_all_products_in_store_by_product(int id_product) {
         return storeProductRepo.get_all_products_in_store_by_product(id_product);
     }
+
+    @Transactional
+    public List<StoreProductRepo.StoreProductPriceNum> get_product_by_upc(String upc) {
+        return storeProductRepo.get_product_by_upc(upc);
+    }
 }
