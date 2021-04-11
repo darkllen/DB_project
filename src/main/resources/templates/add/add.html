@@ -55,8 +55,8 @@
         <input type="text" placeholder="Employee patronymic" name="em_patron">
         <p>Role : </p>
         <select name="em_role">
-            <option>MANAGER</option>
-            <option>KASSIR</option>
+            <option value="MANAGER">MANAGER</option>
+            <option value="KASSIR">KASSIR</option>
         </select>
         <p>Salary : </p>
         <input type="number" placeholder="Salary" name="em_salary">
@@ -384,7 +384,7 @@
                 },
                 success: function (response) {
                     alert("Success");
-
+                    $("input[name='cat_name']").val('');
                 },
                 error: function (request, textStatus, errorThrown) {
                     alert(request.getResponseHeader('error'));
@@ -409,6 +409,7 @@
                     , zip_code: $(this).find('[name=em_zipcode]').val()};
 
 
+
                 $.ajax({
                 type: 'POST',
                 url: '/add_employee',
@@ -420,10 +421,24 @@
                 },
                     success: function (response) {
                         alert("Success");
+                        $("input[name='em_id']").val('');
+                        $("input[name='em_pas']").val('');
+                        $("input[name='em_surname']").val('');
+                        $("input[name='em_name']").val('');
+                        $("input[name='em_patron']").val('');
+                        $("select[name='em_role']").val("MANAGER");
+                        $("input[name='em_salary']").val('');
+                        $("input[name='em_date_birth']").val('');
+                        $("input[name='em_date_start']").val('');
+                        $("input[name='em_phone']").val('');
+                        $("input[name='em_city']").val('');
+                        $("input[name='em_street']").val('');
+                        $("input[name='em_zipcode']").val('');
 
                     },
                     error: function (request, textStatus, errorThrown) {
                         alert(request.getResponseHeader('error'));
+
                     }
             });
         });
@@ -453,7 +468,15 @@
                 },
                 success: function (response) {
                     alert("Success");
-
+                    $("input[name='cust_card_num']").val('');
+                    $("input[name='cust_surname']").val('');
+                    $("input[name='cust_name']").val('');
+                    $("input[name='cust_patron']").val('');
+                    $("input[name='cust_phone']").val('');
+                    $("input[name='cust_city']").val('');
+                    $("input[name='cust_street']").val('');
+                    $("input[name='cust_zipcode']").val('');
+                    $("input[name='cust_percent']").val('');
                 },
                 error: function (request, textStatus, errorThrown) {
                     alert(request.getResponseHeader('error'));
@@ -481,6 +504,10 @@
                 },
                 success: function (response) {
                     alert("Success");
+                    // $("select[name='prod_cat_name']").val(''); //todo - set to default
+                    $("input[name='prod_name']").val('');
+                    $("textarea[name='prod_char']").val('');
+
 
                 },
                 error: function (request, textStatus, errorThrown) {
@@ -515,6 +542,12 @@
                 },
                 success: function (response) {
                     alert("Success");
+                    $("input[name='st_upc']").val('');
+                    $("input[name='st_upc_prom']").val('None');
+                    $("input[name='st_price']").val('');
+                    $("input[name='st_number']").val('');
+                    $("input[name='st_is_prom']").val('Yes');
+
 
                 },
                 error: function (request, textStatus, errorThrown) {
@@ -543,6 +576,9 @@
                 },
                 success: function (response) {
                     alert("Success");
+                    $("input[name='check_number']").val('');
+                    $("input[name='ch_date']").val('');
+
 
                 },
                 error: function (request, textStatus, errorThrown) {
@@ -575,6 +611,8 @@
                     },
                     success: function (response) {
                         alert("Success");
+                        $("input[name='sale_pr_number']").val('');
+
 
                     },
                     error: function (request, textStatus, errorThrown) {
