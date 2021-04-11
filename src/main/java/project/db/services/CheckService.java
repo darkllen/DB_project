@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import project.db.dto.Check;
+import project.db.dto.Customer_Card;
 import project.db.repos.CheckRepo;
 
 import javax.transaction.Transactional;
@@ -87,4 +88,6 @@ public class CheckService {
     public Integer get_num_product_saled_between_time(Date date_start, Date date_end) {
         return  checkRepo.get_num_product_saled_between_time(date_start, date_end);
     }
+
+
 }

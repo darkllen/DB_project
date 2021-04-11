@@ -76,4 +76,8 @@ public class CustomerService {
                 customer.getPercent()
         );
     }
+
+    public List<Customer_Card> get_customers_by_percent(int percent) {
+        return customerRepo.get_customers_by_percent(percent);
+    }
 }
