@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import project.db.dto.Employee;
 import project.db.repos.EmployeeRepo;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,30 +24,37 @@ public class EmployeeService {
     private final EmployeeRepo employeeRepo;
 
 
+    @Transactional
     public List<EmployeeRepo.EmployeeTotalInfo> getEmployeesSalesSum(){
         return employeeRepo.getEmployeesSalesSum();
     }
 
+    @Transactional
     public List<EmployeeRepo.EmployeeCustInfo> getEmployeesClientsNum(){
         return employeeRepo.getEmployeesClientsNum();
     };
 
+    @Transactional
     public Optional<Employee> getEmployeeById(String id){
         return employeeRepo.getEmployeeById(id);
     };
 
+    @Transactional
     public List<Employee> getAllEmployees() {
         return employeeRepo.getAllEmployees();
     }
 
+    @Transactional
     public Employee getEmployeeByIdEmployee(String id_employee) {
         return employeeRepo.getEmployeeByIdEmployee(id_employee);
     }
 
+    @Transactional
     public void removeEmployeeByIdEmployee(String id_employee) {
         employeeRepo.removeEmployeeByIdEmployee(id_employee);
     }
 
+    @Transactional
     public void editEmployee(Employee employee, String prev_id_employee) {
         String pass = passwordEncoder.encode(employee.getPassword());
         employeeRepo.editEmployee(
@@ -67,6 +75,7 @@ public class EmployeeService {
         );
     }
 
+    @Transactional
     public void addEmployee(Employee employee) {
         String pass = passwordEncoder.encode(employee.getPassword());
 
@@ -87,6 +96,7 @@ public class EmployeeService {
         );
     }
 
+    @Transactional
     public void editEmployeeWithoutPass(Employee employee, String prev_id_employee) {
         employeeRepo.editEmployee(
                 prev_id_employee,

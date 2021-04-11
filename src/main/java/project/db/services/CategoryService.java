@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import project.db.dto.Category;
 import project.db.repos.CategoryRepo;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -13,34 +14,42 @@ import java.util.List;
 public class CategoryService {
     private final CategoryRepo categoryRepo;
 
+    @Transactional
     public List<CategoryRepo.CategoriesProductsCounted> getCategoriesProductsCount(){
         return categoryRepo.getCategoriesProductsCount();
     };
 
+    @Transactional
     public List<CategoryRepo.CategoriesInfo> getCategoriesLike(String name){
         return categoryRepo.getCategoriesLike(name);
     };
 
+    @Transactional
     public List<CategoryRepo.CategoriesInfo> getCategories(){
         return categoryRepo.getCategories();
     };
 
+    @Transactional
     public void addCategory(Category category){
         categoryRepo.addCategory(category.getCategory_name());
     };
 
+    @Transactional
     public List<Category> getAllCategories() {
         return categoryRepo.getAllCategories();
     }
 
+    @Transactional
     public Category getCategoryByCategoryNumber(int category_number) {
         return categoryRepo.getCategoryByCategoryNumber(category_number);
     }
 
+    @Transactional
     public void removeCategoryByCategoryNumber(int category_number) {
         categoryRepo.removeCategoryByCategoryNumber(category_number);
     }
 
+    @Transactional
     public void editCategory(Category category) {
         categoryRepo.editCategory(category.getCategory_number(), category.getCategory_name());
     }
