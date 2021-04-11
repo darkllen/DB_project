@@ -1,0 +1,63 @@
+<!--групування-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>All categories sorted by name</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>All categories sorted by name</h1>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <th>CATEGORY NUMBER</th>
+        <th>CATEGORY NAME</th>
+
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+    var $categories = $('#table_body');
+    getAll($categories);
+
+    function formTableRow(cat){
+        return '<tr class = "table_row"><td>' + cat.category_number + '</td><td>' + cat.category_name + '</td></tr>';
+    }
+
+    function getAll($categories){
+        $.ajax({
+            type: 'GET',
+            url: '/get_all_categories_sorted_name',
+
+            success: function (response) {
+                response.forEach(function (cat) {
+                    $categories.append(formTableRow(cat));
+                });
+
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>
