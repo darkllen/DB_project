@@ -46,4 +46,22 @@ public class RestControllerSorted {
             return ResponseEntity.status(500).header("error","error").body(List.of());
         }
     }
+
+    @RequestMapping(value = {"/get_all_products_sorted_name"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> get_all_products_sorted_name(){
+        try{
+            return ResponseEntity.ok().body(productService.get_all_products_sorted_name());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_all_categories_sorted_name"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Category>> get_all_categories_sorted_name(){
+        try{
+            return ResponseEntity.ok().body(categoryService.get_all_categories_sorted_name());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
 }

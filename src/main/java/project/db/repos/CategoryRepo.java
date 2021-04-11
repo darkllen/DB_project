@@ -36,6 +36,11 @@ public interface CategoryRepo extends JpaRepository<Category, Integer> {
             "WHERE category_number=?1", nativeQuery = true)
     void editCategory(int category_number, String category_name);
 
+    @Query(value = "SELECT * " +
+            "FROM Category " +
+            "ORDER BY category_name ", nativeQuery = true)
+    List<Category> get_all_categories_sorted_name();
+
     interface CategoriesProductsCounted {
         int getProducts_count();
         int getCategory_number();
