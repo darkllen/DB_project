@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit store product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<!--<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">-->
+
+<form id="store_product" th:name="${st_pr_id}">
+    <h2>Edit store product</h2>
+    <p>Category name : </p>
+    <select id='prod_cat_name' name='prod_cat_name'>
+    </select>
+    <br>
+    <p>Product name : </p>
+    <input type="text" placeholder="Product name" name="prod_name">
+    <p>Characteristics : </p>
+    <textarea type="text" placeholder="Characteristics" name="prod_char"></textarea>
+    <button class="btn btn-success" type="submit">Edit</button>
+</form>
+
+<script>
+
+    $(function() {
+        var id = document.getElementById("product").getAttribute("name");
+
+
+        var data = {
+            id_product: id,
+        };
+
+        $.ajax({
+            type: 'get',
+            url: '/get_product_by_id_product',
+            dataType: 'json',
+            data: data,
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-Type', 'application/json')
+            },
+            success: function (response) {
+
+                $.ajax({
+                    url: '/get_categories',
+                    type: "get",
+                    success: function (response) {
+                        document.getElementById("prod_cat_name").innerHTML= '';
+
+                        response.forEach(function (cat) {
+                            document.getElementById("prod_cat_name").innerHTML+= '<option value="'+cat.category_number+'">'+cat.category_name+'</option>';
+                        })
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                });
+
+                $("input[name='prod_cat_name']").val(response.category_number);
+                $("input[name='prod_name']").val(response.product_name);
+                $("textarea[name='prod_char']").val(response.characteristics);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+        $('#product').submit(function(e) {
+            e.preventDefault();
+
+            var data = {category_number : $(this).find('[name=prod_cat_name]').val()
+                , product_name: $(this).find('[name=prod_name]').val()
+                , characteristics: $(this).find('[name=prod_char]').val()};
+
+            $.ajax({
+                type: 'POST',
+                url: '/edit_product',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    alert("Success");
+
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+        });
+
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
+
