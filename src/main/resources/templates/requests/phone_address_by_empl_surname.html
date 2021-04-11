@@ -1,0 +1,116 @@
+<!--заперечення + параметр-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get phone address by employee surname</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Get phone address by employee surname</h1>
+
+    <form id="form">
+        <p>Employee surname : </p>
+        <input type="text" placeholder="Employee surname" name="em_surname">
+        <button type="submit">Search</button>
+    </form>
+
+
+    <table id="table" class="table table-hover table-bordered" style="visibility: hidden;">
+        <thead>
+        <th>EMPLOYEE ID</th>
+        <th>EMPLOYEE NAME</th>
+        <th>EMPLOYEE SURNAME</th>
+        <th>PHONE NUMBER</th>
+        <th>CITY</th>
+        <th>STREET</th>
+        <th>ZIPCODE</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+    <h3 id="no_results" style="visibility: hidden">No results found</h3>
+
+
+</div>
+
+
+<script>
+    var $table = $('#table_body');
+
+    function formTableRow(e){
+        return '<tr class = "table_row">' +
+            '<td>' + e.id_employee + '</td>' +
+            '<td>' + e.empl_surname + '</td>' +
+            '<td>' + e.empl_name + '</td>' +
+            '<td>' + e.phone_number + '</td>' +
+            '<td>' + e.city + '</td>' +
+            '<td>' + e.street + '</td>' +
+            '<td>' + e.zip_code + '</td>' +
+            '</tr>';
+    }
+
+    $(function() {
+
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            $products.empty();
+
+            var data = {
+                surname: $(this).find('[name=em_surname]').val()
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: '/get_phone_address_by_empl_surname',
+                dataType: 'json',
+                data: data,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    // $('input').val('');
+                    if(response.length == 0){
+                        document.getElementById("table").style.visibility = 'hidden';
+                        document.getElementById("no_results").style.visibility = 'visible';
+                    }
+                    else {
+                        document.getElementById("table").style.visibility = 'visible';
+                        document.getElementById("no_results").style.visibility = 'hidden';
+                        response.forEach(function (prod) {
+                            $table.append(formTableRow(prod));
+                        });
+                    }
+
+
+                }
+            });
+        });
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
