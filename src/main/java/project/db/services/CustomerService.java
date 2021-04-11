@@ -35,4 +35,8 @@ public class CustomerService {
     public Customer_Card getCustomerCardByCardNumber(String card_number) {
         return customerRepo.getCustomerCardByCardNumber(card_number);
     }
+
+    public void removeCustomerCardByCardNumber(String card_number) {
+        customerRepo.removeCustomerCardByCardNumber(card_number);
+    }
 }

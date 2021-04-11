@@ -62,4 +62,8 @@ public class EmployeeService implements UserDetailsService {
     public Employee getEmployeeByIdEmployee(String id_employee) {
         return employeeRepo.getEmployeeByIdEmployee(id_employee);
     }
+
+    public void removeEmployeeByIdEmployee(String id_employee) {
+        employeeRepo.removeEmployeeByIdEmployee(id_employee);
+    }
 }

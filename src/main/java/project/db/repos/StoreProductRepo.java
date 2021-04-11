@@ -1,9 +1,11 @@
 package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import project.db.dto.Store_Product;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface StoreProductRepo  extends JpaRepository<Store_Product, String> {
@@ -20,6 +22,13 @@ public interface StoreProductRepo  extends JpaRepository<Store_Product, String> 
             "FROM Store_Product " +
             "WHERE UPC=?1", nativeQuery = true)
     Store_Product getStoreProductByUPC(String upc);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE " +
+            "FROM Store_Product " +
+            "WHERE UPC=?1", nativeQuery = true)
+    void removeStoreProductByUPC(String upc);
 
     interface StoreProductWithName {
         String getProduct_name();

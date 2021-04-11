@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import project.db.dto.*;
 import project.db.services.*;
 
-import java.util.List;
-
 @RestController
 public class RestControllerGetAllById {
     @Autowired

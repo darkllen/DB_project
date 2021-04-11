@@ -1,10 +1,12 @@
 package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import project.db.dto.Employee;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,13 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             "FROM Employee " +
             "WHERE id_employee=?1", nativeQuery = true)
     Employee getEmployeeByIdEmployee(String id_employee);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE " +
+            "FROM Employee " +
+            "WHERE id_employee=?1", nativeQuery = true)
+    void removeEmployeeByIdEmployee(String id_employee);
 
     interface EmployeeTotalInfo {
         String getEmpl_surname();
