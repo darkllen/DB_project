@@ -24,4 +24,8 @@ public class CheckService {
     public Check getCheckByCheckNumber(String check_number) {
         return checkRepo.getCheckByCheckNumber(check_number);
     }
+
+    public void removeCheckByCheckNumber(String check_number) {
+        checkRepo.removeCheckByCheckNumber(check_number);
+    }
 }

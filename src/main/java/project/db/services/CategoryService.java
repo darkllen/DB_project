@@ -36,4 +36,8 @@ public class CategoryService {
     public Category getCategoryByCategoryNumber(int category_number) {
         return categoryRepo.getCategoryByCategoryNumber(category_number);
     }
+
+    public void removeCategoryByCategoryNumber(int category_number) {
+        categoryRepo.removeCategoryByCategoryNumber(category_number);
+    }
 }

@@ -33,4 +33,8 @@ public class ProductService {
     public Product getProductByIdProduct(int id_product) {
         return productRepo.getProductByIdProduct(id_product);
     }
+
+    public void removeProductByIdProduct(int id_product) {
+        productRepo.removeProductByIdProduct(id_product);
+    }
 }

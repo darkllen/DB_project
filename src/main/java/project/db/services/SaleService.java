@@ -18,4 +18,8 @@ public class SaleService {
     public Sale getSaleByUpcCheckNumber(String upc, String check_number) {
         return saleRepo.getSaleByUpcCheckNumber(upc, check_number);
     }
+
+    public void removeSaleByUpcCheckNumber(String upc, String check_number) {
+        saleRepo.removeSaleByUpcCheckNumber(upc, check_number);
+    }
 }

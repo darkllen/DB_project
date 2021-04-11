@@ -1,11 +1,13 @@
 package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import project.db.dto.Category;
 import project.db.dto.Check;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +46,13 @@ public interface CheckRepo extends JpaRepository<Check, String> {
             "FROM Recipe " +
             "WHERE check_number=?1",nativeQuery = true)
     Check getCheckByCheckNumber(String check_number);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE " +
+            "FROM Recipe " +
+            "WHERE check_number=?1",nativeQuery = true)
+    void removeCheckByCheckNumber(String check_number);
 
     interface ChecksInfo {
         String getCheck_number();

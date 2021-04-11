@@ -1,12 +1,14 @@
 package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import project.db.dto.Customer_Card;
 import project.db.dto.Product;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
@@ -20,6 +22,13 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
             "FROM Customer_Card " +
             "WHERE card_number=?1", nativeQuery = true)
     Customer_Card getCustomerCardByCardNumber(String card_number);
+
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT * " +
+            "FROM Customer_Card " +
+            "WHERE card_number=?1", nativeQuery = true)
+    void removeCustomerCardByCardNumber(String card_number);
 
     interface CustomerSpends {
         String getCard_number();

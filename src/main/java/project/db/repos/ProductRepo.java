@@ -1,10 +1,12 @@
 package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import project.db.dto.Product;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ProductRepo extends JpaRepository<Product, Integer> {
@@ -50,4 +52,11 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
             "FROM Product " +
             "WHERE id_product=?1 ", nativeQuery = true)
     Product getProductByIdProduct(int id_product);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE" +
+            "FROM Product " +
+            "WHERE id_product=?1 ", nativeQuery = true)
+    void removeProductByIdProduct(int id_product);
 }

@@ -24,4 +24,8 @@ public class StoreProductService {
     public Store_Product getStoreProductByUPC(String upc) {
         return storeProductRepo.getStoreProductByUPC(upc);
     }
+
+    public void removeStoreProductByUPC(String upc) {
+        storeProductRepo.removeStoreProductByUPC(upc);
+    }
 }
