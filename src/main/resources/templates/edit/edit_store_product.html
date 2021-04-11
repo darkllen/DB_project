@@ -85,8 +85,8 @@
                 console.log(response);
 
                 $("input[name='st_upc']").val(response.upc);
-                $("input[name='st_pr_id']").val(response.id_product);
-                $("inputa[name='st_upc_prom']").val(response.upc_prom);
+                $("select[name='st_pr_id']").val(response.id_product);
+                $("select[name='st_upc_prom']").val(response.upc_prom);
                 $("input[name='st_price']").val(response.selling_price);
                 $("input[name='st_number']").val(response.products_number);
                 if(response.promotional)
