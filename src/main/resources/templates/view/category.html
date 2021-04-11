@@ -75,9 +75,15 @@
                 dataType: 'json',
                 data: JSON.stringify(data),
                 success: function (response) {
+                    console.log(response)
                     document.getElementById("my_table").deleteRow(rowNum);
                 },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
                 error: function (request, textStatus, errorThrown) {
+                    console.log(request)
+                    console.log(errorThrown)
                     alert(request.getResponseHeader('error'));
                 }
             });
