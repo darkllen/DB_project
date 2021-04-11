@@ -17,60 +17,31 @@
 <!--<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">-->
 
 <form id="product" th:name="${pr_id}">
-    <h2>Edit employee</h2>
-    <div class="col1">
-        <p>Id employee : </p>
-        <input type="text" placeholder="Id employee" name="em_id">
-        <p>Password : </p>
-        <input type="password" placeholder="Password" name="em_pas">
-        <p>Employee surname : </p>
-        <input type="text" placeholder="Employee surname" name="em_surname">
-        <p>Employee name : </p>
-        <input type="text" placeholder="Employee name" name="em_name">
-        <p>Employee patronymic : </p>
-        <input type="text" placeholder="Employee patronymic" name="em_patron">
-        <p>Role : </p>
-        <select name="em_role">
-            <option value="MANAGER">MANAGER</option>
-            <option value="KASSIR">KASSIR</option>
-        </select>
-        <p>Salary : </p>
-        <input type="number" placeholder="Salary" name="em_salary">
-
-    </div>
-    <div class="col2">
-        <p>Date of birth : </p>
-        <input type="date" placeholder="Date of birth" name="em_date_birth">
-        <p>Date of start : </p>
-        <input type="date" placeholder="Date of start" name="em_date_start">
-        <p>Phone number : </p>
-        <input type="tel" placeholder="Phone number" name="em_phone">
-        <p>Employee city : </p>
-        <input type="text" placeholder="City" name="em_city">
-        <p>Employee street : </p>
-        <input type="text" placeholder="Street" name="em_street">
-        <p>Zip code : </p>
-        <input type="number" placeholder="Zip code" name="em_zipcode">
-        <button class="btn btn-success" type="submit">Edit</button>
-    </div>
+    <h2>Edit product</h2>
+    <p>Category name : </p>
+    <select id='prod_cat_name' name='prod_cat_name'>
+    </select>
+    <br>
+    <p>Product name : </p>
+    <input type="text" placeholder="Product name" name="prod_name">
+    <p>Characteristics : </p>
+    <textarea type="text" placeholder="Characteristics" name="prod_char"></textarea>
+    <button class="btn btn-success" type="submit">Add</button>
 </form>
 
 <script>
 
-
-
-
     $(function() {
-        var id = document.getElementById("employee").getAttribute("name");
+        var id = document.getElementById("product").getAttribute("name");
 
 
         var data = {
-            id_employee: id,
+            id_product: id,
         };
 
         $.ajax({
             type: 'get',
-            url: '/get_employee_by_id_employee',
+            url: '/get_product_by_id_product',
             dataType: 'json',
             data: data,
 
@@ -79,47 +50,40 @@
             },
             success: function (response) {
 
-                var date_of_birth = new Date(response.date_of_birth).toLocaleDateString('en-CA');
-                var date_of_start = new Date(response.date_of_birth).toLocaleDateString('en-CA');
-                $("input[name='em_id']").val(response.id_employee);
-                $("input[name='em_pas']").val(response.password);
-                $("input[name='em_surname']").val(response.empl_surname);
-                $("input[name='em_name']").val(response.empl_name);
-                $("input[name='em_patron']").val(response.empl_patronymic);
-                $("select[name='em_role']").val(response.role);
-                $("input[name='em_salary']").val(response.salary);
-                $("input[name='em_date_birth']").val(date_of_birth);
-                $("input[name='em_date_start']").val(date_of_start);
-                $("input[name='em_phone']").val(response.phone_number);
-                $("input[name='em_city']").val(response.city);
-                $("input[name='em_street']").val(response.street);
-                $("input[name='em_zipcode']").val(response.zip_code);
+                $.ajax({
+                    url: '/get_categories',
+                    type: "get",
+                    success: function (response) {
+                        document.getElementById("prod_cat_name").innerHTML= '';
+
+                        response.forEach(function (cat) {
+                            document.getElementById("prod_cat_name").innerHTML+= '<option value="'+cat.category_number+'">'+cat.category_name+'</option>';
+                        })
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                });
+
+                $("input[name='prod_cat_name']").val(response.category_number);
+                $("input[name='prod_name']").val(response.product_name);
+                $("textarea[name='prod_char']").val(response.characteristics);
             },
             error: function (err) {
                 console.log(err);
             }
         });
 
-        $('#employee').submit(function(e) {
+        $('#product').submit(function(e) {
             e.preventDefault();
 
-            var data = {
-                id_employee: $(this).find('[name=em_id]').val()
-                , password: $(this).find('[name=em_pas]').val()
-                , empl_surname: $(this).find('[name=em_surname]').val()
-                , empl_name: $(this).find('[name=em_name]').val()
-                , empl_patronymic: $(this).find('[name=em_patron]').val()
-                , role: $(this).find('[name=em_role]').val()
-                , salary: $(this).find('[name=em_salary]').val()
-                , date_of_birth: $(this).find('[name=em_date_birth]').val()
-                , date_of_start: $(this).find('[name=em_date_start]').val()
-                , phone_number: $(this).find('[name=em_phone]').val()
-                , city: $(this).find('[name=em_city]').val()
-                , street: $(this).find('[name=em_street]').val()
-                , zip_code: $(this).find('[name=em_zipcode]').val()};
+            var data = {category_number : $(this).find('[name=prod_cat_name]').val()
+                , product_name: $(this).find('[name=prod_name]').val()
+                , characteristics: $(this).find('[name=prod_char]').val()};
+
             $.ajax({
                 type: 'POST',
-                url: '/edit_employee/'+id,
+                url: '/edit_product/'+id,
                 dataType: 'json',
                 data: JSON.stringify(data),
 
