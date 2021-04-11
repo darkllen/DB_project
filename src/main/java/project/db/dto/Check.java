@@ -36,4 +36,8 @@ public class Check {
     @Column(name = "vat")
     private double vat;
 
+    public void countVat() {
+        vat = (sum_total*0.2)/1.2;
+        sum_total+=vat;
+    }
 }

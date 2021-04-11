@@ -30,6 +30,22 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
             "WHERE card_number=?1", nativeQuery = true)
     void removeCustomerCardByCardNumber(String card_number);
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Customer_Card " +
+            "SET card_number=?2, cust_name=?3, cust_surname=?4, cust_patronymic=?5, phone_number=?6, city=?7, street=?8, zip_code=?9, `percent`=?10 " +
+            "WHERE card_number=?1", nativeQuery = true)
+    void editCustomerCard(String prev_card_number,
+                          String card_number,
+                          String cust_name,
+                          String cust_surname,
+                          String cust_patronymic,
+                          String phone_number,
+                          String city,
+                          String street,
+                          String zip_code,
+                          Integer percent);
+
     interface CustomerSpends {
         String getCard_number();
         String getCust_surname();
