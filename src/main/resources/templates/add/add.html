@@ -386,8 +386,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -422,8 +422,8 @@
                         alert("Success");
 
                     },
-                    error: function(err){
-                        alert(err);
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
                     }
             });
         });
@@ -455,8 +455,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -483,8 +483,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -517,8 +517,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -545,8 +545,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -554,28 +554,34 @@
         $('#sale').submit(function(e) {
             e.preventDefault();
 
-            var data = {upc : $(this).find('[name=sale_pr]').val()
-                , check_number : $(this).find('[name=sale_ch]').val()
-                , product_number: $(this).find('[name=sale_pr_number]').val()
-            };
+            if(find('[name=sale_pr_number]').val()<1)
+                alert("Number of products must be > 0 ")
+            else {
 
-            $.ajax({
-                type: 'POST',
-                url: '/add_sale',
-                dataType: 'json',
-                data: JSON.stringify(data),
+                var data = {
+                    upc: $(this).find('[name=sale_pr]').val()
+                    , check_number: $(this).find('[name=sale_ch]').val()
+                    , product_number: $(this).find('[name=sale_pr_number]').val()
+                };
 
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Content-Type', 'application/json')
-                },
-                success: function (response) {
-                    alert("Success");
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_sale',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
 
-                },
-                error: function(err){
-                    alert(err);
-                }
-            });
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Content-Type', 'application/json')
+                    },
+                    success: function (response) {
+                        alert("Success");
+
+                    },
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
+                    }
+                });
+            }
         });
 
     });
