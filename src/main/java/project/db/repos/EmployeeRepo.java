@@ -2,9 +2,11 @@ package project.db.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import project.db.dto.Employee;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
@@ -30,5 +32,11 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
         String getId_employee();
         String getCust_number();
     }
+
+    @Query(value = "SELECT * " +
+            "FROM Employee " +
+            "WHERE id_employee=:id", nativeQuery = true)
+    Optional<Employee> getEmployeeById(@Param("id") String id);
+
 
 }
