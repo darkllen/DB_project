@@ -386,8 +386,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -422,8 +422,8 @@
                         alert("Success");
 
                     },
-                    error: function(err){
-                        alert(err);
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
                     }
             });
         });
@@ -455,8 +455,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -483,8 +483,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -517,8 +517,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -545,8 +545,8 @@
                     alert("Success");
 
                 },
-                error: function(err){
-                    alert(err);
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
                 }
             });
         });
@@ -577,8 +577,8 @@
                         alert("Success");
 
                     },
-                    error: function (err) {
-                        alert(err);
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
                     }
                 });
             }
