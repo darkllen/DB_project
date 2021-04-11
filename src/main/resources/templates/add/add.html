@@ -261,7 +261,7 @@
 
             var data = {
                 category_name: $(this).find('[name=cat_name]').val()
-            }
+            };
             $.ajax({
                 type: 'POST',
                 url: '/add_category',
@@ -283,25 +283,26 @@
 
         $('#employee').submit(function(e) {
             e.preventDefault();
-            var d = '{id_employee:'+$(this).find('[name=em_id]').val()+
-                    ', password:'+$(this).find('[name=em_pas]').val()+'}'+
-                    ', empl_surname:'+$(this).find('[name=em_surname]').val()+
-                    ', empl_name:'+$(this).find('[name=em_name]').val()+
-                    ', empl_patronymic:'+$(this).find('[name=em_patron]').val()+
-                    ', role:'+$(this).find('[name=em_role]').val()+
-                    ', salary:'+$(this).find('[name=em_salary]').val()+
-                    ', date_of_birth:'+$(this).find('[name=em_date_birth]').val()+
-                    ', date_of_start:'+$(this).find('[name=em_date_start]').val()+
-                    ', phone_number:'+$(this).find('[name=em_phone]').val()+
-                    ', city:'+$(this).find('[name=em_city]').val()+
-                    ', street:'+$(this).find('[name=em_street]').val()+
-                    ', zip_code:'+$(this).find('[name=em_zipcode]').val()+'}';
+            var data = {id_employee: $(this).find('[name=em_id]').val()
+                    , password: $(this).find('[name=em_pas]').val()
+                    , empl_surname: $(this).find('[name=em_surname]').val()
+                    , empl_name: $(this).find('[name=em_name]').val()
+                    , empl_patronymic: $(this).find('[name=em_patron]').val()
+                    , role: $(this).find('[name=em_role]').val()
+                    , salary: $(this).find('[name=em_salary]').val()
+                    , date_of_birth: $(this).find('[name=em_date_birth]').val()
+                    , date_of_start: $(this).find('[name=em_date_start]').val()
+                    , phone_number: $(this).find('[name=em_phone]').val()
+                    , city: $(this).find('[name=em_city]').val()
+                    , street: $(this).find('[name=em_street]').val()
+                    , zip_code: $(this).find('[name=em_zipcode]').val()};
 
 
                 $.ajax({
                 type: 'POST',
                 url: '/add_employee',
-                data: d,
+                    dataType: 'json',
+                    data: JSON.stringify(data),
 
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
@@ -319,21 +320,22 @@
         $('#cust_card').submit(function(e) {
             e.preventDefault();
 
-            var d = '{card_number:'+$(this).find('[name=cust_card_num]').val()+
-                ', cust_surname:'+$(this).find('[name=cust_surname]').val()+'}'+
-                ', cust_name:'+$(this).find('[name=cust_name]').val()+
-                ', cust_patronymic:'+$(this).find('[name=cust_patron]').val()+
-                ', phone_number:'+$(this).find('[name=cust_phone]').val()+
-                ', city:'+$(this).find('[name=cust_city]').val()+
-                ', street:'+$(this).find('[name=cust_street]').val()+
-                ', zip_code:'+$(this).find('[name=cust_zipcode]').val()+
-                ', percent:'+$(this).find('[name=cust_percent]').val()+'}';
+            var data = {card_number: $(this).find('[name=cust_card_num]').val()
+                , cust_surname: $(this).find('[name=cust_surname]').val()
+                , cust_name: $(this).find('[name=cust_name]').val()
+                , cust_patronymic: $(this).find('[name=cust_patron]').val()
+                , phone_number: $(this).find('[name=cust_phone]').val()
+                , city: $(this).find('[name=cust_city]').val()
+                , street: $(this).find('[name=cust_street]').val()
+                , zip_code: $(this).find('[name=cust_zipcode]').val()
+                , percent: $(this).find('[name=cust_percent]').val()};
 
 
             $.ajax({
                 type: 'POST',
                 url: '/add_customer',
-                data: d,
+                dataType: 'json',
+                data: JSON.stringify(data),
 
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
