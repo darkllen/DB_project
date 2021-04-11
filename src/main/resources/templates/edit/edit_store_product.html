@@ -69,7 +69,7 @@
 
 
         var data = {
-            UPC: id,
+            upc: id,
         };
 
         $.ajax({
@@ -82,16 +82,17 @@
                 xhr.setRequestHeader('Content-Type', 'application/json')
             },
             success: function (response) {
+                console.log(response);
 
-                $("input[name='st_upc']").val(response.UPC);
+                $("input[name='st_upc']").val(response.upc);
                 $("input[name='st_pr_id']").val(response.id_product);
-                $("textarea[name='st_upc_prom']").val(response.UPC_prom);
-                $("textarea[name='st_price']").val(response.selling_price);
-                $("textarea[name='st_number']").val(response.products_number);
+                $("inputa[name='st_upc_prom']").val(response.upc_prom);
+                $("input[name='st_price']").val(response.selling_price);
+                $("input[name='st_number']").val(response.products_number);
                 if(response.promotional)
-                    $("textarea[name='st_is_prom']").val('Yes');
+                    $("select[name='st_is_prom']").val('Yes');
                 else
-                    $("textarea[name='st_is_prom']").val('No');
+                    $("select[name='st_is_prom']").val('No');
 
 
                 $.ajax({
