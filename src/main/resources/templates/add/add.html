@@ -46,8 +46,6 @@
     <div class="col1">
         <p>Id employee : </p>
         <input type="text" placeholder="Id employee" name="em_id">
-        <p>Password : </p>
-        <input type="password" placeholder="Password" name="em_pas">
         <p>Employee surname : </p>
         <input type="text" placeholder="Employee surname" name="em_surname">
         <p>Employee name : </p>
@@ -61,11 +59,11 @@
         </select>
         <p>Salary : </p>
         <input type="number" step="0.01" placeholder="Salary" name="em_salary">
-
-    </div>
-    <div class="col2">
         <p>Date of birth : </p>
         <input type="date" placeholder="Date of birth" name="em_date_birth">
+    </div>
+    <div class="col2">
+
         <p>Date of start : </p>
         <input type="date" placeholder="Date of start" name="em_date_start">
         <p>Phone number : </p>
@@ -76,6 +74,8 @@
         <input type="text" placeholder="Street" name="em_street">
         <p>Zip code : </p>
         <input type="number" placeholder="Zip code" name="em_zipcode">
+        <p>Enter new password (or leave the field empty) : </p>
+        <input type="password" placeholder="Password" name="em_pas">
         <button class="btn btn-success" type="submit">Add</button>
     </div>
 </form>
@@ -84,7 +84,7 @@
     <h2>Add customer</h2>
     <div class="col1">
         <p>Card number : </p>
-        <input type="number" placeholder="Card number" name="cust_card_num">
+        <input type="text" placeholder="Customer card number" name="cust_card_num">
         <p>Customer surname : </p>
         <input type="text" placeholder="Customer surname" name="cust_surname">
         <p>Customer name : </p>
@@ -395,8 +395,10 @@
 
         $('#employee').submit(function(e) {
             e.preventDefault();
+            var password = $(this).find('[name=em_pas]').val();
+
+
             var data = {id_employee: $(this).find('[name=em_id]').val()
-                    , password: $(this).find('[name=em_pas]').val()
                     , empl_surname: $(this).find('[name=em_surname]').val()
                     , empl_name: $(this).find('[name=em_name]').val()
                     , empl_patronymic: $(this).find('[name=em_patron]').val()
@@ -408,6 +410,10 @@
                     , city: $(this).find('[name=em_city]').val()
                     , street: $(this).find('[name=em_street]').val()
                     , zip_code: $(this).find('[name=em_zipcode]').val()};
+
+            if(password!='') data["password"] = password;
+
+            console.log(data);
 
 
 
