@@ -16,4 +16,8 @@ public class StoreProductService {
     public List<Store_Product> getAllStoreProducts() {
         return storeProductRepo.getAllStoreProducts();
     }
+
+    public List<StoreProductRepo.StoreProductWithName> getAllProductStoreWithName() {
+        return storeProductRepo.getAllStoreProductsWithName();
+    }
 }

@@ -11,4 +11,12 @@ public interface StoreProductRepo  extends JpaRepository<Store_Product, String> 
     @Query(value = "SELECT  * " +
             "FROM Store_Product ", nativeQuery = true)
     List<Store_Product> getAllStoreProducts();
+
+    @Query(value = "SELECT Store_Product.UPC AS UPC, Product.product_name AS product_name " +
+            "FROM Store_Product INNER JOIN Product ON Store_Product.id_product=Product.id_product ", nativeQuery = true)
+    List<StoreProductWithName> getAllStoreProductsWithName();
+    interface StoreProductWithName {
+        String getProduct_name();
+        String getUPC();
+    }
 }
