@@ -73,12 +73,12 @@ public interface CheckRepo extends JpaRepository<Check, String> {
 
     @Query(value = "SELECT *  " +
             "FROM Recipe " +
-            "WHERE id_employee=?1 AND print_date>?2 AND print_date<?3",nativeQuery = true)
+            "WHERE id_employee=?1 AND print_date>=?2 AND print_date<=?3",nativeQuery = true)
     List<Check> get_checks_with_sales_by_employee_between_time(String id_employee, Date date_start, Date date_end);
 
     @Query(value = "SELECT *  " +
             "FROM Recipe " +
-            "WHERE print_date>?1 AND print_date<?2",nativeQuery = true)
+            "WHERE print_date>=?1 AND print_date<=?2",nativeQuery = true)
     List<Check> get_checks_with_sales_between_time(Date date_start, Date date_end);
 
     interface CheckSaleInfo{
@@ -93,12 +93,12 @@ public interface CheckRepo extends JpaRepository<Check, String> {
 
     @Query(value = "SELECT SUM(sum_total)  " +
             "FROM Recipe " +
-            "WHERE print_date>?2 AND print_date<?3 " ,nativeQuery = true)
+            "WHERE print_date>=?1 AND print_date<=?2 " ,nativeQuery = true)
     Double get_sum_all_recipes_between_time(Date date_start, Date date_end);
 
     @Query(value = "SELECT SUM(product_number)  " +
             "FROM Recipe INNER JOIN Sale ON Sale.check_number=Recipe.check_number " +
-            "WHERE print_date>?2 AND print_date<?3 " ,nativeQuery = true)
+            "WHERE print_date>=?2 AND print_date<=?3 " ,nativeQuery = true)
     Integer get_num_product_saled_between_time(Date date_start, Date date_end);
 
     interface ChecksWithEmpl {
