@@ -61,6 +61,25 @@ public interface CheckRepo extends JpaRepository<Check, String> {
             "WHERE check_number=?1",nativeQuery = true)
     void editCheck(String prev_check_number, String check_number, String id_employee, String card_number, Date print_date, double sum_total, double vat);
 
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Recipe VALUES (?1, ?2, ?3, ?4, ?5, ?6)", nativeQuery = true)
+    void addCheck(String check_number, String id_employee, String card_number, Date print_date, double sum_total, double vat);
+
+    @Query(value = "SELECT Recipe.check_number AS check_number, Recipe.id_employee AS id_employee, Recipe.card_number AS card_number, Recipe.print_date AS print_date, Recipe.sum_total AS sum_total, Recipe.vat AS vat, Employee.empl_surname AS empl_surname, Employee.empl_name AS empl_name    " +
+            "FROM Recipe INNER JOIN Employee ON Recipe.id_employee=Employee.id_employee",nativeQuery = true)
+    List<ChecksWithEmpl> getAllChecksWithEmpl();
+    interface ChecksWithEmpl {
+        String getCheck_number();
+        String getId_employee();
+        String getCard_number();
+        Date getPrint_date();
+        double getSum_total();
+        double getVat();
+        String getEmpl_name();
+        String getEmpl_surname();
+    }
+
     interface ChecksInfo {
         String getCheck_number();
         Date getPrint_date();
