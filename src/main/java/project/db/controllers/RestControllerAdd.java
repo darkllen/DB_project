@@ -29,7 +29,12 @@ public class RestControllerAdd {
 
     @RequestMapping(value = {"/add_category"}, method = RequestMethod.POST)
     public ResponseEntity<Category> add_category(@RequestBody Category category){
-        categoryService.addCategory(category);
+        try{
+            categoryService.addCategory(category);
+        }catch ( Exception e){
+            return ResponseEntity.status(500).header("error","can not be added").body(null);
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(category);
     }
 
@@ -45,7 +50,12 @@ public class RestControllerAdd {
 
     @RequestMapping(value = {"/add_product"}, method = RequestMethod.POST)
     public ResponseEntity<Product> add_product(@RequestBody Product product){
-        productService.addProduct(product);
+        try{
+            System.out.println(product);
+            productService.addProduct(product);
+        }catch ( Exception e){
+            return ResponseEntity.status(500).header("error","can not be added").body(null);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
