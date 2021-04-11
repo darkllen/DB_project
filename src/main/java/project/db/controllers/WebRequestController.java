@@ -75,6 +75,16 @@ public class WebRequestController {
         return "requests/check/checks_with_sales_by_employee_between_time";
     }
 
+//    @RequestMapping(value = {"/checks_with_sales_by_employee_between_time"}, method = RequestMethod.GET)
+//    public String checks_with_sales_by_employee_between_time(){
+//        return "requests/check/checks_with_sales_by_employee_between_time";
+//    }
+
+    @RequestMapping(value = {"/sum_recipes_by_employee_between_time"}, method = RequestMethod.GET)
+    public String sum_recipes_by_employee_between_time(){
+        return "requests/check/sum_recipes_by_employee_between_time";
+    }
+
 
 
 
