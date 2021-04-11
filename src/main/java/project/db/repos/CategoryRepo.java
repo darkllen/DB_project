@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface CategoryRepo extends JpaRepository<Category, Integer> {
 
+
     @Query(value = "SELECT Category.category_number AS category_number, category_name, COUNT(id_product) AS products_count " +
             "FROM (Category INNER JOIN Product ON Category.category_number=Product.category_number) " +
             "GROUP BY Category.category_number", nativeQuery = true)
@@ -27,6 +28,13 @@ public interface CategoryRepo extends JpaRepository<Category, Integer> {
             "FROM Category " +
             "WHERE category_number=?1", nativeQuery = true)
     void removeCategoryByCategoryNumber(int category_number);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Category " +
+            "SET  category_name=?2 " +
+            "WHERE category_number=?1", nativeQuery = true)
+    void editCategory(int category_number, String category_name);
 
     interface CategoriesProductsCounted {
         int getProducts_count();

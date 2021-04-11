@@ -40,4 +40,8 @@ public class CategoryService {
     public void removeCategoryByCategoryNumber(int category_number) {
         categoryRepo.removeCategoryByCategoryNumber(category_number);
     }
+
+    public void editCategory(Category category) {
+        categoryRepo.editCategory(category.getCategory_number(), category.getCategory_name());
+    }
 }

@@ -32,7 +32,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     protected UserDetailsService userDetailsService() {
-        return new EmployeeService(employeeRepo);
+        return new EmployeeSecurity(employeeRepo);
     }
 
 }
