@@ -31,3 +31,7 @@ h1{
     padding-top: 30px;
 }
 
+.edit_button, .remove_button{
+    margin: 0px;
+
+}

@@ -2,17 +2,20 @@
     margin-top: 30px;
 }
 
-.my-group{
+.my-group, .my-group-main{
     margin-left: 50px;
 }
-
+.my-group-main, .my-group-main-2{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
 h2{
     margin-left: 50px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.my-group-2{
+.my-group-2, .my-group-main-2{
     margin-left: -10px;
 }
 
@@ -57,6 +60,12 @@ p{
 }
 
 
+
+.main_h2{
+    margin-bottom: 10px;
+}
+
+
 @media screen and (max-width: 750px) {
     .col1, .col2 {
         width: 95%;
@@ -67,6 +76,14 @@ p{
 @media screen and (max-width: 850px) {
 
     .my-group-2{
+        margin-left: 50px;
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+    .my-group-main-2{
         margin-left: 50px;
         margin-top: -5px;
     }

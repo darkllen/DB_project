@@ -9,16 +9,18 @@
 <body>
 
 <!--<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">-->
-<h2>Add info</h2>
-<div class="my-group btn-group btn-group-justified">
+<h2 class="main_h2">Add info</h2>
+<div class="my-group-main my-group btn-group btn-group-justified" style="margin-top: 15px;">
     <a href="/add" class="btn btn-warning">Add</a>
 </div>
 
-<h2>View/Edit/Remove info</h2>
-<div class="my-group btn-group btn-group-justified">
+<h2 class="main_h2">View/Edit/Remove info</h2>
+<div class="my-group-main btn-group btn-group-justified">
     <a href="/category" class="btn btn-warning">Category</a>
     <a href="/employee" class="btn btn-warning">Employee</a>
     <a href="/customer_card" class="btn btn-warning">Customer_card</a>
+</div>
+<div class="my-group-main-2 btn-group btn-group-justified">
     <a href="/product" class="btn btn-warning">Product</a>
     <a href="/store_product" class="btn btn-warning">Store product</a>
     <a href="/check" class="btn btn-warning">Check</a>
