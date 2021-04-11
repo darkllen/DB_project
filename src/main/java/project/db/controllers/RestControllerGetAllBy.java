@@ -79,4 +79,13 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(500).header("error","error").body(List.of());
         }
     }
+
+    @RequestMapping(value = {"/get_checks_with_sales_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Check>> get_checks_with_sales_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_checks_with_sales_between_time(date_start, date_end));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
 }

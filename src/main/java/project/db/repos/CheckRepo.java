@@ -76,6 +76,11 @@ public interface CheckRepo extends JpaRepository<Check, String> {
             "WHERE id_employee=?1 AND print_date>?2 AND print_date<?3",nativeQuery = true)
     List<Check> get_checks_with_sales_by_employee_between_time(String id_employee, Date date_start, Date date_end);
 
+    @Query(value = "SELECT *  " +
+            "FROM Recipe " +
+            "WHERE print_date>?1 AND print_date<?2",nativeQuery = true)
+    List<Check> get_checks_with_sales_between_time(Date date_start, Date date_end);
+
     interface ChecksWithEmpl {
         String getCheck_number();
         String getId_employee();

@@ -67,4 +67,9 @@ public class CheckService {
     public List<Check> get_checks_with_sales_by_employee_between_time(String id_employee, Date date_start, Date date_end) {
         return checkRepo.get_checks_with_sales_by_employee_between_time(id_employee, date_start, date_end);
     }
+
+    @Transactional
+    public List<Check> get_checks_with_sales_between_time(Date date_start, Date date_end) {
+        return  checkRepo.get_checks_with_sales_between_time(date_start,date_end);
+    }
 }
