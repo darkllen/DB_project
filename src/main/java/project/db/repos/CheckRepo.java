@@ -69,6 +69,13 @@ public interface CheckRepo extends JpaRepository<Check, String> {
     @Query(value = "SELECT Recipe.check_number AS check_number, Recipe.id_employee AS id_employee, Recipe.card_number AS card_number, Recipe.print_date AS print_date, Recipe.sum_total AS sum_total, Recipe.vat AS vat, Employee.empl_surname AS empl_surname, Employee.empl_name AS empl_name    " +
             "FROM Recipe INNER JOIN Employee ON Recipe.id_employee=Employee.id_employee",nativeQuery = true)
     List<ChecksWithEmpl> getAllChecksWithEmpl();
+
+
+    @Query(value = "SELECT *  " +
+            "FROM Recipe " +
+            "WHERE id_employee=?1 AND print_date>?2 AND print_date<?3",nativeQuery = true)
+    List<Check> get_checks_with_sales_by_employee_between_time(String id_employee, Date date_start, Date date_end);
+
     interface ChecksWithEmpl {
         String getCheck_number();
         String getId_employee();

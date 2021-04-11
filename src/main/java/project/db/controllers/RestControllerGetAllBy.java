@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import project.db.dto.Category;
+import project.db.dto.Check;
 import project.db.dto.Product;
 import project.db.dto.Store_Product;
 import project.db.repos.EmployeeRepo;
 import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -64,6 +66,15 @@ public class RestControllerGetAllBy {
     public ResponseEntity<List<StoreProductRepo.StoreProductPriceNum>> get_product_by_upc(@RequestParam String upc) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(storeProductService.get_product_by_upc(upc));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_checks_with_sales_by_employee_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Check>> get_checks_with_sales_by_employee_between_time(@RequestParam String id_employee, @RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_checks_with_sales_by_employee_between_time(id_employee, date_start, date_end));
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","error").body(List.of());
         }
