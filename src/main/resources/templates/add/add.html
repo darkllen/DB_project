@@ -106,7 +106,7 @@
 <form id="product" style="visibility: hidden; display: none;">
     <h2>Add product</h2>
     <p>Category name : </p>
-        <select id='prod_cat_name'>
+        <select id='prod_cat_name' name='prod_cat_name'>
         </select>
     <br>
     <p>Product name : </p>
@@ -124,11 +124,11 @@
         <p>UPC : </p>
         <input type="text" placeholder="UPC" name="st_upc">
         <p>Product name: </p>
-        <select id='st_pr_id' onchange="changeProductUPC()">
+        <select id='st_pr_id' name='st_pr_id' onchange="changeProductUPC()">
         </select>
         <br>
         <p>UPC promotion : </p>
-        <select id='st_upc_prom'>
+        <select id='st_upc_prom' name='st_upc_prom'>
         </select>
         <br>
         <p>Selling price : </p>
@@ -138,7 +138,7 @@
         <p>Products number : </p>
         <input type="text" placeholder="Products number" name="st_number">
         <p>Is promotional : </p>
-        <select id='st_is_prom'>
+        <select id='st_is_prom' name='st_is_prom'>
             <option>Yes</option>
             <option>No</option>
         </select>
@@ -212,8 +212,10 @@
                 url: '/get_categories',
                 type: "get",
                 success: function (response) {
+                    document.getElementById("prod_cat_name").innerHTML= '';
+
                     response.forEach(function (cat) {
-                        document.getElementById("prod_cat_name").innerHTML+= '<option value="'+cat.category_name+'">'+cat.category_name+'</option>';
+                        document.getElementById("prod_cat_name").innerHTML+= '<option value="'+cat.category_number+'">'+cat.category_name+'</option>';
                     })
                 },
                 error: function(err){
@@ -234,6 +236,7 @@
                 type: "get",
                 success: function (response) {
                     var i = 0;
+                    document.getElementById("st_pr_id").innerHTML= '';
                     response.forEach(function (pr) {
                         if(i==0)
                             document.getElementById("st_pr_id").innerHTML+= '<option selected="selected" value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
@@ -261,7 +264,7 @@
 
             var data = {
                 category_name: $(this).find('[name=cat_name]').val()
-            }
+            };
             $.ajax({
                 type: 'POST',
                 url: '/add_category',
@@ -283,25 +286,26 @@
 
         $('#employee').submit(function(e) {
             e.preventDefault();
-            var d = '{id_employee:'+$(this).find('[name=em_id]').val()+
-                    ', password:'+$(this).find('[name=em_pas]').val()+'}'+
-                    ', empl_surname:'+$(this).find('[name=em_surname]').val()+
-                    ', empl_name:'+$(this).find('[name=em_name]').val()+
-                    ', empl_patronymic:'+$(this).find('[name=em_patron]').val()+
-                    ', role:'+$(this).find('[name=em_role]').val()+
-                    ', salary:'+$(this).find('[name=em_salary]').val()+
-                    ', date_of_birth:'+$(this).find('[name=em_date_birth]').val()+
-                    ', date_of_start:'+$(this).find('[name=em_date_start]').val()+
-                    ', phone_number:'+$(this).find('[name=em_phone]').val()+
-                    ', city:'+$(this).find('[name=em_city]').val()+
-                    ', street:'+$(this).find('[name=em_street]').val()+
-                    ', zip_code:'+$(this).find('[name=em_zipcode]').val()+'}';
+            var data = {id_employee: $(this).find('[name=em_id]').val()
+                    , password: $(this).find('[name=em_pas]').val()
+                    , empl_surname: $(this).find('[name=em_surname]').val()
+                    , empl_name: $(this).find('[name=em_name]').val()
+                    , empl_patronymic: $(this).find('[name=em_patron]').val()
+                    , role: $(this).find('[name=em_role]').val()
+                    , salary: $(this).find('[name=em_salary]').val()
+                    , date_of_birth: $(this).find('[name=em_date_birth]').val()
+                    , date_of_start: $(this).find('[name=em_date_start]').val()
+                    , phone_number: $(this).find('[name=em_phone]').val()
+                    , city: $(this).find('[name=em_city]').val()
+                    , street: $(this).find('[name=em_street]').val()
+                    , zip_code: $(this).find('[name=em_zipcode]').val()};
 
 
                 $.ajax({
                 type: 'POST',
                 url: '/add_employee',
-                data: d,
+                    dataType: 'json',
+                    data: JSON.stringify(data),
 
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
@@ -319,21 +323,84 @@
         $('#cust_card').submit(function(e) {
             e.preventDefault();
 
-            var d = '{card_number:'+$(this).find('[name=cust_card_num]').val()+
-                ', cust_surname:'+$(this).find('[name=cust_surname]').val()+'}'+
-                ', cust_name:'+$(this).find('[name=cust_name]').val()+
-                ', cust_patronymic:'+$(this).find('[name=cust_patron]').val()+
-                ', phone_number:'+$(this).find('[name=cust_phone]').val()+
-                ', city:'+$(this).find('[name=cust_city]').val()+
-                ', street:'+$(this).find('[name=cust_street]').val()+
-                ', zip_code:'+$(this).find('[name=cust_zipcode]').val()+
-                ', percent:'+$(this).find('[name=cust_percent]').val()+'}';
+            var data = {card_number: $(this).find('[name=cust_card_num]').val()
+                , cust_surname: $(this).find('[name=cust_surname]').val()
+                , cust_name: $(this).find('[name=cust_name]').val()
+                , cust_patronymic: $(this).find('[name=cust_patron]').val()
+                , phone_number: $(this).find('[name=cust_phone]').val()
+                , city: $(this).find('[name=cust_city]').val()
+                , street: $(this).find('[name=cust_street]').val()
+                , zip_code: $(this).find('[name=cust_zipcode]').val()
+                , percent: $(this).find('[name=cust_percent]').val()};
 
 
             $.ajax({
                 type: 'POST',
                 url: '/add_customer',
-                data: d,
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    console.log(response);
+
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#product').submit(function(e) {
+            e.preventDefault();
+
+            console.log($(this).find('[name=prod_cat_name]').val());
+
+            var data = {category_number : $(this).find('[name=prod_cat_name]').val()
+                , product_name: $(this).find('[name=prod_name]').val()
+                , characteristics: $(this).find('[name=prod_char]').val()};
+
+            $.ajax({
+                type: 'POST',
+                url: '/add_product',
+                dataType: 'json',
+                data: JSON.stringify(data),
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    console.log(response);
+
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#product').submit(function(e) {
+            e.preventDefault();
+
+            var is_prom = true;
+            if($(this).find('[name=st_is_prom]').val()=="No") is_prom=false;
+
+
+            var data = {UPC : $(this).find('[name=st_upc]').val()
+                , id_product: $(this).find('[name=st_pr_id]').val()
+                , UPC_prom: $(this).find('[name=st_upc_prom]').val()
+                , selling_price: $(this).find('[name=st_price]').val()
+                , products_number: $(this).find('[name=st_number]').val()
+                , promotional: is_prom
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/add_store_product',
+                dataType: 'json',
+                data: JSON.stringify(data),
 
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
