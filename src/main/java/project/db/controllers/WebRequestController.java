@@ -41,10 +41,13 @@ public class WebRequestController {
 
     @RequestMapping(value = {"/all_products_in_store_by_product"}, method = RequestMethod.GET)
     public String all_products_in_store_by_product(){
-        return "requests/product/all_products_in_store_by_product";
+        return "requests/product/store_product/all_products_in_store_by_product";
     }
 
-
+    @RequestMapping(value = {"/product_by_upc"}, method = RequestMethod.GET)
+    public String product_by_upc(){
+        return "requests/product/store_product/product_by_upc";
+    }
 
 
 
