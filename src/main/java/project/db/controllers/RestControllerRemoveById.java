@@ -37,7 +37,7 @@ public class RestControllerRemoveById {
             categoryService.removeCategoryByCategoryNumber(Integer.parseInt(map.get("category_number")));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
-            return ResponseEntity.status(500).header("error","has some products, can not be removed").body("");
+            return ResponseEntity.status(500).header("error","can not be removed").body("");
         }
     }
 
@@ -48,7 +48,7 @@ public class RestControllerRemoveById {
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
 
         } catch (Exception e){
-            return ResponseEntity.status(500).header("error","has some products, can not be removed").body("");
+            return ResponseEntity.status(500).header("error","can not be removed").body("");
         }
     }
 
@@ -58,7 +58,7 @@ public class RestControllerRemoveById {
             storeProductService.removeStoreProductByUPC(map.get("UPC"));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
-            return ResponseEntity.status(500).header("error","has some products, can not be removed").body("");
+            return ResponseEntity.status(500).header("error","can not be removed").body("");
         }
     }
 
@@ -68,7 +68,7 @@ public class RestControllerRemoveById {
             saleService.removeSaleByUpcCheckNumber(map.get("UPC"), map.get("check_number"));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
-            return ResponseEntity.status(500).header("error","has some products, can not be removed").body("");
+            return ResponseEntity.status(500).header("error","can not be removed").body("");
         }
     }
 
@@ -78,18 +78,17 @@ public class RestControllerRemoveById {
             checkService.removeCheckByCheckNumber(map.get("check_number"));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
-            return ResponseEntity.status(500).header("error","has some products, can not be removed").body("");
+            return ResponseEntity.status(500).header("error","can not be removed").body("");
         }
     }
 
     @RequestMapping(value = {"/remove_employee"}, method = RequestMethod.POST)
     public ResponseEntity<String > remove_employee(Principal principal, @RequestBody Map<String, String> map){
-        System.out.println(principal.getName());
         try {
             employeeService.removeEmployeeByIdEmployee(map.get("id_employee"));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
-            return ResponseEntity.status(500).header("error","has some products, can not be removed").body("");
+            return ResponseEntity.status(500).header("error","can not be removed").body("");
         }
     }
 
@@ -99,7 +98,7 @@ public class RestControllerRemoveById {
             customerService.removeCustomerCardByCardNumber(map.get("card_number"));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
-            return ResponseEntity.status(500).header("error","has some products, can not be removed").body("");
+            return ResponseEntity.status(500).header("error","can not be removed").body("");
         }
     }
 }
