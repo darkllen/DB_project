@@ -43,7 +43,11 @@ public class RestControllerEdit {
 
     @RequestMapping(value = {"/edit_employee/{prev_id_employee}"}, method = RequestMethod.POST)
     public ResponseEntity<String> edit_employee(@RequestBody Employee employee, @PathVariable String prev_id_employee) {
-        employeeService.editEmployee(employee, prev_id_employee);
+        if (employee.getPassword()==null){
+            employeeService.editEmployeeWithoutPass(employee, prev_id_employee);
+        } else{
+            employeeService.editEmployee(employee, prev_id_employee);
+        }
         return ResponseEntity.status(HttpStatus.OK).body("{\"edited\":\"edited\"}");
     }
 
