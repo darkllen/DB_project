@@ -84,4 +84,23 @@ public class RestControllerSorted {
             return ResponseEntity.status(500).header("error","error").body(List.of());
         }
     }
+
+
+    @RequestMapping(value = {"/get_not_promo_store_products_sorted_name_num"}, method = RequestMethod.GET)
+    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_not_promo_store_products_sorted_name_num(){
+        try{
+            return ResponseEntity.ok().body(storeProductService.get_not_promo_store_products_sorted_name_num());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_not_promo_store_products_sorted_num_name"}, method = RequestMethod.GET)
+    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_not_promo_store_products_sorted_num_name(){
+        try{
+            return ResponseEntity.ok().body(storeProductService.get_not_promo_store_products_sorted_num_name());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
 }

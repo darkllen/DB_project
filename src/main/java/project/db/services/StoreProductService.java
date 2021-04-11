@@ -77,4 +77,14 @@ public class StoreProductService {
     public List<StoreProductRepo.StoreProductWithName> get_promo_store_products_sorted_num_name() {
         return storeProductRepo.get_promo_store_products_sorted_num_name();
     }
+
+    @Transactional
+    public List<StoreProductRepo.StoreProductWithName> get_not_promo_store_products_sorted_name_num() {
+        return storeProductRepo.get_not_promo_store_products_sorted_name_num();
+    }
+
+    @Transactional
+    public List<StoreProductRepo.StoreProductWithName> get_not_promo_store_products_sorted_num_name() {
+        return storeProductRepo.get_not_promo_store_products_sorted_num_name();
+    }
 }

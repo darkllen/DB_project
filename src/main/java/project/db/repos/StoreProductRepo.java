@@ -64,6 +64,18 @@ public interface StoreProductRepo  extends JpaRepository<Store_Product, String> 
             "ORDER BY Store_Product.products_number, Product.product_name", nativeQuery = true)
     List<StoreProductWithName> get_promo_store_products_sorted_num_name();
 
+    @Query(value = "SELECT Store_Product.UPC AS UPC, Store_Product.UPC_prom AS UPC_prom, Store_Product.id_product AS id_product, Store_Product.selling_price AS selling_price, Store_Product.products_number AS products_number, Store_Product.promotional_product  AS promotional_product,   Product.product_name AS product_name  " +
+            "FROM Store_Product INNER JOIN Product ON Store_Product.id_product=Product.id_product " +
+            "WHERE NOT Store_Product.promotional_product " +
+            "ORDER BY Product.product_name, Store_Product.products_number", nativeQuery = true)
+    List<StoreProductWithName> get_not_promo_store_products_sorted_name_num();
+
+    @Query(value = "SELECT Store_Product.UPC AS UPC, Store_Product.UPC_prom AS UPC_prom, Store_Product.id_product AS id_product, Store_Product.selling_price AS selling_price, Store_Product.products_number AS products_number, Store_Product.promotional_product  AS promotional_product,   Product.product_name AS product_name  " +
+            "FROM Store_Product INNER JOIN Product ON Store_Product.id_product=Product.id_product " +
+            "WHERE NOT Store_Product.promotional_product " +
+            "ORDER BY Store_Product.products_number, Product.product_name", nativeQuery = true)
+    List<StoreProductWithName> get_not_promo_store_products_sorted_num_name();
+
     interface StoreProductPriceNum{
         double getSelling_price();
         int getProducts_number();
