@@ -37,12 +37,11 @@
     var $table = $('#table_body');
     getAll($table);
 
-    function formTableRow(empl){
-        return '<tr class = "table_row"><td>' + product.id_product + '</td>' +
+    function formTableRow(product){
+        return '<tr class = "table_row"><td>' + product.upc + '</td>' +
             '<td>' + product.product_name + '</td>' +
-            '<td>' + product.characteristics + '</td>'+
-            '<td><button class="edit_button btn btn-success" value="'+product.id_product+'" type="submit">Edit</button></td>' +
-            '<td><button class="remove_button btn btn-danger" value="'+product.id_product+'" type="submit">Remove</button></td>' +
+            '<td><button class="edit_button btn btn-success" value="'+product.upc+'" type="submit">Edit</button></td>' +
+            '<td><button class="remove_button btn btn-danger" value="'+product.upc+'" type="submit">Remove</button></td>' +
             '</tr>';
     }
 
@@ -51,7 +50,7 @@
     function getAll($table){
         $.ajax({
             type: 'GET',
-            url: '/get_all_products',
+            url: '/get_all_store_product_with_name',
 
             success: function (response) {
                 response.forEach(function (row) {
@@ -69,12 +68,11 @@
 
 
             var data = {
-                id_product : $(this).val()
+                upc : $(this).val()
             };
 
-            console.log($(this).val());
             $.ajax({
-                url: '/remove_product',
+                url: '/remove_store_product',
                 type: "post",
                 dataType: 'json',
                 data: JSON.stringify(data),
@@ -93,7 +91,7 @@
         });
 
         $(document).on("click",".edit_button",function() {
-            window.location.href = "edit_product/"+$(this).val();
+            window.location.href = "edit_store_product/"+$(this).val();
         });
     });
 
