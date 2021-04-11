@@ -71,4 +71,9 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     @Modifying
     @Query(value = "INSERT INTO Product (category_number, product_name, `characteristics`) VALUES (?2, ?1, ?3)", nativeQuery = true)
     void addProduct(String product_name, Integer category_number, String characteristics);
+
+    @Query(value = "SELECT  * " +
+            "FROM Product " +
+            "WHERE category_number=?1 ", nativeQuery = true)
+    List<Product> get_products_by_category_sorted_name(int category_number);
 }

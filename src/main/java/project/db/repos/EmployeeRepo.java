@@ -50,6 +50,11 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             "WHERE id_employee=?1", nativeQuery = true)
     void editEmployee(String prev_id_employee, String id_employee, String empl_name, String empl_surname, String empl_patronymic, String role, double salary, Date date_of_birth, Date date_of_start, String phone_number, String city, String street, String zip_code);
 
+    @Query(value = "SELECT * " +
+            "FROM Employee " +
+            "ORDER BY empl_surname", nativeQuery = true)
+    List<Employee> get_cassiers_sorted_surname();
+
     interface EmployeeTotalInfo {
         String getEmpl_surname();
         String getEmpl_name();
