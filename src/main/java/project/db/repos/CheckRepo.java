@@ -81,6 +81,10 @@ public interface CheckRepo extends JpaRepository<Check, String> {
             "WHERE print_date>?1 AND print_date<?2",nativeQuery = true)
     List<Check> get_checks_with_sales_between_time(Date date_start, Date date_end);
 
+    interface CheckSaleInfo{
+
+    }
+
     @Query(value = "SELECT SUM(sum_total)  " +
             "FROM Recipe " +
             "GROUP BY id_employee " +

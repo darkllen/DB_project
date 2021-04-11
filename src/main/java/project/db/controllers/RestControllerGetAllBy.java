@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import project.db.dto.*;
 import project.db.repos.EmployeeRepo;
+import project.db.repos.ProductRepo;
 import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
@@ -120,6 +121,15 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(HttpStatus.OK).body(customerService.get_customers_by_percent(percent));
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_product_info_by_upc"}, method = RequestMethod.GET)
+    public ResponseEntity<ProductRepo.ProductInfo> get_product_info_by_upc(@RequestParam String upc) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(productService.get_product_info_by_upc(upc));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(null);
         }
     }
 }
