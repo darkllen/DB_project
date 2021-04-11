@@ -18,7 +18,7 @@
 <div class="col2">
     <h1>Get products with category sorted by name</h1>
 
-    <form id="city_form">
+    <form id="form">
 
         <p>Category name : </p>
         <select id='cat' name='cat'>
@@ -73,7 +73,7 @@
             }
         });
 
-        $('#cat').submit(function(e) {
+        $('#form').submit(function(e) {
             e.preventDefault();
 
             $products.empty();
