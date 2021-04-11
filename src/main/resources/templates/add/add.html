@@ -53,8 +53,8 @@
         <input type="text" placeholder="Employee patronymic" name="em_patron">
         <p>Role : </p>
         <select name="em_role">
-            <option>Manager</option>
-            <option>Kassir</option>
+            <option>MANAGER</option>
+            <option>KASSIR</option>
         </select>
         <p>Salary : </p>
         <input type="number" placeholder="Salary" name="em_salary">
@@ -283,7 +283,6 @@
 
         $('#employee').submit(function(e) {
             e.preventDefault();
-            console.log($(this).find('[name=em_role]').val());
             var d = '{id_employee:'+$(this).find('[name=em_id]').val()+
                     ', password:'+$(this).find('[name=em_pas]').val()+'}'+
                     ', empl_surname:'+$(this).find('[name=em_surname]').val()+
@@ -302,6 +301,38 @@
                 $.ajax({
                 type: 'POST',
                 url: '/add_employee',
+                data: d,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    console.log(response);
+
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#cust_card').submit(function(e) {
+            e.preventDefault();
+
+            var d = '{card_number:'+$(this).find('[name=cust_card_num]').val()+
+                ', cust_surname:'+$(this).find('[name=cust_surname]').val()+'}'+
+                ', cust_name:'+$(this).find('[name=cust_name]').val()+
+                ', cust_patronymic:'+$(this).find('[name=cust_patron]').val()+
+                ', phone_number:'+$(this).find('[name=cust_phone]').val()+
+                ', city:'+$(this).find('[name=cust_city]').val()+
+                ', street:'+$(this).find('[name=cust_street]').val()+
+                ', zip_code:'+$(this).find('[name=cust_zipcode]').val()+
+                ', percent:'+$(this).find('[name=cust_percent]').val()+'}';
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/add_customer',
                 data: d,
 
                 beforeSend: function (xhr) {
