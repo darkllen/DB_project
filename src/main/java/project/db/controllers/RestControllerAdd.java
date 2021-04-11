@@ -33,7 +33,7 @@ public class RestControllerAdd {
         return ResponseEntity.status(HttpStatus.OK).body(category);
     }
 
-    @RequestMapping(value = {"/add_customer_card"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/add_customer"}, method = RequestMethod.POST)
     public ResponseEntity<Customer_Card> add_customer_card(@RequestBody Customer_Card customer){
         customerService.addCustomerCard(customer);
         return ResponseEntity.status(HttpStatus.OK).body(customer);
@@ -59,6 +59,8 @@ public class RestControllerAdd {
 
     @RequestMapping(value = {"/add_store_product"}, method = RequestMethod.POST)
     public ResponseEntity<Store_Product> add_store_product(@RequestBody Store_Product store_product){
+
+        System.out.println(store_product);
         storeProductService.addStoreProduct(store_product);
         return ResponseEntity.status(HttpStatus.OK).body(store_product);
     }

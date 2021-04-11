@@ -2,6 +2,7 @@ package project.db.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,15 +12,16 @@ import javax.persistence.Table;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "Store_Product")
 public class Store_Product {
 
     @Id
     @Column(name = "UPC")
-    private String UPC;
+    private String upc;
 
     @Column(name = "UPC_prom")
-    private String UPC_prom;
+    private String upc_prom;
 
     @Column(name = "id_product")
     private Integer id_product;

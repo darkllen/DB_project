@@ -30,7 +30,7 @@ public class SaleService {
 
 
     public void editSale(Sale sale) {
-        Sale old = saleRepo.getSaleByUpcCheckNumber(sale.getUPC(), sale.getCheck_number());
+        Sale old = saleRepo.getSaleByUpcCheckNumber(sale.getUpc(), sale.getCheck_number());
         double diff =sale.getProduct_number()*sale.getSelling_price() - old.getProduct_number()*old.getSelling_price();
         Check check = checkRepo.getCheckByCheckNumber(sale.getCheck_number());
 
@@ -39,7 +39,7 @@ public class SaleService {
         service.editCheck(check, sale.getCheck_number());
 
         saleRepo.editSale(
-                sale.getUPC(),
+                sale.getUpc(),
                 sale.getCheck_number(),
                 sale.getProduct_number(),
                 sale.getSelling_price());
@@ -53,7 +53,7 @@ public class SaleService {
         service.editCheck(check, sale.getCheck_number());
 
         saleRepo.addSale(
-                sale.getUPC(),
+                sale.getUpc(),
                 sale.getCheck_number(),
                 sale.getProduct_number(),
                 sale.getSelling_price()
