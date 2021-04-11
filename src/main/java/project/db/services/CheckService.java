@@ -8,6 +8,8 @@ import project.db.dto.Customer_Card;
 import project.db.repos.CheckRepo;
 
 import javax.transaction.Transactional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -75,8 +77,10 @@ public class CheckService {
     }
 
     @Transactional
-    public Double get_sum_recipes_by_employee_between_time(String id_employee, Date date_start, Date date_end) {
-        return checkRepo.get_sum_recipes_by_employee_between_time(id_employee, date_start, date_end);
+    public Double get_sum_recipes_by_employee_between_time(String id_employee, String date_start, String date_end) throws ParseException {
+        Date date_s = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
+        Date date_e = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
+        return checkRepo.get_sum_recipes_by_employee_between_time(id_employee, date_s, date_e);
     }
 
     @Transactional

@@ -14,6 +14,7 @@ import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -79,6 +80,15 @@ public class RestControllerGetAllBy {
         }
     }
 
+    @RequestMapping(value = {"/get_checks_by_curr_employee_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Check>> get_checks_with_sales_by_employee_between_time(Principal principal, @RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_checks_with_sales_by_employee_between_time(principal.getName(), date_start, date_end));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
     @RequestMapping(value = {"/get_checks_with_sales_between_time"}, method = RequestMethod.GET)
     public ResponseEntity<List<Check>> get_checks_with_sales_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
         try{
@@ -89,7 +99,7 @@ public class RestControllerGetAllBy {
     }
 
     @RequestMapping(value = {"/get_sum_recipes_by_employee_between_time"}, method = RequestMethod.GET)
-    public ResponseEntity<Double> get_sum_recipes_by_employee_between_time(@RequestParam String id_employee, @RequestParam Date date_start, @RequestParam Date date_end) {
+    public ResponseEntity<Double> get_sum_recipes_by_employee_between_time(@RequestParam String id_employee, @RequestParam String date_start, @RequestParam String date_end) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_sum_recipes_by_employee_between_time(id_employee, date_start, date_end));
         } catch (Exception e){

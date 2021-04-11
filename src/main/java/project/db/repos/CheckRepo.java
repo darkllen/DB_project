@@ -86,10 +86,9 @@ public interface CheckRepo extends JpaRepository<Check, String> {
     }
 
     @Query(value = "SELECT SUM(sum_total)  " +
-            "FROM Recipe " +
+            "FROM (SELECT * FROM Recipe WHERE print_date>=?2 AND print_date<=?3) " +
             "GROUP BY id_employee " +
-            "HAVING id_employee=?1 " +
-            "WHERE print_date>?2 AND print_date<?3 " ,nativeQuery = true)
+            "HAVING id_employee=?1 " ,nativeQuery = true)
     Double get_sum_recipes_by_employee_between_time(String id_employee, Date date_start, Date date_end);
 
     @Query(value = "SELECT SUM(sum_total)  " +
