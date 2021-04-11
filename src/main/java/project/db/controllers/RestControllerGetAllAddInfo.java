@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import project.db.repos.CheckRepo;
 import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
@@ -32,4 +33,11 @@ public class RestControllerGetAllAddInfo {
     public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_all_store_product_with_name(){
         return ResponseEntity.status(HttpStatus.OK).body(storeProductService.getAllProductStoreWithName());
     }
+
+    @RequestMapping(value = {"/get_all_checks_with_empl"}, method = RequestMethod.GET)
+    public ResponseEntity<List<CheckRepo.ChecksWithEmpl>> get_all_checks_with_empl(){
+        return ResponseEntity.status(HttpStatus.OK).body(checkService.getAllChecksWithEmpl());
+    }
+
+
 }

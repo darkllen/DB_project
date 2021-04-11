@@ -38,4 +38,19 @@ public class CheckService {
                 check.getSum_total(),
                 check.getVat());
     }
+
+    public void addCheck(Check check) {
+        checkRepo.addCheck(
+                check.getCheck_number(),
+                check.getId_employee(),
+                check.getCard_number(),
+                check.getPrint_date(),
+                check.getSum_total(),
+                check.getVat()
+        );
+    }
+
+    public List<CheckRepo.ChecksWithEmpl> getAllChecksWithEmpl() {
+        return checkRepo.getAllChecksWithEmpl();
+    }
 }
