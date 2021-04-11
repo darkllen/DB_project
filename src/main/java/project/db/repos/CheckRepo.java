@@ -57,7 +57,7 @@ public interface CheckRepo extends JpaRepository<Check, String> {
     @Transactional
     @Modifying
     @Query(value = "UPDATE Recipe " +
-            "SET check_number=?1, id_employee=?2, card_number=?3, print_date=?4, sum_total=?5, vat=?6  " +
+            "SET check_number=?2, id_employee=?3, card_number=?4, print_date=?5, sum_total=?6, vat=?7  " +
             "WHERE check_number=?1",nativeQuery = true)
     void editCheck(String prev_check_number, String check_number, String id_employee, String card_number, Date print_date, double sum_total, double vat);
 
