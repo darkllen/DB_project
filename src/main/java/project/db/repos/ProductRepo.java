@@ -69,6 +69,6 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO Product (categoty_number, product_name, `characteristics`) VALUES (?1, ?2, ?3)", nativeQuery = true)
+    @Query(value = "INSERT INTO Product (category_number, product_name, `characteristics`) VALUES (?2, ?1, ?3)", nativeQuery = true)
     void addProduct(String product_name, Integer category_number, String characteristics);
 }

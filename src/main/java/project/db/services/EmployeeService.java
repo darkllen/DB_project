@@ -53,7 +53,8 @@ public class EmployeeService {
                 employee.getPhone_number(),
                 employee.getCity(),
                 employee.getStreet(),
-                employee.getZip_code()
+                employee.getZip_code(),
+                employee.getPassword()
         );
     }
 
@@ -70,7 +71,8 @@ public class EmployeeService {
                 employee.getPhone_number(),
                 employee.getCity(),
                 employee.getStreet(),
-                employee.getZip_code()
+                employee.getZip_code(),
+                employee.getPassword()
         );
     }
 }
