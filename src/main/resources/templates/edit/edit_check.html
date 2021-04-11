@@ -168,7 +168,6 @@
     var $table = $('#table_body');
     getAll($table);
 
-    var check = document.getElementById("check").getAttribute("name");
 
     function formTableRow(sale){
         return '<tr class = "table_row"><td>' + sale.upc + '</td>' +
@@ -181,11 +180,14 @@
     }
 
 
-    var data = {
-        check_number : check
-    };
+
 
     function getAll($table){
+        var check = document.getElementById("check").getAttribute("name");
+        var data = {
+            check_number : check
+        };
+
         $.ajax({
             type: 'GET',
             url: '/get_all_sales_with_product_name_by_check_number',
@@ -210,13 +212,13 @@
             var rowNum = e.target.parentNode.parentNode.rowIndex;
             e.preventDefault();
 
+            var check = document.getElementById("check").getAttribute("name");
 
             var data = {
                 check_number : check,
                 upc : $(this).val()
             };
 
-            console.log($(this).val());
             $.ajax({
                 url: '/remove_sale',
                 type: "post",
@@ -236,7 +238,8 @@
         });
 
         $(document).on("click",".edit_button",function() {
-            window.location.href = "edit_sale/"+check+"/"+$(this).val();
+            var check = document.getElementById("check").getAttribute("name");
+            window.location.href = "/edit_sale/"+check+"/"+$(this).val();
         });
     });
 
