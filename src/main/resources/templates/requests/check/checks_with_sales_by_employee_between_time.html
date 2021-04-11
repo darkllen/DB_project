@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get all products in store by product</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Get checks with sales by employee between time</h1>
+
+    <form id="form">
+
+        <p>Employee name: </p>
+        <select id='st_pr_id' name='st_pr_id'>
+        </select>
+
+        <p>Date of start : </p>
+        <input type="date" placeholder="Date of start" name="em_date_start">
+        <p>Date of end : </p>
+        <input type="date" placeholder="Date of birth" name="em_date_end">
+
+
+        <button type="submit">Search</button>
+    </form>
+
+
+    <table id="table" class="table table-hover table-bordered" style="visibility: hidden;">
+        <thead>
+        <th>CHECK NUMBER</th>
+        <th>CARD NUMBER</th>
+        <th>PRINT DATE</th>
+        <th>TOTAL</th>
+        <th>VAT</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+    <h3 id="no_results" style="visibility: hidden">No results found</h3>
+
+
+</div>
+
+
+<script>
+    var $products = $('#table_body');
+
+    function formTableRow(check){
+        return '<tr class = "table_row" id="'+check.check_number+'"><td>' + check.check_number + '</td>' +
+            '<td>' + check.card_number + '</td>' +
+            '<td>' + check.print_date + '</td>' +
+            '<td>' + check.sum_total + '</td>' +
+            '<td>' + check.vat + '</td>' +
+            '</tr>';
+    }
+
+    $(function() {
+        $.ajax({
+            url: '/get_all_employees',
+            type: "get",
+            success: function (response) {
+                document.getElementById("st_pr_id").innerHTML= '';
+                response.forEach(function (em) {
+                    var i=0;
+                    if(i==0) {
+                        document.getElementById("st_pr_id").innerHTML += '<option selected="selected" value="' + em.id_employee + '">' + em.empl_surname + ' ' + em.empl_name + ' (id = ' + em.id_employee + ') ' + '</option>';
+                        i++;
+                    }else
+                        document.getElementById("st_pr_id").innerHTML+= '<option value="'+em.id_employee+'">'+em.empl_surname+' '+em.empl_name+' (id = '+em.id_employee+') '+'</option>';
+                });
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+
+
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            $products.empty();
+            var date_of_start = new Date($(this).find('[name=em_date_start]').val()).toLocaleDateString('en-CA');
+            var date_of_end = new Date($(this).find('[name=em_date_end]').val()).toLocaleDateString('en-CA');
+
+            var data = {
+                id_employee: $(this).find('[name=st_pr_id]').val(),
+                date_start: date_of_start,
+                date_end: date_of_end
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: '/get_checks_with_sales_by_employee_between_time',
+                dataType: 'json',
+                data: data,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    // $('input').val('');
+                    if(response.length == 0){
+                        document.getElementById("table").style.visibility = 'hidden';
+                        document.getElementById("no_results").style.visibility = 'visible';
+                    }
+                    else {
+                        document.getElementById("table").style.visibility = 'visible';
+                        document.getElementById("no_results").style.visibility = 'hidden';
+                        response.forEach(function (prod) {
+                            $products.append(formTableRow(prod));
+                        });
+                    }
+
+
+                }
+            });
+        });
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>

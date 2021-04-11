@@ -70,6 +70,10 @@ public class WebRequestController {
     }
 
 
+    @RequestMapping(value = {"/checks_with_sales_by_employee_between_time"}, method = RequestMethod.GET)
+    public String checks_with_sales_by_employee_between_time(){
+        return "requests/check/checks_with_sales_by_employee_between_time";
+    }
 
 
 
