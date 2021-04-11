@@ -59,4 +59,8 @@ public class SaleService {
                 sale.getSelling_price()
         );
     }
+
+    public List<SaleRepo.SalesWithProductName> getAllSalesWithProductNameByCheckNumber(String check_number) {
+        return saleRepo.getAllSalesWithProductNameByCheckNumber(check_number);
+    }
 }
