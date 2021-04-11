@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import project.db.dto.Category;
 import project.db.dto.Employee;
 import project.db.dto.Product;
+import project.db.dto.Store_Product;
+import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
 import java.util.List;
@@ -60,6 +62,43 @@ public class RestControllerSorted {
     public ResponseEntity<List<Category>> get_all_categories_sorted_name(){
         try{
             return ResponseEntity.ok().body(categoryService.get_all_categories_sorted_name());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_promo_store_products_sorted_name_num"}, method = RequestMethod.GET)
+    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_promo_store_products_sorted_name_num(){
+        try{
+            return ResponseEntity.ok().body(storeProductService.get_promo_store_products_sorted_name_num());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_promo_store_products_sorted_num_name"}, method = RequestMethod.GET)
+    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_promo_store_products_sorted_num_name(){
+        try{
+            return ResponseEntity.ok().body(storeProductService.get_promo_store_products_sorted_num_name());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+
+    @RequestMapping(value = {"/get_not_promo_store_products_sorted_name_num"}, method = RequestMethod.GET)
+    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_not_promo_store_products_sorted_name_num(){
+        try{
+            return ResponseEntity.ok().body(storeProductService.get_not_promo_store_products_sorted_name_num());
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_not_promo_store_products_sorted_num_name"}, method = RequestMethod.GET)
+    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_not_promo_store_products_sorted_num_name(){
+        try{
+            return ResponseEntity.ok().body(storeProductService.get_not_promo_store_products_sorted_num_name());
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","error").body(List.of());
         }

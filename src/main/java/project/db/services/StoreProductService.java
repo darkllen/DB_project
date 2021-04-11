@@ -67,4 +67,24 @@ public class StoreProductService {
     public List<StoreProductRepo.StoreProductPriceNum> get_product_by_upc(String upc) {
         return storeProductRepo.get_product_by_upc(upc);
     }
+
+    @Transactional
+    public List<StoreProductRepo.StoreProductWithName> get_promo_store_products_sorted_name_num() {
+        return storeProductRepo.get_promo_store_products_sorted_name_num();
+    }
+
+    @Transactional
+    public List<StoreProductRepo.StoreProductWithName> get_promo_store_products_sorted_num_name() {
+        return storeProductRepo.get_promo_store_products_sorted_num_name();
+    }
+
+    @Transactional
+    public List<StoreProductRepo.StoreProductWithName> get_not_promo_store_products_sorted_name_num() {
+        return storeProductRepo.get_not_promo_store_products_sorted_name_num();
+    }
+
+    @Transactional
+    public List<StoreProductRepo.StoreProductWithName> get_not_promo_store_products_sorted_num_name() {
+        return storeProductRepo.get_not_promo_store_products_sorted_num_name();
+    }
 }
