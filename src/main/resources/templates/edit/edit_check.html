@@ -28,7 +28,7 @@
     </select>
     <p>Print date : </p>
     <input class="big_input" type="date" placeholder="Print date" name="ch_date">
-    <button class="btn btn-success" type="submit">Add</button>
+    <button class="btn btn-success" type="submit">Edit</button>
 </form>
 
 <script>
@@ -45,8 +45,6 @@
 
 
 
-
-
         $.ajax({
             type: 'get',
             url: '/get_check_by_check_number',
@@ -58,11 +56,13 @@
             },
             success: function (response) {
                 console.log(response);
+                var print_date = new Date(response.print_date).toLocaleDateString('en-CA');
+
 
                 $("input[name='check_number']").val(response.check_number);
                 $("select[name='ch_empl']").val(response.id_employee);
                 $("select[name='ch_card']").val(response.card_number);
-                $("input[name='ch_date']").val(response.print_date);
+                $("input[name='ch_date']").val(print_date);
 
                 $.ajax({
                     url: '/get_all_employees',
@@ -74,7 +74,6 @@
                                 document.getElementById("ch_empl").innerHTML+= '<option selected="selected" value="'+em.id_employee+'">'+em.empl_surname+' '+em.empl_name+' (id = '+em.id_employee+') '+'</option>';
                             else
                                 document.getElementById("ch_empl").innerHTML+= '<option value="'+em.id_employee+'">'+em.empl_surname+' '+em.empl_name+' (id = '+em.id_employee+') '+'</option>';
-                            i++;
                         });
                     },
                     error: function(err){
@@ -92,7 +91,6 @@
                                 document.getElementById("ch_card").innerHTML += '<option selected="selected" value="' + c.card_number + '">' + c.cust_surname + ' ' + c.cust_name + ' (card number = ' + c.card_number + ') ' + '</option>';
                             else
                                 document.getElementById("ch_card").innerHTML += '<option value="' + c.card_number + '">' + c.cust_surname + ' ' + c.cust_name + ' (card number = ' + c.card_number + ') ' + '</option>';
-                            i++;
                         });
                     },
                     error: function(err){
