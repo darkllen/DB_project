@@ -15,13 +15,12 @@
 
 
 <div class="col2">
-    <h1>Category info</h1>
+    <h1>Customer info</h1>
 
     <table id="my_table" class="table table-hover table-bordered">
         <thead>
         <th>CUSTOMER SURNAME</th>
         <th>CUSTOMER NAME</th>
-        <th>PATRONYMIC</th>
         <th>PHONE NUMBER</th>
         <th>CARD NUMBER</th>
         <th>EDIT</th>
@@ -41,11 +40,12 @@
     getAll($table);
 
     function formTableRow(empl){
-        return '<tr class = "table_row"><td>' + empl.empl_surname + '</td>' +
-            '<td>' + empl.empl_name + '</td>' +
-            '<td>' + empl.id_employee + '</td>' +
-            '<td><button class="edit_button btn btn-success" value="'+empl.id_employee+'" type="submit">Edit</button></td>' +
-            '<td><button class="remove_button btn btn-danger" value="'+empl.id_employee+'" type="submit">Remove</button></td>' +
+        return '<tr class = "table_row"><td>' + customer.cust_surname + '</td>'
+            +'<td>' + customer.cust_name + '</td>'
+            +'<td>' + customer.phone_number + '</td>'
+            +'<td>' + customer.card_number + '</td>'+
+            '<td><button class="edit_button btn btn-success" value="'+customer.card_number+'" type="submit">Edit</button></td>' +
+            '<td><button class="remove_button btn btn-danger" value="'+customer.card_number+'" type="submit">Remove</button></td>' +
             '</tr>';
     }
 
@@ -54,7 +54,7 @@
     function getAll($table){
         $.ajax({
             type: 'GET',
-            url: '/get_all_employees',
+            url: '/get_all_customer_cards',
 
             success: function (response) {
                 response.forEach(function (row) {
@@ -72,12 +72,12 @@
 
 
             var data = {
-                id_employee : $(this).val()
+                card_number : $(this).val()
             };
 
             console.log($(this).val());
             $.ajax({
-                url: '/remove_employee',
+                url: '/remove_customer_card',
                 type: "post",
                 dataType: 'json',
                 data: JSON.stringify(data),
@@ -96,7 +96,7 @@
         });
 
         $(document).on("click",".edit_button",function() {
-            window.location.href = "edit_employee/"+$(this).val();
+            window.location.href = "edit_customer_card/"+$(this).val();
         });
     });
 
