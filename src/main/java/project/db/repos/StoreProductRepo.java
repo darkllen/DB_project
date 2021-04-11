@@ -47,6 +47,15 @@ public interface StoreProductRepo  extends JpaRepository<Store_Product, String> 
             "WHERE id_product=?1", nativeQuery = true)
     List<Store_Product> get_all_products_in_store_by_product(int id_product);
 
+    @Query(value = "SELECT  Store_Product.selling_price AS selling_price,  Store_Product.products_number AS products_number  " +
+            "FROM Store_Product " +
+            "WHERE UPC=?1", nativeQuery = true)
+    List<StoreProductPriceNum> get_product_by_upc(String upc);
+    interface StoreProductPriceNum{
+        double getSelling_price();
+        int getProducts_number();
+    }
+
     interface StoreProductWithName {
         String getProduct_name();
         String getUPC();
