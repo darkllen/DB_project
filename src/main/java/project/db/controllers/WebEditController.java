@@ -41,9 +41,10 @@ public class WebEditController {
         model.addAttribute("ch_id", ch_id);
         return "edit/edit_check";
     }
-//    @RequestMapping(value = {"/edit_sale/{sale_id}"}, method = RequestMethod.GET)
-//    public String sale(Model model, @PathVariable int sale_id){
-//        model.addAttribute("sale_id", sale_id);
-//        return "edit/edit_sale";
-//    }
+    @RequestMapping(value = {"/edit_sale/{check_id}/{upc}"}, method = RequestMethod.GET)
+    public String sale(Model model, @PathVariable int check_id,@PathVariable int upc){
+        model.addAttribute("upc", upc);
+        model.addAttribute("check_id", check_id);
+        return "edit/edit_sale";
+    }
 }

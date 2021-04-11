@@ -47,11 +47,11 @@ public class WebController {
     public String check(){
         return "view/check";
     }
-    @RequestMapping(value = {"/sale/{check_id}"}, method = RequestMethod.GET)
-    public String employee(Model model, @PathVariable int check_id){
-        model.addAttribute("check_id", check_id);
-        return "view/sale";
-    }
+//    @RequestMapping(value = {"/sale/{check_id}"}, method = RequestMethod.GET)
+//    public String employee(Model model, @PathVariable int check_id){
+//        model.addAttribute("check_id", check_id);
+//        return "view/sale";
+//    }
 
 
 //    @RequestMapping(value = {"/edit"}, method = RequestMethod.GET)
