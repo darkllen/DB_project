@@ -43,6 +43,8 @@
     <div class="col1">
         <p>Id employee : </p>
         <input type="text" placeholder="Id employee" name="em_id">
+        <p>Password : </p>
+        <input type="password" placeholder="Password" name="em_pas">
         <p>Employee surname : </p>
         <input type="text" placeholder="Employee surname" name="em_surname">
         <p>Employee name : </p>
@@ -279,6 +281,7 @@
             e.preventDefault();
             console.log($(this).find('[name=em_role]').val());
             var d = '{id_employee:'+$(this).find('[name=em_id]').val()+
+                    ', password:'+$(this).find('[name=em_pas]').val()+'}';
                     ', empl_surname:'+$(this).find('[name=em_surname]').val()+
                     ', empl_name:'+$(this).find('[name=em_name]').val()+
                     ', empl_patronymic:'+$(this).find('[name=em_patron]').val()+
