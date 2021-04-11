@@ -15,6 +15,7 @@ import project.db.repos.EmployeeRepo;
 import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 import java.util.List;
 
@@ -86,6 +87,24 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_checks_with_sales_between_time(date_start, date_end));
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_sum_recipes_by_employee_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<Double> get_sum_recipes_by_employee_between_time(@RequestParam String id_employee, @RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_sum_recipes_by_employee_between_time(id_employee, date_start, date_end));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(0.0);
+        }
+    }
+
+    @RequestMapping(value = {"/get_sum_all_recipes_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<Double> get_sum_all_recipes_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_sum_all_recipes_between_time(date_start, date_end));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(0.0);
         }
     }
 }
