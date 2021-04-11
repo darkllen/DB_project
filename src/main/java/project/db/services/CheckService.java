@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import project.db.dto.Check;
+import project.db.dto.Customer_Card;
 import project.db.repos.CheckRepo;
 
 import javax.transaction.Transactional;
@@ -78,7 +79,15 @@ public class CheckService {
         return checkRepo.get_sum_recipes_by_employee_between_time(id_employee, date_start, date_end);
     }
 
+    @Transactional
     public Double get_sum_all_recipes_between_time(Date date_start, Date date_end) {
         return checkRepo.get_sum_all_recipes_between_time(date_start,date_end);
     }
+
+    @Transactional
+    public Integer get_num_product_saled_between_time(Date date_start, Date date_end) {
+        return  checkRepo.get_num_product_saled_between_time(date_start, date_end);
+    }
+
+
 }

@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import project.db.dto.Category;
-import project.db.dto.Check;
-import project.db.dto.Product;
-import project.db.dto.Store_Product;
+import project.db.dto.*;
 import project.db.repos.EmployeeRepo;
+import project.db.repos.ProductRepo;
 import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
@@ -105,6 +103,33 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_sum_all_recipes_between_time(date_start, date_end));
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","error").body(0.0);
+        }
+    }
+
+    @RequestMapping(value = {"/get_num_product_saled_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<Integer> get_num_product_saled_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_num_product_saled_between_time(date_start, date_end));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(0);
+        }
+    }
+
+    @RequestMapping(value = {"/get_customers_by_percent"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Customer_Card>> get_customers_by_percent(@RequestParam int percent) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(customerService.get_customers_by_percent(percent));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_product_info_by_upc"}, method = RequestMethod.GET)
+    public ResponseEntity<ProductRepo.ProductInfo> get_product_info_by_upc(@RequestParam String upc) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(productService.get_product_info_by_upc(upc));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(null);
         }
     }
 }

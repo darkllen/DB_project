@@ -77,4 +77,9 @@ public class RestControllerGetAll {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getAllCustomerCards());
     }
 
+//    @RequestMapping(value = {"/get_all_customers_contacts"}, method = RequestMethod.GET)
+//    public ResponseEntity<List<Customer_Card>> get_all_customers_contacts(){
+//        return ResponseEntity.status(HttpStatus.OK).body(customerService.get_all_customers_contacts());
+//    }
+
 }
