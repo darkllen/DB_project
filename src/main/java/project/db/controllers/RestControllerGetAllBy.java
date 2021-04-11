@@ -98,4 +98,13 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(500).header("error","error").body(0.0);
         }
     }
+
+    @RequestMapping(value = {"/get_sum_all_recipes_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<Double> get_sum_all_recipes_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_sum_all_recipes_between_time(date_start, date_end));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(0.0);
+        }
+    }
 }

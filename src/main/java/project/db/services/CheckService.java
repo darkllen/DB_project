@@ -77,4 +77,8 @@ public class CheckService {
     public Double get_sum_recipes_by_employee_between_time(String id_employee, Date date_start, Date date_end) {
         return checkRepo.get_sum_recipes_by_employee_between_time(id_employee, date_start, date_end);
     }
+
+    public Double get_sum_all_recipes_between_time(Date date_start, Date date_end) {
+        return checkRepo.get_sum_all_recipes_between_time(date_start,date_end);
+    }
 }
