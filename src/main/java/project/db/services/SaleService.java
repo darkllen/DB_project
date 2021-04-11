@@ -15,4 +15,7 @@ public class SaleService {
         return saleRepo.getAllSales();
     }
 
+    public Sale getSaleByUpcCheckNumber(String upc, String check_number) {
+        return saleRepo.getSaleByUpcCheckNumber(upc, check_number);
+    }
 }

@@ -29,4 +29,8 @@ public class ProductService {
     public List<String> getUpcsForProduct( int id){
         return productRepo.getUpcsForProduct(id);
     };
+
+    public Product getProductByIdProduct(int id_product) {
+        return productRepo.getProductByIdProduct(id_product);
+    }
 }

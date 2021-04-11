@@ -31,4 +31,8 @@ public class CustomerService {
     public List<Customer_Card> getAllCustomerCards() {
         return customerRepo.getAllCustomerCards();
     }
+
+    public Customer_Card getCustomerCardByCardNumber(String card_number) {
+        return customerRepo.getCustomerCardByCardNumber(card_number);
+    }
 }

@@ -13,4 +13,9 @@ public interface SaleRepo  extends JpaRepository<Sale, SaleId> {
     @Query(value = "SELECT  * " +
             "FROM Sale ", nativeQuery = true)
     List<Sale> getAllSales();
+
+    @Query(value = "SELECT  * " +
+            "FROM Sale " +
+            "WHERE UPC=?1 AND check_number=?2", nativeQuery = true)
+    Sale getSaleByUpcCheckNumber(String upc, String check_number);
 }

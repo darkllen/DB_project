@@ -40,6 +40,11 @@ public interface CheckRepo extends JpaRepository<Check, String> {
             "FROM Recipe",nativeQuery = true)
     List<Check> getAllChecks();
 
+    @Query(value = "SELECT * " +
+            "FROM Recipe " +
+            "WHERE check_number=?1",nativeQuery = true)
+    Check getCheckByCheckNumber(String check_number);
+
     interface ChecksInfo {
         String getCheck_number();
         Date getPrint_date();

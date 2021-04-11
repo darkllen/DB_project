@@ -20,4 +20,8 @@ public class StoreProductService {
     public List<StoreProductRepo.StoreProductWithName> getAllProductStoreWithName() {
         return storeProductRepo.getAllStoreProductsWithName();
     }
+
+    public Store_Product getStoreProductByUPC(String upc) {
+        return storeProductRepo.getStoreProductByUPC(upc);
+    }
 }
