@@ -107,4 +107,13 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(500).header("error","error").body(0.0);
         }
     }
+
+    @RequestMapping(value = {"/get_num_product_saled_between_time"}, method = RequestMethod.GET)
+    public ResponseEntity<Integer> get_num_product_saled_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.get_num_product_saled_between_time(date_start, date_end));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(0);
+        }
+    }
 }
