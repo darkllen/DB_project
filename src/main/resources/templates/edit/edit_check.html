@@ -168,7 +168,7 @@
     var $table = $('#table_body');
     getAll($table);
 
-    var check_number = document.getElementById("check").getAttribute("name");
+    var check = document.getElementById("check").getAttribute("name");
 
     function formTableRow(sale){
         return '<tr class = "table_row"><td>' + sale.upc + '</td>' +
@@ -182,7 +182,7 @@
 
 
     var data = {
-        check_number : check_number
+        check_number : check
     };
 
     function getAll($table){
@@ -190,7 +190,7 @@
             type: 'GET',
             url: '/get_all_sales_with_product_name_by_check_number',
             dataType: 'json',
-            data: JSON.stringify(data),
+            data: data,
 
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Content-Type', 'application/json')
@@ -212,7 +212,7 @@
 
 
             var data = {
-                check_number : check_number,
+                check_number : check,
                 upc : $(this).val()
             };
 
@@ -236,7 +236,7 @@
         });
 
         $(document).on("click",".edit_button",function() {
-            window.location.href = "edit_sale/"+check_number+"/"+$(this).val();
+            window.location.href = "edit_sale/"+check+"/"+$(this).val();
         });
     });
 

@@ -28,12 +28,12 @@
 <script>
 
     $(function() {
-        var upc = document.getElementById("sale").getAttribute("name");
+        var upc_id = document.getElementById("sale").getAttribute("name");
         var check_id = document.getElementById("sale").getAttribute("value");
 
 
         var data = {
-            upc: upc,
+            upc: upc_id,
             check_number: check_id
         };
 
@@ -62,7 +62,7 @@
             e.preventDefault();
 
             var data = {
-                  upc: upc
+                  upc: upc_id
                 , check_number: check_id
                 , product_number: $(this).find('[name=sale_pr_number]').val()
                 , selling_price: $(this).find('[name=sale_pr_price]').val()
