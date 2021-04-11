@@ -142,4 +142,13 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(500).header("error","error").body(null);
         }
     }
+
+    @RequestMapping(value = {"/get_customers_by_surname"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Customer_Card>> get_customers_by_surname(@RequestParam String cust_surname) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(customerService.get_customers_by_surname(cust_surname));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(null);
+        }
+    }
 }

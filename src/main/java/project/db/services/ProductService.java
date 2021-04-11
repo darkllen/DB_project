@@ -84,4 +84,9 @@ public class ProductService {
     public ProductRepo.ProductInfo get_product_info_by_upc(String upc) {
         return productRepo.get_product_info_by_upc(upc);
     }
+
+    @Transactional
+    public List<String> get_all_products_name() {
+        return productRepo.get_all_products_name();
+    }
 }

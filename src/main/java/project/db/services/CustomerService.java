@@ -7,6 +7,7 @@ import project.db.repos.CustomerRepo;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -79,5 +80,10 @@ public class CustomerService {
 
     public List<Customer_Card> get_customers_by_percent(int percent) {
         return customerRepo.get_customers_by_percent(percent);
+    }
+
+    @Transactional
+    public List<Customer_Card> get_customers_by_surname(String cust_surname) {
+        return customerRepo.get_customers_by_surname(cust_surname.toLowerCase(Locale.ROOT));
     }
 }

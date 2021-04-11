@@ -84,4 +84,8 @@ public class SaleService {
     public List<SaleRepo.SalesWithProductName> getAllSalesWithProductNameByCheckNumber(String check_number) {
         return saleRepo.getAllSalesWithProductNameByCheckNumber(check_number);
     }
+
+    public SaleRepo.SalesWithProductName get_sale_with_name_by_upc_check_number(String upc, String check_number) {
+        return  saleRepo.get_sale_with_name_by_upc_check_number(upc, check_number);
+    }
 }
