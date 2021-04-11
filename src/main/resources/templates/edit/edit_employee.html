@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<!--<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">-->
+
+    <form id="employee" th:name="${em_id}">
+        <h2>Edit employee</h2>
+        <div class="col1">
+            <p>Id employee : </p>
+            <input type="text" placeholder="Id employee" name="em_id">
+            <p>Password : </p>
+            <input type="password" placeholder="Password" name="em_pas">
+            <p>Employee surname : </p>
+            <input type="text" placeholder="Employee surname" name="em_surname">
+            <p>Employee name : </p>
+            <input type="text" placeholder="Employee name" name="em_name">
+            <p>Employee patronymic : </p>
+            <input type="text" placeholder="Employee patronymic" name="em_patron">
+            <p>Role : </p>
+            <select name="em_role">
+                <option value="MANAGER">MANAGER</option>
+                <option value="KASSIR">KASSIR</option>
+            </select>
+            <p>Salary : </p>
+            <input type="number" placeholder="Salary" name="em_salary">
+
+        </div>
+        <div class="col2">
+            <p>Date of birth : </p>
+            <input type="date" placeholder="Date of birth" name="em_date_birth">
+            <p>Date of start : </p>
+            <input type="date" placeholder="Date of start" name="em_date_start">
+            <p>Phone number : </p>
+            <input type="tel" placeholder="Phone number" name="em_phone">
+            <p>Employee city : </p>
+            <input type="text" placeholder="City" name="em_city">
+            <p>Employee street : </p>
+            <input type="text" placeholder="Street" name="em_street">
+            <p>Zip code : </p>
+            <input type="number" placeholder="Zip code" name="em_zipcode">
+            <button class="btn btn-success" type="submit">Add</button>
+        </div>
+    </form>
+
+    <script>
+
+
+
+
+        $(function() {
+            var id = document.getElementById("employee").getAttribute("name");
+
+
+            var data = {
+                id_employee: id,
+            };
+
+            $.ajax({
+                type: 'get',
+                url: '/get_employee_by_id_employee',
+                dataType: 'json',
+                data: data,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    console.log(response.role);
+                    $("input[name='em_id']").val(response.id_employee);
+                    $("input[name='em_pas']").val(response.password);
+                    $("input[name='em_surname']").val(response.empl_surname);
+                    $("input[name='em_name']").val(response.empl_name);
+                    $("input[name='em_patron']").val(response.empl_patronymic);
+                    $("select[name='em_role']").val(response.role);
+                    $("input[name='em_salary']").val(response.salary);
+                    $("input[name='em_date_birth']").val(response.date_of_birth);
+                    $("input[name='em_date_start']").val(response.date_of_start);
+                    $("input[name='em_phone']").val(response.phone_number);
+                    $("input[name='em_city']").val(response.city);
+                    $("input[name='em_street']").val(response.street);
+                    $("input[name='em_zipcode']").val(response.zip_code);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+            $('#employee').submit(function(e) {
+                e.preventDefault();
+
+                var data = {
+                      prev_id_employee: id
+                    , id_employee: $(this).find('[name=em_id]').val()
+                    , password: $(this).find('[name=em_pas]').val()
+                    , empl_surname: $(this).find('[name=em_surname]').val()
+                    , empl_name: $(this).find('[name=em_name]').val()
+                    , empl_patronymic: $(this).find('[name=em_patron]').val()
+                    , role: $(this).find('[name=em_role]').val()
+                    , salary: $(this).find('[name=em_salary]').val()
+                    , date_of_birth: $(this).find('[name=em_date_birth]').val()
+                    , date_of_start: $(this).find('[name=em_date_start]').val()
+                    , phone_number: $(this).find('[name=em_phone]').val()
+                    , city: $(this).find('[name=em_city]').val()
+                    , street: $(this).find('[name=em_street]').val()
+                    , zip_code: $(this).find('[name=em_zipcode]').val()};
+                $.ajax({
+                    type: 'POST',
+                    url: '/edit_employee',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Content-Type', 'application/json')
+                    },
+                    success: function (response) {
+                        alert("Success");
+
+                    },
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
+                    }
+                });
+            });
+
+
+        });
+
+
+    </script>
+
+
+</body>
+</html>
+

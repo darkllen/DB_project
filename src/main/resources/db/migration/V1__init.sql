@@ -27,8 +27,8 @@ create table Employee
 );
 
 insert into Employee (id_employee, empl_surname, empl_name, empl_patronymic, role, salary, date_of_birth, date_of_start, phone_number, city, street, zip_code, password) values
-('aaaa', 'Cvetkova', 'Marina', 'Vladislavivna', 'kassir', '5000', CURDATE(), CURDATE(), '0660123590', 'Kyiv', 'Skovorodi', '03903', 'pass'),
-('bbbb', 'Sirov', 'Volodimir', 'Tarasovich', 'kassir', '10000', CURDATE(), CURDATE(), '0661234243', 'Odessa', 'Deribasivska', '93402', 'pass');
+('aaaa', 'Cvetkova', 'Marina', 'Vladislavivna', 'KASSIR', '5000', CURDATE(), CURDATE(), '0660123590', 'Kyiv', 'Skovorodi', '03903', 'pass'),
+('bbbb', 'Sirov', 'Volodimir', 'Tarasovich', 'KASSIR', '10000', CURDATE(), CURDATE(), '0661234243', 'Odessa', 'Deribasivska', '93402', 'pass');
 
 create table Customer_Card
 (
