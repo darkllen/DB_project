@@ -39,6 +39,11 @@ public class WebRequestController {
         return "requests/product/all_products_by_category";
     }
 
+    @RequestMapping(value = {"/all_products_in_store_by_product"}, method = RequestMethod.GET)
+    public String all_products_in_store_by_product(){
+        return "requests/product/all_products_in_store_by_product";
+    }
+
 
 
 
