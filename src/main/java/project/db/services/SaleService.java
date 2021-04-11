@@ -44,4 +44,19 @@ public class SaleService {
                 sale.getProduct_number(),
                 sale.getSelling_price());
     }
+
+    public void addSale(Sale sale) {
+        double diff =sale.getProduct_number()*sale.getSelling_price();
+        Check check = checkRepo.getCheckByCheckNumber(sale.getCheck_number());
+        check.setSum_total(check.getSum_total()-check.getVat()+diff);
+        check.countVat();
+        service.editCheck(check, sale.getCheck_number());
+
+        saleRepo.addSale(
+                sale.getUPC(),
+                sale.getCheck_number(),
+                sale.getProduct_number(),
+                sale.getSelling_price()
+        );
+    }
 }

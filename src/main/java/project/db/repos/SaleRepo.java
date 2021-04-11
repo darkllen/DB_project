@@ -34,4 +34,10 @@ public interface SaleRepo  extends JpaRepository<Sale, SaleId> {
             "SET product_number=?3, selling_price=?4 " +
             "WHERE UPC=?1 AND check_number=?2", nativeQuery = true)
     void editSale(String upc, String check_number, Integer product_number, double selling_price);
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Sale VALUES (?1, ?2, ?3, ?4)", nativeQuery = true)
+    void addSale(String upc, String check_number, Integer product_number, double selling_price);
 }

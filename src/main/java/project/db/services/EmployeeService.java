@@ -56,4 +56,21 @@ public class EmployeeService {
                 employee.getZip_code()
         );
     }
+
+    public void addEmployee(Employee employee) {
+        employeeRepo.addEmployee(
+                employee.getId_employee(),
+                employee.getEmpl_surname(),
+                employee.getEmpl_name(),
+                employee.getEmpl_patronymic(),
+                employee.getRole(),
+                employee.getSalary(),
+                employee.getDate_of_birth(),
+                employee.getDate_of_start(),
+                employee.getPhone_number(),
+                employee.getCity(),
+                employee.getStreet(),
+                employee.getZip_code()
+        );
+    }
 }

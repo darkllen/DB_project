@@ -46,6 +46,11 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
                           String zip_code,
                           Integer percent);
 
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Customer_Card VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)", nativeQuery = true)
+    void addCustomerCard(String card_number, String cust_surname, String cust_name, String cust_patronymic, String phone_number, String city, String street, String zip_code, Integer percent);
+
     interface CustomerSpends {
         String getCard_number();
         String getCust_surname();
