@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import project.db.dto.Category;
 import project.db.dto.Customer_Card;
 import project.db.dto.Product;
 import project.db.repos.*;
@@ -102,6 +100,12 @@ public class RestController {
     @RequestMapping(value = {"/get_all_products"}, method = RequestMethod.GET)
     public ResponseEntity<List<Product>> get_all_products(){
         return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProducts());
+    }
+
+    @RequestMapping(value = {"/add_category"}, method = RequestMethod.POST)
+    public ResponseEntity<Category> add_category(@RequestBody Category category){
+        categoryRepo.addCategory(category.getCategory_name());
+        return ResponseEntity.status(HttpStatus.OK).body(category);
     }
 
 

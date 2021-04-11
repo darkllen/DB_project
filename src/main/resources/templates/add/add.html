@@ -259,10 +259,14 @@
         $('#category').submit(function(e) {
             e.preventDefault();
 
+            var data = {
+                category_name: $(this).find('[name=cat_name]').val()
+            }
             $.ajax({
                 type: 'POST',
                 url: '/add_category',
-                data: '{category_name:'+$(this).find('[name=cat_name]').val()+'}',
+                dataType: 'json',
+                data: JSON.stringify(data),
 
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
