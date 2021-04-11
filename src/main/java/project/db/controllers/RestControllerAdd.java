@@ -35,7 +35,11 @@ public class RestControllerAdd {
 
     @RequestMapping(value = {"/add_customer"}, method = RequestMethod.POST)
     public ResponseEntity<Customer_Card> add_customer_card(@RequestBody Customer_Card customer){
-        customerService.addCustomerCard(customer);
+        try{
+            customerService.addCustomerCard(customer);
+        }catch ( Exception e){
+            return ResponseEntity.status(500).header("error","can not be added").body(null);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
@@ -47,27 +51,42 @@ public class RestControllerAdd {
 
     @RequestMapping(value = {"/add_employee"}, method = RequestMethod.POST)
     public ResponseEntity<Employee> add_employee(@RequestBody Employee employee){
-        employeeService.addEmployee(employee);
+        try{
+            employeeService.addEmployee(employee);
+        }catch ( Exception e){
+            return ResponseEntity.status(500).header("error","can not be added").body(null);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(employee);
     }
 
     @RequestMapping(value = {"/add_check"}, method = RequestMethod.POST)
     public ResponseEntity<Check> add_check(@RequestBody Check check){
-        checkService.addCheck(check);
+        try{
+            checkService.addCheck(check);
+        }catch ( Exception e){
+            return ResponseEntity.status(500).header("error","can not be added").body(null);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(check);
     }
 
     @RequestMapping(value = {"/add_store_product"}, method = RequestMethod.POST)
     public ResponseEntity<Store_Product> add_store_product(@RequestBody Store_Product store_product){
-
-        System.out.println(store_product);
-        storeProductService.addStoreProduct(store_product);
+        try{
+            storeProductService.addStoreProduct(store_product);
+        }catch ( Exception e){
+            return ResponseEntity.status(500).header("error","can not be added").body(null);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(store_product);
     }
 
     @RequestMapping(value = {"/add_sale"}, method = RequestMethod.POST)
     public ResponseEntity<Sale> add_sale(@RequestBody Sale sale){
-        saleService.addSale(sale);
+        try{
+            saleService.addSale(sale);
+        }catch ( Exception e){
+            return ResponseEntity.status(500).header("error","can not be added").body(null);
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(sale);
     }
 
