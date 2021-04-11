@@ -2,6 +2,7 @@ package project.db.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -22,16 +23,46 @@ public class WebController {
     public String add(){
         return "add/add";
     }
-
-    @RequestMapping(value = {"/edit"}, method = RequestMethod.GET)
-    public String edit(){
-        return "edit";
+    @RequestMapping(value = {"/category"}, method = RequestMethod.GET)
+    public String category(){
+        return "view/category";
+    }
+    @RequestMapping(value = {"/employee"}, method = RequestMethod.GET)
+    public String employee(){
+        return "view/employee";
+    }
+    @RequestMapping(value = {"/customer_card"}, method = RequestMethod.GET)
+    public String customer_card(){
+        return "view/customer_card";
+    }
+    @RequestMapping(value = {"/product"}, method = RequestMethod.GET)
+    public String product(){
+        return "view/product";
+    }
+    @RequestMapping(value = {"/store_product"}, method = RequestMethod.GET)
+    public String store_product(){
+        return "view/store_product";
+    }
+    @RequestMapping(value = {"/check"}, method = RequestMethod.GET)
+    public String check(){
+        return "view/check";
+    }
+    @RequestMapping(value = {"/sale/{check_id}"}, method = RequestMethod.GET)
+    public String employee(Model model, @PathVariable int check_id){
+        model.addAttribute("check_id", check_id);
+        return "view/sale";
     }
 
-    @RequestMapping(value = {"/remove"}, method = RequestMethod.GET)
-    public String remove(){
-        return "remove";
-    }
+
+//    @RequestMapping(value = {"/edit"}, method = RequestMethod.GET)
+//    public String edit(){
+//        return "edit";
+//    }
+//
+//    @RequestMapping(value = {"/remove"}, method = RequestMethod.GET)
+//    public String remove(){
+//        return "remove";
+//    }
 
     @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
     public String index(){
