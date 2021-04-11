@@ -55,6 +55,20 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             "ORDER BY empl_surname", nativeQuery = true)
     List<Employee> get_cassiers_sorted_surname();
 
+    @Query(value = "SELECT Employee.id_employee AS id_employee,  Employee.empl_name AS name, Employee.empl_surname AS surname, Employee.phone_number AS  phone_number, Employee.city AS city, Employee.street AS street, Employee.zip_code AS zip_code " +
+            "FROM Employee " +
+            "WHERE empl_surname LIKE ?1%", nativeQuery = true)
+    List<EmployeeContacts> get_phone_address_by_empl_surname(String empl_surname);
+    interface EmployeeContacts{
+        String getId_employee();
+        String getEmpl_name();
+        String getEmpl_surname();
+        String getPhone_number();
+        String getCity();
+        String getStreet();
+        String getZip_code();
+    }
+
     interface EmployeeTotalInfo {
         String getEmpl_surname();
         String getEmpl_name();
