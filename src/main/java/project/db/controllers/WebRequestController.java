@@ -54,6 +54,22 @@ public class WebRequestController {
         return "requests/product/store_product/promo_store_products_sorted_name_num";
     }
 
+    @RequestMapping(value = {"/promo_store_products_sorted_num_name"}, method = RequestMethod.GET)
+    public String promo_store_products_sorted_num_name(){
+        return "requests/product/store_product/promo_store_products_sorted_num_name";
+    }
+
+    @RequestMapping(value = {"/not_promo_store_products_sorted_name_num"}, method = RequestMethod.GET)
+    public String not_promo_store_products_sorted_name_num(){
+        return "requests/product/store_product/not_promo_store_products_sorted_name_num";
+    }
+
+    @RequestMapping(value = {"/not_promo_store_products_sorted_num_name"}, method = RequestMethod.GET)
+    public String not_promo_store_products_sorted_num_name(){
+        return "requests/product/store_product/not_promo_store_products_sorted_num_name";
+    }
+
+
 
 
 
