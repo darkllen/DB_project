@@ -1,10 +1,106 @@
+<!--групування-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Customers</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
 </head>
 <body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Product info</h1>
+
+    <table id="my_table" class="table table-hover table-bordered">
+        <thead>
+        <th>PRODUCT ID</th>
+        <th>PRODUCT NAME</th>
+        <th>PRODUCT CHARACTERISTICS</th>
+        <th>EDIT</th>
+        <th>REMOVE</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    var $table = $('#table_body');
+    getAll($table);
+
+    function formTableRow(empl){
+        return '<tr class = "table_row"><td>' + product.id_product + '</td>' +
+            '<td>' + product.product_name + '</td>' +
+            '<td>' + product.characteristics + '</td>'+
+            '<td><button class="edit_button btn btn-success" value="'+product.id_product+'" type="submit">Edit</button></td>' +
+            '<td><button class="remove_button btn btn-danger" value="'+product.id_product+'" type="submit">Remove</button></td>' +
+            '</tr>';
+    }
+
+
+
+    function getAll($table){
+        $.ajax({
+            type: 'GET',
+            url: '/get_all_products',
+
+            success: function (response) {
+                response.forEach(function (row) {
+                    $table.append(formTableRow(row));
+                });
+
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $(document).on("click",".remove_button",function(e) {
+            var rowNum = e.target.parentNode.parentNode.rowIndex;
+            e.preventDefault();
+
+
+            var data = {
+                id_product : $(this).val()
+            };
+
+            console.log($(this).val());
+            $.ajax({
+                url: '/remove_product',
+                type: "post",
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    console.log(response)
+                    document.getElementById("my_table").deleteRow(rowNum);
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+
+        });
+
+        $(document).on("click",".edit_button",function() {
+            window.location.href = "edit_product/"+$(this).val();
+        });
+    });
+
+
+</script>
+
 
 </body>
 </html>
