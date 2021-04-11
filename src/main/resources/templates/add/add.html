@@ -41,6 +41,8 @@
 <form id="employee" style="visibility: hidden; display: none;">
     <h2>Add employee</h2>
     <div class="col1">
+        <p>Id employee : </p>
+        <input type="text" placeholder="Id employee" name="em_id">
         <p>Employee surname : </p>
         <input type="text" placeholder="Employee surname" name="em_surname">
         <p>Employee name : </p>
@@ -101,7 +103,6 @@
 
 <form id="product" style="visibility: hidden; display: none;">
     <h2>Add product</h2>
-    <!--todo-->
     <p>Category name : </p>
         <select id='prod_cat_name'>
         </select>
@@ -111,14 +112,37 @@
     <p>Characteristics : </p>
     <textarea type="text" placeholder="Characteristics" name="prod_char"></textarea>
     <button class="btn btn-success" type="submit">Add</button>
-
 </form>
+
+
 
 <form id="product_store" style="visibility: hidden; display: none;">
     <h2>Add product in store</h2>
-    <p>Category name : </p>
-    <input type="text" placeholder="Category name" name="cat_name">
-    <button class="btn btn-success" type="submit">Add</button>
+    <div class="col1">
+        <p>UPC : </p>
+        <input type="text" placeholder="UPC" name="st_upc">
+        <p>Product name: </p>
+        <select id='st_pr_id'>
+        </select>
+        <br>
+        <p>UPC promotion : </p>
+        <select id='st_upc_prom'>
+        </select>
+        <br>
+        <p>Selling price : </p>
+        <input type="text" placeholder="Selling price" name="st_price">
+    </div>
+    <div class="col2">
+        <p>Products number : </p>
+        <input type="text" placeholder="Products number" name="st_number">
+        <p>Is promotional : </p>
+        <select id='st_is_prom'>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+        <button class="btn btn-success" type="submit">Add</button>
+
+    </div>
 
 </form>
 
@@ -145,19 +169,7 @@
 
     $(document).ready(function() {
 
-        $.ajax( {
-                url: '/get_categories',
-                type: "get",
-                success: function (response) {
-                console.log(response);
-                response.forEach(function (cat) {
-                    document.getElementById("prod_cat_name").innerHTML+= '<option value="'+cat.category_name+'">'+cat.category_name+'</option>';
-                })
-            },
-            error: function(err){
-                console.log(err);
-            }
-        });
+
 
     });
 
@@ -184,11 +196,55 @@
             makeAllFormsHidden();
             document.getElementById("product").style.visibility = 'visible';
             document.getElementById("product").style.display = 'block';
+
+            $.ajax({
+                url: '/get_categories',
+                type: "get",
+                success: function (response) {
+                    console.log(response);
+                    response.forEach(function (cat) {
+                        document.getElementById("prod_cat_name").innerHTML+= '<option value="'+cat.category_name+'">'+cat.category_name+'</option>';
+                    })
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+
         });
         $('#button_product_store').click(function(e) {
             makeAllFormsHidden();
             document.getElementById("product_store").style.visibility = 'visible';
             document.getElementById("product_store").style.display = 'block';
+
+            // $.ajax({
+            //     url: '/get_upc_product/'+document.getElementById("st_pr_id").value,
+            //     type: "get",
+            //     success: function (response) {
+            //         console.log(response);
+            //         response.forEach(function (pr) {
+            //             document.getElementById("st_upc_prom").innerHTML+= '<option value="'+pr.upc+'">'+pr.upc+'</option>';
+            //         })
+            //     },
+            //     error: function(err){
+            //         console.log(err);
+            //     }
+            // });
+
+            $.ajax({
+                url: '/get_all_products',
+                type: "get",
+                success: function (response) {
+                    console.log(response);
+                    response.forEach(function (pr) {
+                        document.getElementById("st_pr_id").innerHTML+= '<option value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
+                    })
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+
         });
         $('#button_check').click(function(e) {
             makeAllFormsHidden();

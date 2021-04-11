@@ -94,6 +94,11 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategories());
     }
 
+    @RequestMapping(value = {"/get_all_products"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> get_all_products(){
+        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProducts());
+    }
+
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public String test(){

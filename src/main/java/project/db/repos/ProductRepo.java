@@ -35,4 +35,8 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
             "WHERE Customer_Card.city=:city", nativeQuery = true)
     List<Product> getAllProductsThatClientsFromCityNBuy(@Param("city") String city);
 
+    @Query(value = "SELECT  Product.id_product, category_number, product_name, characteristics " +
+            "FROM Product ", nativeQuery = true)
+    List<Product> getAllProducts();
+
 }
