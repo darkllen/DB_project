@@ -21,6 +21,11 @@ public class WebRequestController {
         return "requests/products_by_category_sorted_name";
     }
 
+    @RequestMapping(value = {"/phone_address_by_empl_surname"}, method = RequestMethod.GET)
+    public String phone_address_by_empl_surname(){
+        return "requests/phone_address_by_empl_surname";
+    }
+
 
 //    @RequestMapping(value = {"/category_requests}"}, method = RequestMethod.GET)
 //    public String category(){
