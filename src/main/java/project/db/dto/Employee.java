@@ -50,4 +50,7 @@ public class Employee {
 
     @Column(name = "zip_code")
     private String zip_code;
+
+    @Column(name = "password")
+    private String password;
 }
