@@ -104,8 +104,7 @@
                 e.preventDefault();
 
                 var data = {
-                      prev_id_employee: id
-                    , id_employee: $(this).find('[name=em_id]').val()
+                      id_employee: $(this).find('[name=em_id]').val()
                     , password: $(this).find('[name=em_pas]').val()
                     , empl_surname: $(this).find('[name=em_surname]').val()
                     , empl_name: $(this).find('[name=em_name]').val()
@@ -120,7 +119,7 @@
                     , zip_code: $(this).find('[name=em_zipcode]').val()};
                 $.ajax({
                     type: 'POST',
-                    url: '/edit_employee',
+                    url: '/edit_employee/'+id,
                     dataType: 'json',
                     data: JSON.stringify(data),
 
