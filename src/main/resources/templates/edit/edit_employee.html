@@ -78,7 +78,9 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    console.log(response.role);
+
+                    var date_of_birth = new Date(response.date_of_birth).toLocaleDateString('en-CA');
+                    var date_of_start = new Date(response.date_of_birth).toLocaleDateString('en-CA');
                     $("input[name='em_id']").val(response.id_employee);
                     $("input[name='em_pas']").val(response.password);
                     $("input[name='em_surname']").val(response.empl_surname);
@@ -86,8 +88,8 @@
                     $("input[name='em_patron']").val(response.empl_patronymic);
                     $("select[name='em_role']").val(response.role);
                     $("input[name='em_salary']").val(response.salary);
-                    $("input[name='em_date_birth']").val(response.date_of_birth);
-                    $("input[name='em_date_start']").val(response.date_of_start);
+                    $("input[name='em_date_birth']").val(date_of_birth);
+                    $("input[name='em_date_start']").val(date_of_start);
                     $("input[name='em_phone']").val(response.phone_number);
                     $("input[name='em_city']").val(response.city);
                     $("input[name='em_street']").val(response.street);
