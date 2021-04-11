@@ -122,7 +122,7 @@
         <p>UPC : </p>
         <input type="text" placeholder="UPC" name="st_upc">
         <p>Product name: </p>
-        <select id='st_pr_id'>
+        <select id='st_pr_id' onchange="changeProductUPC()">
         </select>
         <br>
         <p>UPC promotion : </p>
@@ -166,13 +166,22 @@
         });
     }
 
+    function changeProductUPC(){
+        $.ajax({
+            url: '/get_upc_product/'+document.getElementById("st_pr_id").value,
+            type: "get",
+            success: function (response) {
+                console.log(response);
+                response.forEach(function (pr) {
+                    document.getElementById("st_upc_prom").innerHTML+= '<option value="'+pr.upc+'">'+pr.upc+'</option>';
+                })
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
 
-    $(document).ready(function() {
-
-
-
-    });
-
+    }
 
     $(function() {
 
@@ -217,19 +226,7 @@
             document.getElementById("product_store").style.visibility = 'visible';
             document.getElementById("product_store").style.display = 'block';
 
-            // $.ajax({
-            //     url: '/get_upc_product/'+document.getElementById("st_pr_id").value,
-            //     type: "get",
-            //     success: function (response) {
-            //         console.log(response);
-            //         response.forEach(function (pr) {
-            //             document.getElementById("st_upc_prom").innerHTML+= '<option value="'+pr.upc+'">'+pr.upc+'</option>';
-            //         })
-            //     },
-            //     error: function(err){
-            //         console.log(err);
-            //     }
-            // });
+
 
             $.ajax({
                 url: '/get_all_products',
