@@ -43,8 +43,8 @@ public class RestControllerGetAllById {
     }
 
     @RequestMapping(value = {"/get_sale_by_upc_check_number"}, method = RequestMethod.GET)
-    public ResponseEntity<Sale> get_sale_by_upc_check_number(@RequestParam String UPC, @RequestParam String check_number){
-        return ResponseEntity.status(HttpStatus.OK).body(saleService.getSaleByUpcCheckNumber(UPC, check_number));
+    public ResponseEntity<Sale> get_sale_by_upc_check_number(@RequestParam String upc, @RequestParam String check_number){
+        return ResponseEntity.status(HttpStatus.OK).body(saleService.getSaleByUpcCheckNumber(upc, check_number));
     }
 
     @RequestMapping(value = {"/get_check_by_check_number"}, method = RequestMethod.GET)
