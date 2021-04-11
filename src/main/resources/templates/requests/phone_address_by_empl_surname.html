@@ -67,10 +67,10 @@
         $('#form').submit(function(e) {
             e.preventDefault();
 
-            $products.empty();
+            $table.empty();
 
             var data = {
-                surname: $(this).find('[name=em_surname]').val()
+                empl_surname: $(this).find('[name=em_surname]').val()
             };
 
             $.ajax({
