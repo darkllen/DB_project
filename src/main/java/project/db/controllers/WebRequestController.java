@@ -85,6 +85,16 @@ public class WebRequestController {
         return "requests/check/sum_recipes_by_employee_between_time";
     }
 
+    @RequestMapping(value = {"/all_customers_contacts"}, method = RequestMethod.GET)
+    public String all_customers_contacts(){
+        return "requests/customer/all_customers_contacts";
+    }
+
+    @RequestMapping(value = {"/customers_by_percent"}, method = RequestMethod.GET)
+    public String customers_by_percent(){
+        return "requests/customer/customers_by_percent";
+    }
+
 
 
 
