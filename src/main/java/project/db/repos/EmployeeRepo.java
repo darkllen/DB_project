@@ -57,7 +57,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
     @Query(value = "SELECT Employee.id_employee AS id_employee,  Employee.empl_name AS empl_name, Employee.empl_surname AS empl_surname, Employee.phone_number AS  phone_number, Employee.city AS city, Employee.street AS street, Employee.zip_code AS zip_code " +
             "FROM Employee " +
-            "WHERE empl_surname LIKE ?1%", nativeQuery = true)
+            "WHERE empl_surname LIKE %?1%", nativeQuery = true)
     List<EmployeeContacts> get_phone_address_by_empl_surname(String empl_surname);
     interface EmployeeContacts{
         String getId_employee();

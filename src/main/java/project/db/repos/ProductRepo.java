@@ -82,4 +82,9 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
             "FROM Product " +
             "ORDER BY product_name ", nativeQuery = true)
     List<Product> get_all_products_sorted_name();
+
+    @Query(value = "SELECT  * " +
+            "FROM Product " +
+            "WHERE category_number=?1 ", nativeQuery = true)
+    List<Product> get_all_products_by_category(int category_number);
 }
