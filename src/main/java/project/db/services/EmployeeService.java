@@ -114,4 +114,9 @@ public class EmployeeService {
                 employee.getZip_code()
         );
     }
+
+    @Transactional
+    public List<Employee> get_cassiers_sorted_surname() {
+        return employeeRepo.get_cassiers_sorted_surname();
+    }
 }

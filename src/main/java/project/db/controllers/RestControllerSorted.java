@@ -2,10 +2,9 @@ package project.db.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
+import project.db.dto.Category;
 import project.db.dto.Employee;
 import project.db.dto.Product;
 import project.db.services.*;
@@ -39,12 +38,12 @@ public class RestControllerSorted {
         }
     }
 
-//    @RequestMapping(value = {"/get_products_by_category_sorted_name"}, method = RequestMethod.POST)
-//    public ResponseEntity<List<Product>> get_products_by_category_sorted_name(){
-//        try{
-//            return ResponseEntity.ok().body(employeeService.get_cassiers_sorted_surname());
-//        } catch (Exception e){
-//            return ResponseEntity.status(500).header("error","error").body(List.of());
-//        }
-//    }
+    @RequestMapping(value = {"/get_products_by_category_sorted_name"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> get_products_by_category_sorted_name(@RequestParam int category_number){
+        try{
+            return ResponseEntity.ok().body(productService.get_products_by_category_sorted_name(category_number));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
 }
