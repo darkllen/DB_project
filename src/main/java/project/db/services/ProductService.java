@@ -69,4 +69,9 @@ public class ProductService {
     public List<Product> get_products_by_category_sorted_name(int category_number) {
         return productRepo.get_products_by_category_sorted_name(category_number);
     }
+
+    @Transactional
+    public List<Product> get_all_products_sorted_name() {
+        return productRepo.get_all_products_sorted_name();
+    }
 }
