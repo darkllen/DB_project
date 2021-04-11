@@ -2,8 +2,6 @@ package project.db.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,23 +11,36 @@ public class WebRequestController {
 
     @RequestMapping(value = {"/cassiers_sorted_surname"}, method = RequestMethod.GET)
     public String cassiers_sorted_surname(){
-        return "requests/cassiers_sorted_surname";
+        return "requests/employee/cassiers_sorted_surname";
     }
 
     @RequestMapping(value = {"/products_by_category_sorted_name"}, method = RequestMethod.GET)
     public String products_by_category_sorted_name(){
-        return "requests/products_by_category_sorted_name";
+        return "requests/product/products_by_category_sorted_name";
     }
 
     @RequestMapping(value = {"/phone_address_by_empl_surname"}, method = RequestMethod.GET)
     public String phone_address_by_empl_surname(){
-        return "requests/phone_address_by_empl_surname";
+        return "requests/employee/phone_address_by_empl_surname";
     }
 
     @RequestMapping(value = {"/all_products_sorted_name"}, method = RequestMethod.GET)
     public String all_products_sorted_name(){
-        return "requests/all_products_sorted_name";
+        return "requests/product/all_products_sorted_name";
     }
+
+    @RequestMapping(value = {"/all_categories_sorted_name"}, method = RequestMethod.GET)
+    public String all_categories_sorted_name(){
+        return "requests/category/all_categories_sorted_name";
+    }
+
+    @RequestMapping(value = {"/all_products_by_category"}, method = RequestMethod.GET)
+    public String all_products_by_category(){
+        return "requests/product/all_products_by_category";
+    }
+
+
+
 
 
 //    @RequestMapping(value = {"/category_requests}"}, method = RequestMethod.GET)
