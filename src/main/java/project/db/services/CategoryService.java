@@ -32,4 +32,8 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepo.getAllCategories();
     }
+
+    public Category getCategoryByCategoryNumber(int category_number) {
+        return categoryRepo.getCategoryByCategoryNumber(category_number);
+    }
 }

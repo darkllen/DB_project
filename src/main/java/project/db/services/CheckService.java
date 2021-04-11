@@ -21,4 +21,7 @@ public class CheckService {
         return checkRepo.getAllChecks();
     }
 
+    public Check getCheckByCheckNumber(String check_number) {
+        return checkRepo.getCheckByCheckNumber(check_number);
+    }
 }

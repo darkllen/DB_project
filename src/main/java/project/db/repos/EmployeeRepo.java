@@ -16,6 +16,11 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             "GROUP BY Employee.id_employee", nativeQuery = true)
     List<EmployeeTotalInfo> getEmployeesSalesSum();
 
+    @Query(value = "SELECT * " +
+            "FROM Employee " +
+            "WHERE id_employee=?1", nativeQuery = true)
+    Employee getEmployeeByIdEmployee(String id_employee);
+
     interface EmployeeTotalInfo {
         String getEmpl_surname();
         String getEmpl_name();

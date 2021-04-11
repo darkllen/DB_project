@@ -58,4 +58,8 @@ public class EmployeeService implements UserDetailsService {
     public List<Employee> getAllEmployees() {
         return employeeRepo.getAllEmployees();
     }
+
+    public Employee getEmployeeByIdEmployee(String id_employee) {
+        return employeeRepo.getEmployeeByIdEmployee(id_employee);
+    }
 }

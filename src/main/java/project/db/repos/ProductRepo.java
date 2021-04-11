@@ -46,4 +46,8 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     List<String> getUpcsForProduct(@Param("id") int id);
 
 
+    @Query(value = "SELECT  * " +
+            "FROM Product " +
+            "WHERE id_product=?1 ", nativeQuery = true)
+    Product getProductByIdProduct(int id_product);
 }
