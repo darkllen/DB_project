@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import project.db.dto.Category;
+import project.db.dto.Product;
 import project.db.repos.EmployeeRepo;
 import project.db.services.*;
 
@@ -34,6 +35,15 @@ public class RestControllerGetAllBy {
     public ResponseEntity<List<EmployeeRepo.EmployeeContacts>> get_phone_address_by_empl_surname(@RequestParam String empl_surname) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(employeeService.get_phone_address_by_empl_surname(empl_surname));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
+    @RequestMapping(value = {"/get_all_products_by_category"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> get_all_products_by_category(@RequestParam int category_number) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(productService.get_all_products_by_category(category_number));
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","error").body(List.of());
         }
