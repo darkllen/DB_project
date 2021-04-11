@@ -34,10 +34,7 @@
 
 <div class="col2">
     <h1>Products in check: </h1>
-    UPC             varchar (12) not null,
-    product_number  int not null,
-    selling_price
-    <table id="my_table" class="table table-hover table-bordered">
+        <table id="my_table" class="table table-hover table-bordered">
         <thead>
         <th>UPC</th>
         <th>PRODUCT NAME</th>
@@ -54,6 +51,8 @@
     </table>
 
 </div>
+
+
 
 <script>
 
@@ -163,6 +162,87 @@
 
 
 </script>
+
+
+<script>
+    var $table = $('#table_body');
+    getAll($table);
+
+    var check_number = document.getElementById("check").getAttribute("name");
+
+    function formTableRow(sale){
+        return '<tr class = "table_row"><td>' + sale.upc + '</td>' +
+            '<td>' + sale.product_name + '</td>' +
+            '<td>' + sale.product_number + '</td>' +
+            '<td>' + sale.selling_price + '</td>' +
+            '<td><button class="edit_button btn btn-success" value="'+sale.upc+'" type="submit">Edit</button></td>' +
+            '<td><button class="remove_button btn btn-danger" value="'+sale.upc+'" type="submit">Remove</button></td>' +
+            '</tr>';
+    }
+
+
+    var data = {
+        check_number : check_number
+    };
+
+    function getAll($table){
+        $.ajax({
+            type: 'GET',
+            url: '/get_all_sales_with_product_name_by_check_number',
+            dataType: 'json',
+            data: JSON.stringify(data),
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-Type', 'application/json')
+            },
+
+            success: function (response) {
+                response.forEach(function (row) {
+                    $table.append(formTableRow(row));
+                });
+
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $(document).on("click",".remove_button",function(e) {
+            var rowNum = e.target.parentNode.parentNode.rowIndex;
+            e.preventDefault();
+
+
+            var data = {
+                check_number : check_number,
+                upc : $(this).val()
+            };
+
+            console.log($(this).val());
+            $.ajax({
+                url: '/remove_sale',
+                type: "post",
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    document.getElementById("my_table").deleteRow(rowNum);
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                error: function (request, textStatus, errorThrown) {
+                    alert(request.getResponseHeader('error'));
+                }
+            });
+
+        });
+
+        $(document).on("click",".edit_button",function() {
+            window.location.href = "edit_sale/"+$(this).val();
+        });
+    });
+
+
+</script>
+
 
 
 </body>
