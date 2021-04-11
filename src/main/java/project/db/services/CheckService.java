@@ -67,13 +67,17 @@ public class CheckService {
     }
 
     @Transactional
-    public List<Check> get_checks_with_sales_by_employee_between_time(String id_employee, Date date_start, Date date_end) {
-        return checkRepo.get_checks_with_sales_by_employee_between_time(id_employee, date_start, date_end);
+    public List<Check> get_checks_with_sales_by_employee_between_time(String id_employee, String date_start, String date_end) throws ParseException {
+        Date date_s = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
+        Date date_e = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
+        return checkRepo.get_checks_with_sales_by_employee_between_time(id_employee, date_s, date_e);
     }
 
     @Transactional
-    public List<Check> get_checks_with_sales_between_time(Date date_start, Date date_end) {
-        return  checkRepo.get_checks_with_sales_between_time(date_start,date_end);
+    public List<Check> get_checks_with_sales_between_time(String date_start, String date_end) throws ParseException {
+        Date date_s = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
+        Date date_e = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
+        return  checkRepo.get_checks_with_sales_between_time(date_s,date_e);
     }
 
     @Transactional
@@ -84,13 +88,17 @@ public class CheckService {
     }
 
     @Transactional
-    public Double get_sum_all_recipes_between_time(Date date_start, Date date_end) {
-        return checkRepo.get_sum_all_recipes_between_time(date_start,date_end);
+    public Double get_sum_all_recipes_between_time(String date_start, String date_end) throws ParseException {
+        Date date_s = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
+        Date date_e = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
+        return checkRepo.get_sum_all_recipes_between_time(date_s,date_e);
     }
 
     @Transactional
-    public Integer get_num_product_saled_between_time(Date date_start, Date date_end) {
-        return  checkRepo.get_num_product_saled_between_time(date_start, date_end);
+    public Integer get_num_product_saled_between_time(String date_start, String date_end) throws ParseException {
+        Date date_s = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
+        Date date_e = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
+        return  checkRepo.get_num_product_saled_between_time(date_s, date_e);
     }
 
 

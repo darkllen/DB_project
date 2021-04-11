@@ -72,7 +72,7 @@ public class RestControllerGetAllBy {
     }
 
     @RequestMapping(value = {"/get_checks_with_sales_by_employee_between_time"}, method = RequestMethod.GET)
-    public ResponseEntity<List<Check>> get_checks_with_sales_by_employee_between_time(@RequestParam String id_employee, @RequestParam Date date_start, @RequestParam Date date_end) {
+    public ResponseEntity<List<Check>> get_checks_with_sales_by_employee_between_time(@RequestParam String id_employee, @RequestParam String date_start, @RequestParam String date_end) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_checks_with_sales_by_employee_between_time(id_employee, date_start, date_end));
         } catch (Exception e){
@@ -81,7 +81,7 @@ public class RestControllerGetAllBy {
     }
 
     @RequestMapping(value = {"/get_checks_by_curr_employee_between_time"}, method = RequestMethod.GET)
-    public ResponseEntity<List<Check>> get_checks_with_sales_by_employee_between_time(Principal principal, @RequestParam Date date_start, @RequestParam Date date_end) {
+    public ResponseEntity<List<Check>> get_checks_with_sales_by_employee_between_time(Principal principal, @RequestParam String date_start, @RequestParam String date_end) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_checks_with_sales_by_employee_between_time(principal.getName(), date_start, date_end));
         } catch (Exception e){
@@ -90,7 +90,7 @@ public class RestControllerGetAllBy {
     }
 
     @RequestMapping(value = {"/get_checks_with_sales_between_time"}, method = RequestMethod.GET)
-    public ResponseEntity<List<Check>> get_checks_with_sales_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+    public ResponseEntity<List<Check>> get_checks_with_sales_between_time(@RequestParam String date_start, @RequestParam String date_end) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_checks_with_sales_between_time(date_start, date_end));
         } catch (Exception e){
@@ -108,7 +108,7 @@ public class RestControllerGetAllBy {
     }
 
     @RequestMapping(value = {"/get_sum_all_recipes_between_time"}, method = RequestMethod.GET)
-    public ResponseEntity<Double> get_sum_all_recipes_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+    public ResponseEntity<Double> get_sum_all_recipes_between_time(@RequestParam String date_start, @RequestParam String date_end) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_sum_all_recipes_between_time(date_start, date_end));
         } catch (Exception e){
@@ -117,7 +117,7 @@ public class RestControllerGetAllBy {
     }
 
     @RequestMapping(value = {"/get_num_product_saled_between_time"}, method = RequestMethod.GET)
-    public ResponseEntity<Integer> get_num_product_saled_between_time(@RequestParam Date date_start, @RequestParam Date date_end) {
+    public ResponseEntity<Integer> get_num_product_saled_between_time(@RequestParam String date_start, @RequestParam String date_end) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(checkService.get_num_product_saled_between_time(date_start, date_end));
         } catch (Exception e){
