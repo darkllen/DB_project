@@ -50,7 +50,7 @@
         <p>Employee patronymic : </p>
         <input type="text" placeholder="Employee patronymic" name="em_patron">
         <p>Role : </p>
-        <select>
+        <select name="em_role">
             <option>Manager</option>
             <option>Kassir</option>
         </select>
@@ -257,11 +257,45 @@
         $('#category').submit(function(e) {
             e.preventDefault();
 
-
-
             $.ajax({
                 type: 'POST',
-                url: '/get_categories_like/F/', //+$(this).find('[name=city]').val(),
+                url: '/add_category',
+                data: '{category_name:'+$(this).find('[name=cat_name]').val()+'}',
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    console.log(response);
+
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#employee').submit(function(e) {
+            e.preventDefault();
+            console.log($(this).find('[name=em_role]').val());
+            var d = '{id_employee:'+$(this).find('[name=em_id]').val()+
+                    ', empl_surname:'+$(this).find('[name=em_surname]').val()+
+                    ', empl_name:'+$(this).find('[name=em_name]').val()+
+                    ', empl_patronymic:'+$(this).find('[name=em_patron]').val()+
+                    ', role:'+$(this).find('[name=em_role]').val()+
+                    ', salary:'+$(this).find('[name=em_salary]').val()+
+                    ', date_of_birth:'+$(this).find('[name=em_date_birth]').val()+
+                    ', date_of_start:'+$(this).find('[name=em_date_start]').val()+
+                    ', phone_number:'+$(this).find('[name=em_phone]').val()+
+                    ', city:'+$(this).find('[name=em_city]').val()+
+                    ', street:'+$(this).find('[name=em_street]').val()+
+                    ', zip_code:'+$(this).find('[name=em_zipcode]').val()+'}';
+
+
+                $.ajax({
+                type: 'POST',
+                url: '/add_employee',
+                data: d,
 
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Content-Type', 'application/json')
@@ -277,11 +311,7 @@
         });
 
 
-
-
     });
-
-
 
 
 </script>
