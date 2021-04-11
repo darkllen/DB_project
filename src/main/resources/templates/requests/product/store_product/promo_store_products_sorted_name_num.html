@@ -17,8 +17,7 @@
 <div class="col2">
     <h1>Get promo products sorted by name</h1>
 
-
-    <table id="table" class="table table-hover table-bordered" style="visibility: hidden;">
+    <table id="table" class="table table-hover table-bordered">
         <thead>
         <th>PRODUCT UPC</th>
         <th>PRODUCT NAME</th>
@@ -51,8 +50,6 @@
 
     $(function() {
 
-        $('#form').submit(function(e) {
-            e.preventDefault();
 
             $products.empty();
 
@@ -80,9 +77,12 @@
                     }
 
 
+                },
+                error:function(error){
+                    console.log(error);
+
                 }
             });
-        });
 
 
 
