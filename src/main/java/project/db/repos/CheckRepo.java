@@ -9,7 +9,7 @@ import project.db.dto.Check;
 import java.util.Date;
 import java.util.List;
 
-public interface CheckRepo extends JpaRepository<Check, Integer> {
+public interface CheckRepo extends JpaRepository<Check, String> {
 
 
     @Query(value = "SELECT R.check_number AS check_number, R.print_date AS print_date, R.sum_total AS sum_total, R.vat as vat " +
@@ -35,6 +35,11 @@ public interface CheckRepo extends JpaRepository<Check, Integer> {
                                        "                                                                          FROM Category AS C" +
                                        "                                                                          WHERE C.category_name=:category))", nativeQuery = true)
     List<ChecksInfo> AllChecksWithAllPromoProductsFromCategory(@Param("category") String category);
+
+    @Query(value = "SELECT * " +
+            "FROM Recipe",nativeQuery = true)
+    List<Check> getAllChecks();
+
     interface ChecksInfo {
         String getCheck_number();
         Date getPrint_date();

@@ -10,6 +10,7 @@ import project.db.dto.Category;
 import project.db.dto.Customer_Card;
 import project.db.dto.Product;
 import project.db.repos.*;
+import project.db.services.*;
 
 import java.util.List;
 import java.util.Map;
@@ -17,20 +18,17 @@ import java.util.Map;
 @org.springframework.web.bind.annotation.RestController
 @RequiredArgsConstructor
 public class RestController {
-    @Autowired
-    private CategoryRepo categoryRepo;
 
     @Autowired
-    private CustomerRepo customerRepo;
-
+    private CategoryService categoryRepo;
     @Autowired
-    private ProductRepo productRepo;
-
+    private CustomerService customerRepo;
     @Autowired
-    private EmployeeRepo employeeRepo;
-
+    private ProductService productRepo;
     @Autowired
-    private CheckRepo checkRepo;
+    private EmployeeService employeeRepo;
+    @Autowired
+    private CheckService checkRepo;
 
     @RequestMapping(value = {"/get_categories_count"}, method = RequestMethod.GET)
     public ResponseEntity<List<CategoryRepo.CategoriesProductsCounted>> get_categories_count(){
@@ -67,10 +65,7 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeRepo.getEmployeesClientsNum());
     }
 
-    @RequestMapping(value = {"/get_all_cities"}, method = RequestMethod.POST)
-    public ResponseEntity<List<String>> get_all_cities(){
-        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.getAllCities());
-    }
+
 
     @RequestMapping(value = {"/get_all_clients_who_buys_all_categories_products"}, method = RequestMethod.GET)
     public ResponseEntity<List<CustomerRepo.Customer_info>> get_all_clients_who_buys_all_categories_products(){
@@ -87,20 +82,14 @@ public class RestController {
         return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategoriesLike(category));
     }
 
-    @RequestMapping(value = {"/get_categories"}, method = RequestMethod.GET)
-    public ResponseEntity<List<CategoryRepo.CategoriesInfo>> get_categories(){
-        return ResponseEntity.status(HttpStatus.OK).body(categoryRepo.getCategories());
-    }
+
 
     @RequestMapping(value = {"/get_upc_product/{product_id}"}, method = RequestMethod.GET)
     public ResponseEntity<List<String>> get_categories(@PathVariable int product_id){
         return ResponseEntity.status(HttpStatus.OK).body(productRepo.getUpcsForProduct(product_id));
     }
 
-    @RequestMapping(value = {"/get_all_products"}, method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> get_all_products(){
-        return ResponseEntity.status(HttpStatus.OK).body(productRepo.getAllProducts());
-    }
+
 
     @RequestMapping(value = {"/add_category"}, method = RequestMethod.POST)
     public ResponseEntity<Category> add_category(@RequestBody Category category){
@@ -109,8 +98,9 @@ public class RestController {
     }
 
 
-    @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
-    public String test(){
+    @RequestMapping(value = {"/test"}, method = RequestMethod.POST)
+    public String test(@RequestBody Map<String,String> id){
+        id.forEach((x,y)-> System.out.println(x + " " + y));
         checkRepo.AllChecksWithAllPromoProductsFromCategory("Fruits").forEach(System.out::println);
         return "index";
     }

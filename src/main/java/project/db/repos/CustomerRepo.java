@@ -15,12 +15,18 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
             "FROM (Customer_Card INNER JOIN Recipe ON Customer_Card.card_number=Recipe.card_number) " +
             "GROUP BY Customer_Card.card_number", nativeQuery = true)
     List<CustomerSpends> getCustomersSpends();
+
     interface CustomerSpends {
         String getCard_number();
         String getCust_surname();
         String getCust_name();
         double getTotal();
     }
+
+    @Query(value = "SELECT * " +
+            "FROM Customer_Card ", nativeQuery = true)
+    List<Customer_Card> getAllCustomerCards();
+
 
     @Query(value = "SELECT DISTINCT (Customer_Card.city) as city " +
             "       FROM Customer_Card", nativeQuery = true)

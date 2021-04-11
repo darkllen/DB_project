@@ -15,12 +15,16 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             "FROM Employee INNER JOIN Recipe ON Employee.id_employee=Recipe.id_employee " +
             "GROUP BY Employee.id_employee", nativeQuery = true)
     List<EmployeeTotalInfo> getEmployeesSalesSum();
+
     interface EmployeeTotalInfo {
         String getEmpl_surname();
         String getEmpl_name();
         String getId_employee();
         String getTotal();
     }
+    @Query(value = "SELECT * " +
+            "FROM Employee ", nativeQuery = true)
+    List<Employee> getAllEmployees();
 
     @Query(value = "SELECT Employee.empl_name AS empl_name, Employee.empl_surname AS empl_surname, Employee.id_employee AS id_employee, COUNT(Recipe.card_number) AS cust_number " +
             "FROM Employee INNER JOIN Recipe ON Employee.id_employee=Recipe.id_employee " +

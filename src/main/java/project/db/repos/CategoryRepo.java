@@ -16,12 +16,16 @@ public interface CategoryRepo extends JpaRepository<Category, Integer> {
             "FROM (Category INNER JOIN Product ON Category.category_number=Product.category_number) " +
             "GROUP BY Category.category_number", nativeQuery = true)
     List<CategoriesProductsCounted> getCategoriesProductsCount();
-
     interface CategoriesProductsCounted {
         int getProducts_count();
         int getCategory_number();
         String getCategory_name();
     }
+
+    @Query(value = "SELECT * " +
+            "FROM Category ", nativeQuery = true)
+    List<Category> getAllCategories();
+
 
 
 
