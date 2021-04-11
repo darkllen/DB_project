@@ -25,8 +25,8 @@ public class CategoryService {
         return categoryRepo.getCategories();
     };
 
-    public void addCategory(String category_name){
-        categoryRepo.addCategory(category_name);
+    public void addCategory(Category category){
+        categoryRepo.addCategory(category.getCategory_name());
     };
 
     public List<Category> getAllCategories() {
