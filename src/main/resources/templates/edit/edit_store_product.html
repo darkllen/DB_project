@@ -18,30 +18,63 @@
 
 <form id="store_product" th:name="${st_pr_id}">
     <h2>Edit store product</h2>
-    <p>Category name : </p>
-    <select id='prod_cat_name' name='prod_cat_name'>
-    </select>
-    <br>
-    <p>Product name : </p>
-    <input type="text" placeholder="Product name" name="prod_name">
-    <p>Characteristics : </p>
-    <textarea type="text" placeholder="Characteristics" name="prod_char"></textarea>
-    <button class="btn btn-success" type="submit">Edit</button>
+    <div class="col1">
+        <p>UPC : </p>
+        <input type="text" placeholder="UPC" name="st_upc">
+        <p>Product name: </p>
+        <select id='st_pr_id' name='st_pr_id' onchange="changeProductUPC()">
+        </select>
+        <br>
+        <p>UPC promotion : </p>
+        <select id='st_upc_prom' name='st_upc_prom'>
+        </select>
+        <br>
+        <p>Selling price : </p>
+        <input type="text" placeholder="Selling price" name="st_price">
+    </div>
+    <div class="col2">
+        <p>Products number : </p>
+        <input type="text" placeholder="Products number" name="st_number">
+        <p>Is promotional : </p>
+        <select id='st_is_prom' name='st_is_prom'>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+        <button class="btn btn-success" type="submit">Add</button>
+
+    </div>
 </form>
 
 <script>
 
+    function changeProductUPC(){
+        $.ajax({
+            url: '/get_upc_product/'+document.getElementById("st_pr_id").value,
+            type: "get",
+            success: function (response) {
+                document.getElementById("st_upc_prom").innerHTML='<option selected="selected" value="None">None</option>';
+                response.forEach(function (pr) {
+                    document.getElementById("st_upc_prom").innerHTML+= '<option value="'+pr+'">'+pr+'</option>';
+                })
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+    }
+
     $(function() {
-        var id = document.getElementById("product").getAttribute("name");
+        var id = document.getElementById("store_product").getAttribute("name");
 
 
         var data = {
-            id_product: id,
+            upc: id,
         };
 
         $.ajax({
             type: 'get',
-            url: '/get_product_by_id_product',
+            url: '/get_store_product_by_upc',
             dataType: 'json',
             data: data,
 
@@ -49,25 +82,39 @@
                 xhr.setRequestHeader('Content-Type', 'application/json')
             },
             success: function (response) {
+                console.log(response);
+
+                $("input[name='st_upc']").val(response.upc);
+                $("input[name='st_pr_id']").val(response.id_product);
+                $("inputa[name='st_upc_prom']").val(response.upc_prom);
+                $("input[name='st_price']").val(response.selling_price);
+                $("input[name='st_number']").val(response.products_number);
+                if(response.promotional)
+                    $("select[name='st_is_prom']").val('Yes');
+                else
+                    $("select[name='st_is_prom']").val('No');
+
 
                 $.ajax({
-                    url: '/get_categories',
+                    url: '/get_all_products',
                     type: "get",
                     success: function (response) {
-                        document.getElementById("prod_cat_name").innerHTML= '';
 
-                        response.forEach(function (cat) {
-                            document.getElementById("prod_cat_name").innerHTML+= '<option value="'+cat.category_number+'">'+cat.category_name+'</option>';
-                        })
+                        document.getElementById("st_pr_id").innerHTML= '';
+                        response.forEach(function (pr) {
+                            if(response.id_product == pr.id_product)
+                                document.getElementById("st_pr_id").innerHTML+= '<option selected="selected" value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
+                            else
+                                document.getElementById("st_pr_id").innerHTML+= '<option value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
+                        });
+                        changeProductUPC();
                     },
                     error: function(err){
                         console.log(err);
                     }
                 });
 
-                $("input[name='prod_cat_name']").val(response.category_number);
-                $("input[name='prod_name']").val(response.product_name);
-                $("textarea[name='prod_char']").val(response.characteristics);
+
             },
             error: function (err) {
                 console.log(err);
@@ -77,13 +124,21 @@
         $('#product').submit(function(e) {
             e.preventDefault();
 
-            var data = {category_number : $(this).find('[name=prod_cat_name]').val()
-                , product_name: $(this).find('[name=prod_name]').val()
-                , characteristics: $(this).find('[name=prod_char]').val()};
+            var is_prom = true;
+            if($(this).find('[name=st_is_prom]').val()=="No") is_prom=false;
+
+
+            var data = {UPC : $(this).find('[name=st_upc]').val()
+                , id_product: $(this).find('[name=st_pr_id]').val()
+                , UPC_prom: $(this).find('[name=st_upc_prom]').val()
+                , selling_price: $(this).find('[name=st_price]').val()
+                , products_number: $(this).find('[name=st_number]').val()
+                , promotional: is_prom
+            };
 
             $.ajax({
                 type: 'POST',
-                url: '/edit_product',
+                url: '/edit_store_product/'+id,
                 dataType: 'json',
                 data: JSON.stringify(data),
 
