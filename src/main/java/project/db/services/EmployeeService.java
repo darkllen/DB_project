@@ -119,4 +119,9 @@ public class EmployeeService {
     public List<Employee> get_cassiers_sorted_surname() {
         return employeeRepo.get_cassiers_sorted_surname();
     }
+
+    @Transactional
+    public List<EmployeeRepo.EmployeeContacts> get_phone_address_by_empl_surname(String empl_surname) {
+        return employeeRepo.get_phone_address_by_empl_surname(empl_surname);
+    }
 }
