@@ -23,12 +23,12 @@ create table Employee
     city            varchar (50) not null,
     street          varchar (50) not null,
     zip_code        varchar (9) not null,
-    password        varchar (20) not null
+    password        varchar (100) not null
 );
 
 insert into Employee (id_employee, empl_surname, empl_name, empl_patronymic, role, salary, date_of_birth, date_of_start, phone_number, city, street, zip_code, password) values
-('aaaa', 'Cvetkova', 'Marina', 'Vladislavivna', 'KASSIR', '5000', CURDATE(), CURDATE(), '0660123590', 'Kyiv', 'Skovorodi', '03903', 'pass'),
-('bbbb', 'Sirov', 'Volodimir', 'Tarasovich', 'KASSIR', '10000', CURDATE(), CURDATE(), '0661234243', 'Odessa', 'Deribasivska', '93402', 'pass');
+('aaaa', 'Cvetkova', 'Marina', 'Vladislavivna', 'KASSIR', '5000', CURDATE(), CURDATE(), '0660123590', 'Kyiv', 'Skovorodi', '03903', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi'),
+('bbbb', 'Sirov', 'Volodimir', 'Tarasovich', 'KASSIR', '10000', CURDATE(), CURDATE(), '0661234243', 'Odessa', 'Deribasivska', '93402', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi');
 
 create table Customer_Card
 (
