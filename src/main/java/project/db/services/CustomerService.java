@@ -52,4 +52,18 @@ public class CustomerService {
                 customer_card.getZip_code(),
                 customer_card.getPercent());
     }
+
+    public void addCustomerCard(Customer_Card customer) {
+        customerRepo.addCustomerCard(
+                customer.getCard_number(),
+                customer.getCust_surname(),
+                customer.getCust_name(),
+                customer.getCust_patronymic(),
+                customer.getPhone_number(),
+                customer.getCity(),
+                customer.getStreet(),
+                customer.getZip_code(),
+                customer.getPercent()
+        );
+    }
 }

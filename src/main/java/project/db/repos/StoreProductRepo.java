@@ -37,6 +37,11 @@ public interface StoreProductRepo  extends JpaRepository<Store_Product, String> 
             "WHERE UPC=?1", nativeQuery = true)
     void editStoreProduct(String prev_upc, String upc, String upc_prom, Integer id_product, double selling_price, Integer products_number, boolean promotional_product);
 
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Store_Product VALUES (?1, ?2, ?3, ?4, ?5, ?6)", nativeQuery = true)
+    void addStoreProduct(String upc, String upc_prom, Integer id_product, double selling_price, Integer products_number, boolean is_promo);
+
     interface StoreProductWithName {
         String getProduct_name();
         String getUPC();

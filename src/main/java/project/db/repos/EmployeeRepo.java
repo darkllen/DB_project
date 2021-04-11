@@ -38,6 +38,11 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             "WHERE id_employee=?1", nativeQuery = true)
     void editEmployee(String prev_id_employee, String id_employee, String empl_name, String empl_surname, String empl_patronymic, String role, double salary, Date date_of_birth, Date date_of_start, String phone_number, String city, String street, String zip_code);
 
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO Employee VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)", nativeQuery = true)
+    void addEmployee(String id_employee, String empl_surname, String empl_name, String empl_patronymic, String role, double salary, Date date_of_birth, Date date_of_start, String phone_number, String city, String street, String zip_code);
+
     interface EmployeeTotalInfo {
         String getEmpl_surname();
         String getEmpl_name();

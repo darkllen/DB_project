@@ -46,4 +46,12 @@ public class ProductService {
                 product.getCharacteristics()
         );
     }
+
+    public void addProduct(Product product) {
+        productRepo.addProduct(
+                product.getProduct_name(),
+                product.getCategory_number(),
+                product.getCharacteristics()
+        );
+    }
 }

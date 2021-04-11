@@ -40,4 +40,15 @@ public class StoreProductService {
                 store_product.isPromotional_product()
         );
     }
+
+    public void addStoreProduct(Store_Product store_product) {
+        storeProductRepo.addStoreProduct(
+                store_product.getUPC(),
+                store_product.getUPC_prom(),
+                store_product.getId_product(),
+                store_product.getSelling_price(),
+                store_product.getProducts_number(),
+                store_product.isPromotional_product()
+        );
+    }
 }
