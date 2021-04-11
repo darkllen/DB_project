@@ -7,6 +7,7 @@ import project.db.dto.Check;
 import project.db.repos.CheckRepo;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -60,5 +61,15 @@ public class CheckService {
     @Transactional
     public List<CheckRepo.ChecksWithEmpl> getAllChecksWithEmpl() {
         return checkRepo.getAllChecksWithEmpl();
+    }
+
+    @Transactional
+    public List<Check> get_checks_with_sales_by_employee_between_time(String id_employee, Date date_start, Date date_end) {
+        return checkRepo.get_checks_with_sales_by_employee_between_time(id_employee, date_start, date_end);
+    }
+
+    @Transactional
+    public List<Check> get_checks_with_sales_between_time(Date date_start, Date date_end) {
+        return  checkRepo.get_checks_with_sales_between_time(date_start,date_end);
     }
 }
