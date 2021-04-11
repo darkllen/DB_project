@@ -2,9 +2,7 @@ package project.db.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import project.db.dto.Sale;
 import project.db.dto.Store_Product;
-import project.db.repos.SaleRepo;
 import project.db.repos.StoreProductRepo;
 
 import java.util.List;
@@ -32,8 +30,8 @@ public class StoreProductService {
     public void editStoreProduct(Store_Product store_product, String prev_upc) {
         storeProductRepo.editStoreProduct(
                 prev_upc,
-                store_product.getUPC(),
-                store_product.getUPC_prom(),
+                store_product.getUpc(),
+                store_product.getUpc_prom(),
                 store_product.getId_product(),
                 store_product.getSelling_price(),
                 store_product.getProducts_number(),
@@ -43,8 +41,8 @@ public class StoreProductService {
 
     public void addStoreProduct(Store_Product store_product) {
         storeProductRepo.addStoreProduct(
-                store_product.getUPC(),
-                store_product.getUPC_prom(),
+                store_product.getUpc(),
+                store_product.getUpc_prom(),
                 store_product.getId_product(),
                 store_product.getSelling_price(),
                 store_product.getProducts_number(),

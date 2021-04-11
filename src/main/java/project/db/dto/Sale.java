@@ -14,7 +14,7 @@ public class Sale {
 
     @Id
     @Column(name = "UPC")
-    private String UPC;
+    private String upc;
 
     @Id
     @Column(name = "check_number")
