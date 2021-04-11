@@ -5,8 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import project.db.dto.Sale;
 import project.db.repos.CheckRepo;
+import project.db.repos.SaleRepo;
 import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
@@ -37,6 +40,11 @@ public class RestControllerGetAllAddInfo {
     @RequestMapping(value = {"/get_all_checks_with_empl"}, method = RequestMethod.GET)
     public ResponseEntity<List<CheckRepo.ChecksWithEmpl>> get_all_checks_with_empl(){
         return ResponseEntity.status(HttpStatus.OK).body(checkService.getAllChecksWithEmpl());
+    }
+
+    @RequestMapping(value = {"/get_all_sales_with_product_name_by_check_number"}, method = RequestMethod.GET)
+    public ResponseEntity<List<SaleRepo.SalesWithProductName>> get_all_sales_with_product_name_by_check_number(@RequestParam String check_number){
+        return ResponseEntity.status(HttpStatus.OK).body(saleService.getAllSalesWithProductNameByCheckNumber(check_number));
     }
 
 

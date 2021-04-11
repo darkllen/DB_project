@@ -25,6 +25,13 @@ public class SaleService {
     }
 
     public void removeSaleByUpcCheckNumber(String upc, String check_number) {
+        Sale old = saleRepo.getSaleByUpcCheckNumber(upc, check_number);
+        double diff =- (old.getProduct_number()*old.getSelling_price());
+        Check check = checkRepo.getCheckByCheckNumber(check_number);
+        check.setSum_total(check.getSum_total()-check.getVat()+diff);
+        check.countVat();
+        service.editCheck(check, check_number);
+
         saleRepo.removeSaleByUpcCheckNumber(upc, check_number);
     }
 
@@ -33,7 +40,6 @@ public class SaleService {
         Sale old = saleRepo.getSaleByUpcCheckNumber(sale.getUpc(), sale.getCheck_number());
         double diff =sale.getProduct_number()*sale.getSelling_price() - old.getProduct_number()*old.getSelling_price();
         Check check = checkRepo.getCheckByCheckNumber(sale.getCheck_number());
-
         check.setSum_total(check.getSum_total()-check.getVat()+diff);
         check.countVat();
         service.editCheck(check, sale.getCheck_number());
@@ -58,5 +64,9 @@ public class SaleService {
                 sale.getProduct_number(),
                 sale.getSelling_price()
         );
+    }
+
+    public List<SaleRepo.SalesWithProductName> getAllSalesWithProductNameByCheckNumber(String check_number) {
+        return saleRepo.getAllSalesWithProductNameByCheckNumber(check_number);
     }
 }
