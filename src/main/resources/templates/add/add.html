@@ -591,16 +591,17 @@
         $('#sale').submit(function(e) {
             e.preventDefault();
 
-            if(find('[name=sale_pr_number]').val()<1)
+            if($(this).find('[name=sale_pr_number]').val()<1)
                 alert("Number of products must be > 0 ")
             else {
 
                 var data = {
-                    upc: $(this).find('[name=sale_pr]').val()
+                      upc: $(this).find('[name=sale_pr]').val()
                     , check_number: $(this).find('[name=sale_ch]').val()
                     , product_number: $(this).find('[name=sale_pr_number]').val()
                 };
 
+                console.log(data);
                 $.ajax({
                     type: 'POST',
                     url: '/add_sale',
