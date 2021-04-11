@@ -27,4 +27,11 @@ public interface SaleRepo  extends JpaRepository<Sale, SaleId> {
             "FROM Sale " +
             "WHERE UPC=?1 AND check_number=?2", nativeQuery = true)
     void removeSaleByUpcCheckNumber(String upc, String check_number);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Sale " +
+            "SET product_number=?3, selling_price=?4 " +
+            "WHERE UPC=?1 AND check_number=?2", nativeQuery = true)
+    void editSale(String upc, String check_number, Integer product_number, double selling_price);
 }

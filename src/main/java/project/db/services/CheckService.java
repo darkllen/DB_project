@@ -28,4 +28,14 @@ public class CheckService {
     public void removeCheckByCheckNumber(String check_number) {
         checkRepo.removeCheckByCheckNumber(check_number);
     }
+
+    public void editCheck(Check check, String prev_check_number) {
+        checkRepo.editCheck(prev_check_number,
+                check.getCheck_number(),
+                check.getId_employee(),
+                check.getCard_number(),
+                check.getPrint_date(),
+                check.getSum_total(),
+                check.getVat());
+    }
 }

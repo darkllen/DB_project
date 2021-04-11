@@ -37,4 +37,13 @@ public class ProductService {
     public void removeProductByIdProduct(int id_product) {
         productRepo.removeProductByIdProduct(id_product);
     }
+
+    public void editProduct(Product product) {
+        productRepo.editProduct(
+                product.getId_product(),
+                product.getProduct_name(),
+                product.getCategory_number(),
+                product.getCharacteristics()
+        );
+    }
 }

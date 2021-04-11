@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import project.db.dto.Employee;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,13 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             "FROM Employee " +
             "WHERE id_employee=?1", nativeQuery = true)
     void removeEmployeeByIdEmployee(String id_employee);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Employee " +
+            "SET  id_employee=?2, empl_name=?3, empl_surname=?4, empl_patronymic=?5, role=?6, salary=?7, date_of_birth=?8, date_of_start=?9, phone_number=?10, city=?11, street=?12, zip_code=?13 " +
+            "WHERE id_employee=?1", nativeQuery = true)
+    void editEmployee(String prev_id_employee, String id_employee, String empl_name, String empl_surname, String empl_patronymic, String role, double salary, Date date_of_birth, Date date_of_start, String phone_number, String city, String street, String zip_code);
 
     interface EmployeeTotalInfo {
         String getEmpl_surname();

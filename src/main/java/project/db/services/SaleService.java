@@ -2,7 +2,9 @@ package project.db.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import project.db.dto.Check;
 import project.db.dto.Sale;
+import project.db.repos.CheckRepo;
 import project.db.repos.SaleRepo;
 
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SaleService {
     private final SaleRepo saleRepo;
+    private final CheckRepo checkRepo;
+    private final CheckService service;
+
     public List<Sale> getAllSales() {
         return saleRepo.getAllSales();
     }
@@ -21,5 +26,22 @@ public class SaleService {
 
     public void removeSaleByUpcCheckNumber(String upc, String check_number) {
         saleRepo.removeSaleByUpcCheckNumber(upc, check_number);
+    }
+
+
+    public void editSale(Sale sale) {
+        Sale old = saleRepo.getSaleByUpcCheckNumber(sale.getUPC(), sale.getCheck_number());
+        double diff =sale.getProduct_number()*sale.getSelling_price() - old.getProduct_number()*old.getSelling_price();
+        Check check = checkRepo.getCheckByCheckNumber(sale.getCheck_number());
+
+        check.setSum_total(check.getSum_total()-check.getVat()+diff);
+        check.countVat();
+        service.editCheck(check, sale.getCheck_number());
+
+        saleRepo.editSale(
+                sale.getUPC(),
+                sale.getCheck_number(),
+                sale.getProduct_number(),
+                sale.getSelling_price());
     }
 }

@@ -55,8 +55,15 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE" +
+    @Query(value = "DELETE " +
             "FROM Product " +
             "WHERE id_product=?1 ", nativeQuery = true)
     void removeProductByIdProduct(int id_product);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Product " +
+            "SET product_name=?2, category_number=?3, `characteristics`=?4 " +
+            "WHERE id_product=?1 ", nativeQuery = true)
+    void editProduct(Integer id_product, String product_name, Integer category_number, String characteristics);
 }

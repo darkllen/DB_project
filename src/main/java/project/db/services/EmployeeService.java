@@ -38,4 +38,22 @@ public class EmployeeService {
     public void removeEmployeeByIdEmployee(String id_employee) {
         employeeRepo.removeEmployeeByIdEmployee(id_employee);
     }
+
+    public void editEmployee(Employee employee, String prev_id_employee) {
+        employeeRepo.editEmployee(
+                prev_id_employee,
+                employee.getId_employee(),
+                employee.getEmpl_name(),
+                employee.getEmpl_surname(),
+                employee.getEmpl_patronymic(),
+                employee.getRole(),
+                employee.getSalary(),
+                employee.getDate_of_birth(),
+                employee.getDate_of_start(),
+                employee.getPhone_number(),
+                employee.getCity(),
+                employee.getStreet(),
+                employee.getZip_code()
+        );
+    }
 }

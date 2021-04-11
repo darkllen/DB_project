@@ -39,4 +39,17 @@ public class CustomerService {
     public void removeCustomerCardByCardNumber(String card_number) {
         customerRepo.removeCustomerCardByCardNumber(card_number);
     }
+
+    public void editCustomerCard(Customer_Card customer_card, String prev_card_number) {
+        customerRepo.editCustomerCard(prev_card_number,
+                customer_card.getCard_number(),
+                customer_card.getCust_name(),
+                customer_card.getCust_surname(),
+                customer_card.getCust_patronymic(),
+                customer_card.getPhone_number(),
+                customer_card.getCity(),
+                customer_card.getStreet(),
+                customer_card.getZip_code(),
+                customer_card.getPercent());
+    }
 }

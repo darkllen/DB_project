@@ -28,4 +28,16 @@ public class StoreProductService {
     public void removeStoreProductByUPC(String upc) {
         storeProductRepo.removeStoreProductByUPC(upc);
     }
+
+    public void editStoreProduct(Store_Product store_product, String prev_upc) {
+        storeProductRepo.editStoreProduct(
+                prev_upc,
+                store_product.getUPC(),
+                store_product.getUPC_prom(),
+                store_product.getId_product(),
+                store_product.getSelling_price(),
+                store_product.getProducts_number(),
+                store_product.isPromotional_product()
+        );
+    }
 }
