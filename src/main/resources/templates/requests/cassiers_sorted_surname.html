@@ -1,0 +1,64 @@
+<!--групування-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get all cassiers sorted by surname</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Get all cassiers sorted by surname</h1>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <th>EMPLOYEE SURNAME</th>
+        <th>EMPLOYEE NAME</th>
+        <th>EMPLOYEE ID</th>
+
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+    var $empl = $('#table_body');
+    getAll($empl);
+
+    function formTableRow(empl){
+        return '<tr class = "table_row"><td>' + empl.empl_surname + '</td><td>' + empl.empl_name + '</td><td>' + empl.id_employee + '</td></tr>';
+    }
+
+    function getAll($customers){
+        $.ajax({
+            type: 'GET',
+            url: '/get_cassiers_sorted_surname',
+
+            success: function (response) {
+                response.forEach(function (empl) {
+                    $empl.append(formTableRow(empl));
+                });
+
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>
