@@ -45,6 +45,12 @@ public interface SaleRepo  extends JpaRepository<Sale, SaleId> {
             "FROM Sale INNER JOIN Store_Product ON Sale.UPC=Store_Product.UPC INNER  JOIN Product ON Store_Product.id_product=Product.id_product " +
             "WHERE Sale.check_number=?1", nativeQuery = true)
     List<SalesWithProductName> getAllSalesWithProductNameByCheckNumber(String check_number);
+
+    @Query(value = "SELECT  Sale.UPC AS upc, Sale.check_number AS check_number, Sale.product_number AS product_number, Sale.selling_price AS selling_price, Product.product_name AS product_name  " +
+            "FROM Sale INNER JOIN Store_Product ON Sale.UPC=Store_Product.UPC INNER  JOIN Product ON Store_Product.id_product=Product.id_product " +
+            "WHERE Sale.check_number=?2 AND Sale.UPC=?1 ", nativeQuery = true)
+    SalesWithProductName get_sale_with_name_by_upc_check_number(String upc, String check_number);
+
     public interface SalesWithProductName{
         String getUpc();
         String getCheck_number();

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import project.db.dto.*;
+import project.db.repos.SaleRepo;
 import project.db.services.*;
 
 @RestController
@@ -45,6 +46,11 @@ public class RestControllerGetAllById {
     @RequestMapping(value = {"/get_sale_by_upc_check_number"}, method = RequestMethod.GET)
     public ResponseEntity<Sale> get_sale_by_upc_check_number(@RequestParam String upc, @RequestParam String check_number){
         return ResponseEntity.status(HttpStatus.OK).body(saleService.getSaleByUpcCheckNumber(upc, check_number));
+    }
+
+    @RequestMapping(value = {"/get_sale_with_name_by_upc_check_number"}, method = RequestMethod.GET)
+    public ResponseEntity<SaleRepo.SalesWithProductName> get_sale_with_name_by_upc_check_number(@RequestParam String upc, @RequestParam String check_number){
+        return ResponseEntity.status(HttpStatus.OK).body(saleService.get_sale_with_name_by_upc_check_number(upc, check_number));
     }
 
     @RequestMapping(value = {"/get_check_by_check_number"}, method = RequestMethod.GET)
