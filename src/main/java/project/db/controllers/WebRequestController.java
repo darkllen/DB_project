@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequiredArgsConstructor
 public class WebRequestController {
 
-    @RequestMapping(value = {"/cassiers_sorted_surname}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/cassiers_sorted_surname"}, method = RequestMethod.GET)
     public String cassiers_sorted_surname(){
          return "requests/cassiers_sorted_surname";
     }
+
+    @RequestMapping(value = {"/products_by_category_sorted_name"}, method = RequestMethod.GET)
+    public String products_by_category_sorted_name(){
+        return "requests/products_by_category_sorted_name";
+    }
+
 
 //    @RequestMapping(value = {"/category_requests}"}, method = RequestMethod.GET)
 //    public String category(){
