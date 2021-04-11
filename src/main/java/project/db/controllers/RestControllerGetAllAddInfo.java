@@ -28,8 +28,8 @@ public class RestControllerGetAllAddInfo {
     @Autowired
     private StoreProductService storeProductService;
 
-    @RequestMapping(value = {"/get_all_product_store_with_name"}, method = RequestMethod.GET)
-    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_all_product_store_with_name(){
+    @RequestMapping(value = {"/get_all_store_product_with_name"}, method = RequestMethod.GET)
+    public ResponseEntity<List<StoreProductRepo.StoreProductWithName>> get_all_store_product_with_name(){
         return ResponseEntity.status(HttpStatus.OK).body(storeProductService.getAllProductStoreWithName());
     }
 }

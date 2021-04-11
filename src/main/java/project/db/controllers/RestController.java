@@ -91,11 +91,6 @@ public class RestController {
 
 
 
-    @RequestMapping(value = {"/add_category"}, method = RequestMethod.POST)
-    public ResponseEntity<Category> add_category(@RequestBody Category category){
-        return ResponseEntity.status(HttpStatus.OK).body(category);
-    }
-
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.POST)
     public String test(@RequestBody Map<String,String> id){
