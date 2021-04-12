@@ -11,14 +11,14 @@
 
 <h2 class="main_h2">Check information</h2>
 <div class="my-group-main">
-    <a href="/checks_with_sales_by_employee_between_time" class="btn btn-warning">Get checks with sales by employee between time</a>
-    <a href="/checks_with_sales_between_time" class="btn btn-warning">Get checks with sales between time</a>
-    <a href="/sum_recipes_by_employee_between_time" class="btn btn-warning">Get sum recipes by employee between time</a>
-    <a href="/sum_all_recipes_between_time" class="btn btn-warning">Get sum recipes between time</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/checks_with_sales_by_employee_between_time" class="btn btn-warning">Get checks with sales by employee between time</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/checks_with_sales_between_time" class="btn btn-warning">Get checks with sales between time</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/sum_recipes_by_employee_between_time" class="btn btn-warning">Get sum recipes by employee between time</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/sum_all_recipes_between_time" class="btn btn-warning">Get sum recipes between time</a>
 
-    <a href="/checks_by_curr_employee_between_time" class="btn btn-warning">Get checks by current employee between time</a>
+    <a th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/checks_by_curr_employee_between_time" class="btn btn-warning">Get checks by current employee between time</a>
 
-    <a href="/check_by_check_number" class="btn btn-warning">Get check by check number</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/check_by_check_number" class="btn btn-warning">Get check by check number</a>
 
 
 </div>
