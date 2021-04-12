@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -33,10 +34,12 @@ public class Store_Product implements NotEmptyF{
 
     @Column(name = "selling_price")
     @NotNull
+    @Min(0)
     private double selling_price;
 
     @Column(name = "products_number")
     @NotNull
+    @Min(0)
     private Integer products_number;
 
     @Column(name = "promotional_product")

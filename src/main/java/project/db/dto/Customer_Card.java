@@ -4,11 +4,13 @@ package project.db.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -43,6 +45,7 @@ public class Customer_Card implements NotEmptyF{
     @Column(name = "phone_number")
     @NotEmpty
     @NotNull
+    @Length(min = 10, max = 13)
     private String phone_number;
 
     @Column(name = "city")
@@ -56,6 +59,7 @@ public class Customer_Card implements NotEmptyF{
 
     @Column(name = "percent")
     @NotNull
+    @Min(0)
     private Integer percent;
 
     public void changeEmpty(){

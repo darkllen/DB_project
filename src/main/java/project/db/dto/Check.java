@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -39,10 +40,12 @@ public class Check implements NotEmptyF{
 
     @Column(name = "sum_total")
     @NotNull
+    @Min(0)
     private double sum_total;
 
     @Column(name = "vat")
     @NotNull
+    @Min(0)
     private double vat;
 
     public void countVat() {

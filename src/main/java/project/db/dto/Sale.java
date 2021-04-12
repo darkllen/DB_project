@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -28,10 +29,12 @@ public class Sale implements NotEmptyF{
 
     @Column(name = "product_number")
     @NotNull
+    @Min(0)
     private Integer product_number;
 
     @Column(name = "selling_price")
     @NotNull
+    @Min(0)
     private double selling_price;
 
 }
