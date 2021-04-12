@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Edit sale</title>
+    <title>Edit check</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/main.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -17,37 +17,50 @@
 
 <!--<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">-->
 
-<form id="sale" th:name="${upc}" th:value="${check_id}">
-    <h2>Sale</h2>
-    <p>Check number : </p>
-    <p name="sale_ch_number"></p>
-    <p>Upc : </p>
-    <p name="sale_upc"></p>
-    <p>Product name : </p>
-    <p name="sale_pr_name"></p>
-    <p>Product number : </p>
-    <p name="sale_pr_number"></p>
-    <p>Selling price : </p>
-    <p name="sale_pr_price"></p>
+<form id="check" th:name="${check_id}">
+    <p id="check_number">Check number : </p>
+    <p id='ch_empl' >Employee : </p>
+    <p id='ch_card'>Customer's card number : </p>
+    <p id="ch_date">Print date : </p>
 </form>
+
+
+<div class="col2" style="width: 100%; margin-left: 0px;" >
+    <h1>Products in check: </h1>
+    <table id="my_table" class="table table-hover table-bordered" style="width: 100%">
+        <thead>
+        <th>UPC</th>
+        <th>PRODUCT NAME</th>
+        <th>PRODUCT NUMBER</th>
+        <th>SELLING PRICE</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
 
 <script>
 
+
+
     $(function() {
-        var upc_id = document.getElementById("sale").getAttribute("name");
-        var check_id = document.getElementById("sale").getAttribute("value");
+        var id = document.getElementById("check").getAttribute("name");
 
 
         var data = {
-            upc: upc_id,
-            check_number: check_id
+            check_number: id,
         };
 
-        console.log(data)
 
         $.ajax({
             type: 'get',
-            url: '/get_sale_with_name_by_upc_check_number',
+            url: '/get_check_by_check_number',
             dataType: 'json',
             data: data,
 
@@ -56,12 +69,13 @@
             },
             success: function (response) {
                 console.log(response);
-                $("input[name='sale_ch_number']").val(response.check_number);
-                $("input[name='sale_upc']").val(response.upc);
-                $("input[name='sale_pr_name']").val(response.product_name);
+                var print_date = new Date(response.print_date).toLocaleDateString('en-CA');
 
-                $("input[name='sale_pr_number']").val(response.product_number);
-                $("input[name='sale_pr_price']").val(response.selling_price);
+
+                document.getElementById('check_number').innerHTML += response.check_number;
+                document.getElementById('ch_empl').innerHTML += response.id_employee;
+                document.getElementById('ch_card').innerHTML += response.card_number;
+                document.getElementById('ch_date').innerHTML += print_date;
 
             },
             error: function (err) {
@@ -75,6 +89,134 @@
 </script>
 
 
+<script>
+    var $table = $('#table_body');
+    getAll($table);
+
+
+    function formTableRow(sale){
+        return '<tr class = "table_row"><td>' + sale.upc + '</td>' +
+            '<td>' + sale.product_name + '</td>' +
+            '<td>' + sale.product_number + '</td>' +
+            '<td>' + sale.selling_price + '</td>' +
+            '</tr>';
+    }
+
+
+
+
+    function getAll($table){
+        var check = document.getElementById("check").getAttribute("name");
+        var data = {
+            check_number : check
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: '/get_all_sales_with_product_name_by_check_number',
+            dataType: 'json',
+            data: data,
+
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Content-Type', 'application/json')
+            },
+
+            success: function (response) {
+                response.forEach(function (row) {
+                    $table.append(formTableRow(row));
+                });
+
+            }
+        });
+    }
+
+
+</script>
+
+
+
 </body>
 </html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Edit sale</title>-->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <!--<link rel="stylesheet" href="/main.css" type="text/css">-->
+    <!--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:insert="~{fragments/header :: head}"></div>-->
+
+<!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+
+
+<!--&lt;!&ndash;<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">&ndash;&gt;-->
+
+<!--<form id="sale" th:value="${check_id}">-->
+    <!--<h2>Sale</h2>-->
+    <!--<p>Check number : </p>-->
+    <!--<p name="sale_ch_number"></p>-->
+    <!--<p>Upc : </p>-->
+    <!--<p name="sale_upc"></p>-->
+    <!--<p>Product name : </p>-->
+    <!--<p name="sale_pr_name"></p>-->
+    <!--<p>Product number : </p>-->
+    <!--<p name="sale_pr_number"></p>-->
+    <!--<p>Selling price : </p>-->
+    <!--<p name="sale_pr_price"></p>-->
+<!--</form>-->
+
+<!--<script>-->
+
+    <!--$(function() {-->
+        <!--var upc_id = document.getElementById("sale").getAttribute("name");-->
+        <!--var check_id = document.getElementById("sale").getAttribute("value");-->
+
+
+        <!--var data = {-->
+            <!--upc: upc_id,-->
+            <!--check_number: check_id-->
+        <!--};-->
+
+        <!--console.log(data)-->
+
+        <!--$.ajax({-->
+            <!--type: 'get',-->
+            <!--url: '/get_all_sales_with_product_name_by_check_number',//'/get_sale_with_name_by_upc_check_number',-->
+            <!--dataType: 'json',-->
+            <!--data: data,-->
+
+            <!--beforeSend: function (xhr) {-->
+                <!--xhr.setRequestHeader('Content-Type', 'application/json')-->
+            <!--},-->
+            <!--success: function (response) {-->
+                <!--console.log(response);-->
+                <!--$("input[name='sale_ch_number']").val(response.check_number);-->
+                <!--$("input[name='sale_upc']").val(response.upc);-->
+                <!--$("input[name='sale_pr_name']").val(response.product_name);-->
+
+                <!--$("input[name='sale_pr_number']").val(response.product_number);-->
+                <!--$("input[name='sale_pr_price']").val(response.selling_price);-->
+
+            <!--},-->
+            <!--error: function (err) {-->
+                <!--console.log(err);-->
+            <!--}-->
+        <!--});-->
+
+    <!--});-->
+
+
+<!--</script>-->
+
+
+<!--</body>-->
+<!--</html>-->
 

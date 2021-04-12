@@ -64,7 +64,7 @@
             '<td>' + check.print_date + '</td>' +
             '<td>' + check.sum_total + '</td>' +
             '<td>' + check.vat + '</td>' +
-            '<td><button class="view_button edit_button btn btn-success" value="'+sale.upc+'" type="submit">View</button></td>' +
+            '<td><button class="view_button edit_button btn btn-success" value="'+check.check_number+'" type="submit">View</button></td>' +
             '</tr>';
     }
 
@@ -135,8 +135,7 @@
 
 
             $(document).on("click",".view_button",function() {
-                var check = document.getElementById("check").getAttribute("name");
-                window.location.href = "/view_sale/"+check+"/"+$(this).val();
+                window.location.href = "/view_sale/"+$(this).val();
             });
         });
 

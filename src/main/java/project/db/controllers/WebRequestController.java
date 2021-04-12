@@ -77,9 +77,8 @@ public class WebRequestController {
         return "requests/check/checks_with_sales_by_employee_between_time";
     }
 
-    @RequestMapping(value = {"/view_sale/{check_id}/{upc}"}, method = RequestMethod.GET)
-    public String sale(Model model, @PathVariable int check_id, @PathVariable int upc){
-        model.addAttribute("upc", upc);
+    @RequestMapping(value = {"/view_sale/{check_id}"}, method = RequestMethod.GET)
+    public String sale(Model model, @PathVariable int check_id){
         model.addAttribute("check_id", check_id);
         return "requests/check/view_sale";
     }
