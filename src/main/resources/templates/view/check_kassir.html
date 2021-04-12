@@ -57,7 +57,7 @@
     function getAll($table){
         $.ajax({
             type: 'GET',
-            url: '/get_all_checks_with_empl_with_current_empl',
+            url: '/get_all_checks_with_empl_by_current_empl',
 
             success: function (response) {
                 response.forEach(function (row) {
