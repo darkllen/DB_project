@@ -89,7 +89,8 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     List<Product> get_all_products_by_category(int category_number);
 
     @Query(value = "SELECT  Product.id_product AS id_product, Store_Product.selling_price AS selling_price, Store_Product.products_number AS products_number, Product.product_name AS product_name, Product.characteristics AS characteristics " +
-            "FROM Product INNER JOIN Store_Product ON Product.id_product=Store_Product.id_product ", nativeQuery = true)
+            "FROM Product INNER JOIN Store_Product ON Product.id_product=Store_Product.id_product " +
+            "WHERE Store_Product.UPC=?1 ", nativeQuery = true)
     ProductInfo get_product_info_by_upc(String upc);
 
     @Query(value = "SELECT  product_name " +
@@ -102,6 +103,17 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
             "          INNER JOIN Product ON Store_Product.id_product=Product.id_product " +
             "WHERE Sale.check_number=?1 ", nativeQuery = true)
     List<Product> get_products_by_check_number(int check_number);
+
+    @Query(value = "SELECT Store_Product.selling_price AS selling_price, Store_Product.products_number AS products_number " +
+            "FROM Product INNER JOIN Store_Product ON Product.id_product=Store_Product.id_product " +
+            "WHERE Store_Product.UPC=?1 ", nativeQuery = true)
+    ProductInfoShort get_product_info_short_by_upc(String upc);
+
+
+    interface ProductInfoShort{
+        double getSelling_price();
+        int getProducts_number();
+    }
 
     interface ProductInfo{
         int getId_product();

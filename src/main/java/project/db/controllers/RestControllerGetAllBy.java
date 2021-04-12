@@ -161,5 +161,14 @@ public class RestControllerGetAllBy {
         }
     }
 
+    @RequestMapping(value = {"/get_product_info_short_by_upc"}, method = RequestMethod.GET)
+    public ResponseEntity<ProductRepo.ProductInfoShort> get_product_info_short_by_upc(@RequestParam String upc) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(productService.get_product_info_short_by_upc(upc));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(null);
+        }
+    }
+
 
 }
