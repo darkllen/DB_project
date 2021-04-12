@@ -134,6 +134,19 @@ public class WebRequestController {
         return "requests/customer/customers_by_surname";
     }
 
+    @RequestMapping(value = {"/products_by_check_number"}, method = RequestMethod.GET)
+    public String products_by_check_number(){
+        return "requests/product/products_by_check_number";
+    }
+
+    @RequestMapping(value = {"/current_employee"}, method = RequestMethod.GET)
+    public String current_employee(){
+        return "requests/employee/current_employee";
+    }
+
+
+
+
 
 
 

@@ -1,0 +1,85 @@
+<!--групування-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get current employee info</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Get current employee info</h1>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <th>EMPLOYEE ID</th>
+        <th>EMPLOYEE NAME</th>
+        <th>EMPLOYEE SURNAME</th>
+        <th>EMPLOYEE PATROMYMIC</th>
+        <th>PHONE NUMBER</th>
+        <th>CITY</th>
+        <th>STREET</th>
+        <th>ZIPCODE</th>
+        <th>ROLE</th>
+        <th>SALARY</th>
+        <th>DATE OF BIRTH</th>
+        <th>DATE OF START</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script>
+    var $empl = $('#table_body');
+    getAll($empl);
+
+    function formTableRow(empl){
+        return '<tr class = "table_row">' +
+            '<td>' + e.id_employee + '</td>' +
+            '<td>' + e.empl_surname + '</td>' +
+            '<td>' + e.empl_name + '</td>' +
+            '<td>' + e.empl_patronymic + '</td>' +
+            '<td>' + e.phone_number + '</td>' +
+            '<td>' + e.city + '</td>' +
+            '<td>' + e.street + '</td>' +
+            '<td>' + e.zip_code + '</td>' +
+            '<td>' + e.role + '</td>' +
+            '<td>' + e.salary + '</td>' +
+            '<td>' + e.date_of_birth + '</td>' +
+            '<td>' + e.date_of_start + '</td>' +
+            '</tr>';
+    }
+
+    function getAll($customers){
+        $.ajax({
+            type: 'GET',
+            url: '/get_current_employee',
+
+            success: function (response) {
+                response.forEach(function (empl) {
+                    $empl.append(formTableRow(empl));
+                });
+
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

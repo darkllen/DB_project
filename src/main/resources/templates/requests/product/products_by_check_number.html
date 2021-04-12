@@ -1,0 +1,134 @@
+<!--заперечення + параметр-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get products by check number</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Get products by check number</h1>
+
+    <form id="form">
+
+        <p>Check number : </p>
+        <select id='check' name='check'>
+        </select>
+
+
+        <button class="btn btn-success" type="submit">Search</button>
+
+    </form>
+
+
+    <table id="table" class="table table-hover table-bordered" style="visibility: hidden;">
+        <thead>
+        <th>PRODUCT ID</th>
+        <th>PRODUCT NAME</th>
+        <th>PRODUCT CHARACTERISTICS</th>
+
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+    <h3 id="no_results" style="visibility: hidden">No results found</h3>
+
+
+</div>
+
+
+<script>
+    var $products = $('#table_body');
+
+    function formTableRow(product){
+        return '<tr class = "table_row"><td>' + product.id_product + '</td><td>' + product.product_name + '</td><td>' + product.characteristics + '</td></tr>';
+    }
+
+    $(function() {
+
+        $.ajax({
+            url: '/get_all_checks',
+            type: "get",
+            success: function (response) {
+                document.getElementById("check").innerHTML= '';
+                response.forEach(function (ch) {
+                    var i=0;
+                    if(i==0) {
+                        document.getElementById("check").innerHTML += '<option selected="selected" value="' + ch.check_number + '">' + ch.check_number + '</option>';
+                        i++;
+                    }else
+                        document.getElementById("check").innerHTML += '<option value="' + ch.check_number + '">' + ch.check_number + '</option>';
+
+                });
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+
+
+
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            $products.empty();
+
+            var data = {
+                check_number: $(this).find('[name=check]').val()
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: '/get_products_by_check_number',
+                dataType: 'json',
+                data: data,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    // $('input').val('');
+                    if(response.length == 0){
+                        document.getElementById("table").style.visibility = 'hidden';
+                        document.getElementById("no_results").style.visibility = 'visible';
+                    }
+                    else {
+                        document.getElementById("table").style.visibility = 'visible';
+                        document.getElementById("no_results").style.visibility = 'hidden';
+                        response.forEach(function (prod) {
+                            $products.append(formTableRow(prod));
+                        });
+                    }
+
+
+                }
+            });
+        });
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
