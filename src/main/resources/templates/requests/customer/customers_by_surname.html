@@ -1,0 +1,139 @@
+<!--групування-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Customer info</h1>
+
+    <form id="form">
+        <p>Surname : </p>
+        <select id='st_pr_id' name='st_pr_id'>
+        </select>
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+
+    <table id="my_table" class="table table-hover table-bordered" style="visibility: hidden;">
+        <thead>
+        <th>CARD NUMBER</th>
+        <th>CUSTOMER SURNAME</th>
+        <th>CUSTOMER NAME</th>
+        <th>CUSTOMER PATRONYMIC</th>
+        <th>PHONE NUMBER</th>
+        <th>CITY</th>
+        <th>STREET</th>
+        <th>ZIPCODE</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+    <h3 id="no_results" style="visibility: hidden">No results found</h3>
+
+
+</div>
+
+<script>
+    var $table = $('#table_body');
+
+    function formTableRow(customer){
+        if(customer.street==null)customer.street='';
+        if(customer.zip_code==null)customer.zip_code='';
+        return '<tr class = "table_row">'
+            +'<td>' + customer.card_number + '</td>'+
+            '<td>' + customer.cust_surname + '</td>'
+            +'<td>' + customer.cust_name + '</td>'
+            +'<td>' + customer.cust_patronymic + '</td>'
+            +'<td>' + customer.phone_number + '</td>'
+            +'<td>' + customer.city + '</td>'
+            +'<td>' + customer.street + '</td>'
+            +'<td>' + customer.zip_code + '</td>'
+            +'</tr>';
+    }
+
+
+    $(function() {
+
+        $.ajax({
+            url: '/get_all_cust_surname',
+            type: "get",
+            success: function (response) {
+
+                document.getElementById("st_pr_id").innerHTML= '';
+                response.forEach(function (sur) {
+                    var i=0;
+                    if(i==0) {
+                        document.getElementById("st_pr_id").innerHTML += '<option selected="selected" value="' + sur + '">' + sur + '</option>';
+                        i++;
+                    }else
+                        document.getElementById("st_pr_id").innerHTML += '<option value="' + sur + '">' + sur + '</option>';
+                });
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            $table.empty();
+
+            var data = {
+                cust_surname: $(this).find('[name=st_pr_id]').val()
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: '/get_customers_by_surname',
+                dataType: 'json',
+                data: data,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    // $('input').val('');
+                    if(response.length == 0){
+                        document.getElementById("my_table").style.visibility = 'hidden';
+                        document.getElementById("no_results").style.visibility = 'visible';
+                    }
+                    else {
+                        document.getElementById("my_table").style.visibility = 'visible';
+                        document.getElementById("no_results").style.visibility = 'hidden';
+                        response.forEach(function (prod) {
+                            $table.append(formTableRow(prod));
+                        });
+                    }
+
+
+                }
+            });
+        });
+
+    });
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
