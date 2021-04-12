@@ -52,6 +52,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
     @Query(value = "SELECT * " +
             "FROM Employee " +
+            "WHERE role='KASSIR' " +
             "ORDER BY empl_surname", nativeQuery = true)
     List<Employee> get_cassiers_sorted_surname();
 

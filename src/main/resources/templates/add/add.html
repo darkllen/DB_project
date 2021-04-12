@@ -217,6 +217,24 @@
 
     $(function() {
 
+        window.onload = function() {
+            $.ajax({
+                url: '/test',
+                type: "post",
+                dataType: 'json',
+                data: JSON.stringify({id:2}),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    alert("s");
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+        };
+
         $('#button_category').click(function(e) {
             makeAllFormsHidden();
             document.getElementById("category").style.visibility = 'visible';
@@ -288,7 +306,7 @@
             document.getElementById("check").style.display = 'block';
 
             $.ajax({
-                url: '/get_all_employees',
+                url: '/get_cassiers_sorted_surname',
                 type: "get",
                 success: function (response) {
                     var i = 0;
@@ -533,6 +551,7 @@
                 , promotional: is_prom
             };
 
+            console.log(JSON.stringify(data))
             $.ajax({
                 type: 'POST',
                 url: '/add_store_product',
