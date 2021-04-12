@@ -25,6 +25,10 @@ public class WebController {
     public String add(){
         return "add/add";
     }
+    @RequestMapping(value = {"/add_kassir"}, method = RequestMethod.GET)
+    public String add_kassir(){
+        return "add/add_kassir";
+    }
     @RequestMapping(value = {"/category"}, method = RequestMethod.GET)
     public String category(){
         return "view/category";

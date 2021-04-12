@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<form id="sale">
+    <h2>Add sale to check</h2>
+    <p>Check number : </p>
+    <select class="big_input" id='sale_ch' name='sale_ch'>
+    </select>
+    <p>Product name and UPC : </p>
+    <select class="big_input" id='sale_pr' name='sale_pr'>
+    </select>
+    <p>Product number : </p>
+    <input class="big_input" type="number" min="1" placeholder="Product number" name="sale_pr_number">
+    <button class="btn btn-success" type="submit">Add</button>
+
+</form>
+
+
+<script>
+
+    function changeProductUPC(){
+        $.ajax({
+            url: '/get_upc_product/'+document.getElementById("st_pr_id").value,
+            type: "get",
+            success: function (response) {
+                document.getElementById("st_upc_prom").innerHTML='<option selected="selected" value="None">None</option>';
+                response.forEach(function (pr) {
+                    document.getElementById("st_upc_prom").innerHTML+= '<option value="'+pr+'">'+pr+'</option>';
+                })
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+    }
+
+    $(function() {
+
+
+
+
+            $.ajax({
+                url: '/get_all_checks_by_current_empl',
+                type: "get",
+                success: function (response) {
+                    var i = 0;
+                    document.getElementById("sale_ch").innerHTML= '';
+                    response.forEach(function (ch) {
+                        if(i==0)
+                            document.getElementById("sale_ch").innerHTML+= '<option selected="selected" value="'+ch.check_number+'">'+ch.check_number+'</option>';
+                        else
+                            document.getElementById("sale_ch").innerHTML+= '<option value="'+ch.check_number+'">'+ch.check_number+'</option>';
+                        i++;
+                    });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+            $.ajax({
+                url: '/get_all_store_product_with_name',
+                type: "get",
+                success: function (response) {
+                    var i = 0;
+                    document.getElementById("sale_pr").innerHTML= '';
+                    response.forEach(function (pr) {
+                        if(i==0)
+                            document.getElementById("sale_pr").innerHTML+= '<option selected="selected" value="'+pr.upc+'">'+pr.product_name+' (UPC = '+pr.upc+') '+'</option>';
+                        else
+                            document.getElementById("sale_pr").innerHTML+= '<option value="'+pr.upc+'">'+pr.product_name+' (UPC = '+pr.upc+') '+'</option>';
+                        i++;
+                    });
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+
+
+        $('#sale').submit(function(e) {
+            e.preventDefault();
+
+            if($(this).find('[name=sale_pr_number]').val()<1)
+                alert("Number of products must be > 0 ")
+            else {
+
+                var data = {
+                    upc: $(this).find('[name=sale_pr]').val()
+                    , check_number: $(this).find('[name=sale_ch]').val()
+                    , product_number: $(this).find('[name=sale_pr_number]').val()
+                };
+
+                console.log(data);
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_sale',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Content-Type', 'application/json')
+                    },
+                    success: function (response) {
+                        alert("Success");
+                        $("input[name='sale_pr_number']").val('');
+
+
+                    },
+                    error: function (request, textStatus, errorThrown) {
+                        alert(request.getResponseHeader('error'));
+                    }
+                });
+            }
+        });
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
+
