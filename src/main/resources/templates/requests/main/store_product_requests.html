@@ -13,12 +13,12 @@
 <h2 class="main_h2">Store product information</h2>
 <div class="my-group-main">
     <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/all_products_in_store_by_product" class="btn btn-warning">Get all products in store by product</a>
-    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/product_by_upc" class="btn btn-warning">Get product by upc</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}"  href="/product_by_upc" class="btn btn-warning">Get product by upc</a>
     <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/product_info_by_upc" class="btn btn-warning">Get product by upc with name and characteristics</a>
-    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/promo_store_products_sorted_name_num" class="btn btn-warning">Get promo products sorted by name</a>
-    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/promo_store_products_sorted_num_name" class="btn btn-warning">Get promo products sorted by number</a>
-    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/not_promo_store_products_sorted_name_num" class="btn btn-warning">Get promo products sorted by name</a>
-    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/not_promo_store_products_sorted_num_name" class="btn btn-warning">Get promo products sorted by number</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}"  href="/promo_store_products_sorted_name_num" class="btn btn-warning">Get promo products sorted by name</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}"  href="/promo_store_products_sorted_num_name" class="btn btn-warning">Get promo products sorted by number</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}"  href="/not_promo_store_products_sorted_name_num" class="btn btn-warning">Get promo products sorted by name</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}"  href="/not_promo_store_products_sorted_num_name" class="btn btn-warning">Get promo products sorted by number</a>
 
 
 </div>

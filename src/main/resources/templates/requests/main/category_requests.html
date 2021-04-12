@@ -12,6 +12,7 @@
 <h2 class="main_h2">Category information</h2>
 <div class="my-group-main">
     <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/all_categories_sorted_name" class="btn btn-warning">Get all categories sorted by name</a>
+    <p th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}">No available requests:(</p>
 
 
 </div>

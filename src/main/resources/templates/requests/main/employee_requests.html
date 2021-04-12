@@ -15,7 +15,7 @@
     <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/cassiers_sorted_surname" class="btn btn-warning">Get all cassiers sorted by surname</a>
     <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/phone_address_by_empl_surname" class="btn btn-warning">Get phone and address by employee surname</a>
 
-    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/current_employee" class="btn btn-warning">Get current employee info</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}" href="/current_employee" class="btn btn-warning">Get current employee info</a>
 
 
 </div>
