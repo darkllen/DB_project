@@ -36,6 +36,10 @@ h1{
 
 }
 
+.btn_print{
+    display: block;
+}
+
 @media print {
     @page {
         margin-bottom: 0;  /* this affects the margin in the printer settings */
