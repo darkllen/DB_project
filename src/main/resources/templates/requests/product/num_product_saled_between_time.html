@@ -46,13 +46,14 @@
             type: "get",
             success: function (response) {
                 document.getElementById("st_pr_id").innerHTML= '';
-                response.forEach(function (em) {
+                response.forEach(function (pr) {
                     var i=0;
                     if(i==0) {
-                        document.getElementById("st_pr_id").innerHTML += '<option selected="selected" value="' + em.id_employee + '">' + em.empl_surname + ' ' + em.empl_name + ' (id = ' + em.id_employee + ') ' + '</option>';
+                        document.getElementById("st_pr_id").innerHTML+= '<option selected="selected" value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
                         i++;
                     }else
-                        document.getElementById("st_pr_id").innerHTML+= '<option value="'+em.id_employee+'">'+em.empl_surname+' '+em.empl_name+' (id = '+em.id_employee+') '+'</option>';
+                        document.getElementById("st_pr_id").innerHTML+= '<option value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
+
                 });
             },
             error: function(err){
