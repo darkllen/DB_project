@@ -11,6 +11,8 @@ import project.db.dto.*;
 import project.db.repos.SaleRepo;
 import project.db.services.*;
 
+import java.security.Principal;
+
 @RestController
 public class RestControllerGetAllById {
     @Autowired
@@ -62,6 +64,12 @@ public class RestControllerGetAllById {
     public ResponseEntity<Employee> get_employee_by_id_employee(@RequestParam String id_employee){
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeByIdEmployee(id_employee));
     }
+
+    @RequestMapping(value = {"/get_current_employee"}, method = RequestMethod.GET)
+    public ResponseEntity<Employee> get_current_employee(Principal principal){
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeByIdEmployee(principal.getName()));
+    }
+
 
     @RequestMapping(value = {"/get_customer_card_by_card_number"}, method = RequestMethod.GET)
     public ResponseEntity<Customer_Card> get_customer_card_by_card_number(@RequestParam String card_number){
