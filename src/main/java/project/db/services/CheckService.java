@@ -104,4 +104,8 @@ public class CheckService {
     }
 
 
+    @Transactional
+    public List<CheckRepo.ChecksWithEmpl> getAllChecksWithEmplByEmpl(String name) {
+        return  checkRepo.getAllChecksWithEmplByEmpl(name);
+    }
 }
