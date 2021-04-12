@@ -17,6 +17,8 @@
 
     <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}" href="/current_employee" class="btn btn-warning">Get current employee info</a>
 
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}" href="/employees_sales_sum" class="btn btn-warning">Get employees sales sum</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')||hasAuthority(''KASSIR'')')}" href="/employees_clients_num" class="btn btn-warning">Get employees clients number</a>
 
 </div>
 
