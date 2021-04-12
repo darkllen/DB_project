@@ -32,7 +32,18 @@ public class SaleService {
 
     @Transactional
     public void removeSaleByUpcCheckNumber(String upc, String check_number) {
+        Store_Product product = store_product.getStoreProductByUPC(upc);
         Sale old = saleRepo.getSaleByUpcCheckNumber(upc, check_number);
+
+        int diff_num = -old.getProduct_number();
+        int numLeft = product.getProducts_number()-diff_num;
+        if (numLeft<0){
+            throw new IllegalArgumentException("too many products");
+        } else {
+            product.setProducts_number(numLeft);
+            store_product.editStoreProduct(product, product.getUpc());
+        }
+
         double diff =- (old.getProduct_number()*old.getSelling_price());
         Check check = checkRepo.getCheckByCheckNumber(check_number);
         check.setSum_total(check.getSum_total()-check.getVat()+diff);
@@ -44,7 +55,18 @@ public class SaleService {
 
     @Transactional
     public void editSale(Sale sale) {
+        Store_Product product = store_product.getStoreProductByUPC(sale.getUpc());
         Sale old = saleRepo.getSaleByUpcCheckNumber(sale.getUpc(), sale.getCheck_number());
+
+        int diff_num = sale.getProduct_number()-old.getProduct_number();
+        int numLeft = product.getProducts_number()-diff_num;
+        if (numLeft<0){
+            throw new IllegalArgumentException("too many products");
+        } else {
+            product.setProducts_number(numLeft);
+            store_product.editStoreProduct(product, product.getUpc());
+        }
+
         double diff =sale.getProduct_number()*sale.getSelling_price() - old.getProduct_number()*old.getSelling_price();
         Check check = checkRepo.getCheckByCheckNumber(sale.getCheck_number());
         check.setSum_total(check.getSum_total()-check.getVat()+diff);
@@ -61,6 +83,14 @@ public class SaleService {
     @Transactional
     public void addSale(Sale sale) {
         Store_Product product = store_product.getStoreProductByUPC(sale.getUpc());
+        int numLeft = product.getProducts_number()-sale.getProduct_number();
+        if (numLeft<0){
+            throw new IllegalArgumentException("too many products");
+        } else {
+            product.setProducts_number(numLeft);
+            store_product.editStoreProduct(product, product.getUpc());
+        }
+
         sale.setSelling_price(product.getSelling_price());
 
         double diff =sale.getProduct_number()*sale.getSelling_price();
