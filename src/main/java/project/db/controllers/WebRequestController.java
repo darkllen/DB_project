@@ -82,15 +82,21 @@ public class WebRequestController {
         model.addAttribute("check_id", check_id);
         return "requests/check/view_sale";
     }
-//    @RequestMapping(value = {"/checks_with_sales_by_employee_between_time"}, method = RequestMethod.GET)
-//    public String checks_with_sales_by_employee_between_time(){
-//        return "requests/check/checks_with_sales_by_employee_between_time";
-//    }
+    @RequestMapping(value = {"/checks_with_sales_between_time"}, method = RequestMethod.GET)
+    public String checks_with_sales_between_time(){
+        return "requests/check/checks_with_sales_between_time";
+    }
 
     @RequestMapping(value = {"/sum_recipes_by_employee_between_time"}, method = RequestMethod.GET)
     public String sum_recipes_by_employee_between_time(){
         return "requests/check/sum_recipes_by_employee_between_time";
     }
+
+    @RequestMapping(value = {"/sum_all_recipes_between_time"}, method = RequestMethod.GET)
+    public String sum_all_recipes_between_time(){
+        return "requests/check/sum_all_recipes_between_time";
+    }
+
 
     @RequestMapping(value = {"/all_customers_contacts"}, method = RequestMethod.GET)
     public String all_customers_contacts(){
