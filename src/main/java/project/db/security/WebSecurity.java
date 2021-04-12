@@ -77,9 +77,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         "/*current_employee",
                         "/check"
                         ).hasAuthority("MANAGER")
-
-                //.requestMatchers()
-
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().permitAll()

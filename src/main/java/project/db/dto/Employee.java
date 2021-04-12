@@ -3,8 +3,11 @@ package project.db.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
+import project.db.security.AgeValidator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -44,10 +47,12 @@ public class Employee implements NotEmptyF{
 
     @Column(name = "salary")
     @NotNull
+    @Min(0)
     private double salary;
 
     @Column(name = "date_of_birth")
     @NotNull
+    @AgeValidator
     private Date date_of_birth;
 
     @Column(name = "date_of_start")
@@ -57,6 +62,7 @@ public class Employee implements NotEmptyF{
     @Column(name = "phone_number")
     @NotEmpty
     @NotNull
+    @Length(min = 10, max = 13)
     private String phone_number;
 
     @Column(name = "city")
