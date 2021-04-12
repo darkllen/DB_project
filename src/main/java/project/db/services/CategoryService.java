@@ -51,6 +51,7 @@ public class CategoryService {
 
     @Transactional
     public void editCategory(Category category) {
+
         categoryRepo.editCategory(category.getCategory_number(), category.getCategory_name());
     }
 

@@ -90,12 +90,8 @@ public class RestController {
     }
 
 
-
-
     @RequestMapping(value = {"/test"}, method = RequestMethod.POST)
     public String test(@RequestBody Map<String,String> id){
-        id.forEach((x,y)-> System.out.println(x + " " + y));
-        checkRepo.AllChecksWithAllPromoProductsFromCategory("Fruits").forEach(System.out::println);
         return "index";
     }
 }

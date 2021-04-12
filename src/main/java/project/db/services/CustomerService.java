@@ -86,4 +86,9 @@ public class CustomerService {
     public List<Customer_Card> get_customers_by_surname(String cust_surname) {
         return customerRepo.get_customers_by_surname(cust_surname.toLowerCase(Locale.ROOT));
     }
+
+    @Transactional
+    public List<String> get_all_cust_surname() {
+        return customerRepo.get_all_cust_surname();
+    }
 }

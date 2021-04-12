@@ -3,7 +3,6 @@ package project.db.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.db.dto.Check;
-import project.db.dto.Product;
 import project.db.dto.Sale;
 import project.db.dto.Store_Product;
 import project.db.repos.CheckRepo;
