@@ -61,6 +61,10 @@ public interface CustomerRepo extends JpaRepository<Customer_Card, String> {
             "WHERE LCASE(cust_surname) LIKE %?1%", nativeQuery = true)
     List<Customer_Card> get_customers_by_surname(String toLowerCase);
 
+    @Query(value = "SELECT cust_surname " +
+            "FROM Customer_Card ", nativeQuery = true)
+    List<String> get_all_cust_surname();
+
     interface CustomerSpends {
         String getCard_number();
         String getCust_surname();
