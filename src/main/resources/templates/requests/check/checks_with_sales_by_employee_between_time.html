@@ -40,6 +40,7 @@
         <th>PRINT DATE</th>
         <th>TOTAL</th>
         <th>VAT</th>
+        <th>VIEW</th>
         </thead>
         <tbody id="table_body">
         <tr class = "table_row" >
@@ -63,6 +64,7 @@
             '<td>' + check.print_date + '</td>' +
             '<td>' + check.sum_total + '</td>' +
             '<td>' + check.vat + '</td>' +
+            '<td><button class="view_button edit_button btn btn-success" value="'+check.check_number+'" type="submit">View</button></td>' +
             '</tr>';
     }
 
@@ -126,6 +128,14 @@
 
 
                 }
+            });
+        });
+
+        $(document).ready(function() {
+
+
+            $(document).on("click",".view_button",function() {
+                window.location.href = "/view_sale/"+$(this).val();
             });
         });
 

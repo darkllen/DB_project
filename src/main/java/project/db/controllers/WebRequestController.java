@@ -2,6 +2,8 @@ package project.db.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -75,6 +77,11 @@ public class WebRequestController {
         return "requests/check/checks_with_sales_by_employee_between_time";
     }
 
+    @RequestMapping(value = {"/view_sale/{check_id}"}, method = RequestMethod.GET)
+    public String sale(Model model, @PathVariable int check_id){
+        model.addAttribute("check_id", check_id);
+        return "requests/check/view_sale";
+    }
 //    @RequestMapping(value = {"/checks_with_sales_by_employee_between_time"}, method = RequestMethod.GET)
 //    public String checks_with_sales_by_employee_between_time(){
 //        return "requests/check/checks_with_sales_by_employee_between_time";
