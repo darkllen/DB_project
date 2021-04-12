@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Supermarket</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css" type="text/css">
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<h2 class="main_h2">Check information</h2>
+<div class="my-group-main">
+    <a href="/checks_with_sales_by_employee_between_time" class="btn btn-warning">Get checks with sales by employee between time</a>
+    <a href="/checks_with_sales_between_time" class="btn btn-warning">Get checks with sales between time</a>
+    <a href="/sum_recipes_by_employee_between_time" class="btn btn-warning">Get sum recipes by employee between time</a>
+    <a href="/sum_all_recipes_between_time" class="btn btn-warning">Get sum recipes between time</a>
+
+    <a href="/checks_by_curr_employee_between_time" class="btn btn-warning">Get checks by current employee between time</a>
+
+    <a href="/check_by_check_number" class="btn btn-warning">Get check by check number</a>
+
+
+</div>
+
+
+</body>
+</html>

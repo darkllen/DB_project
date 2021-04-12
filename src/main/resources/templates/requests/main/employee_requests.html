@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Supermarket</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css" type="text/css">
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+
+<h2 class="main_h2">Employee information</h2>
+<div class="my-group-main">
+    <a href="/cassiers_sorted_surname" class="btn btn-warning">Get all cassiers sorted by surname</a>
+    <a href="/phone_address_by_empl_surname" class="btn btn-warning">Get phone and address by employee surname</a>
+
+    <a href="/current_employee" class="btn btn-warning">Get current employee info</a>
+
+
+</div>
+
+
+
+</body>
+</html>
