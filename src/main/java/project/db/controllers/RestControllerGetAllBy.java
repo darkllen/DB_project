@@ -89,6 +89,15 @@ public class RestControllerGetAllBy {
         }
     }
 
+    @RequestMapping(value = {"/get_all_checks_by_current_empl"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Check>> get_checks_with_sales_by_employee_between_time(Principal principal) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(checkService.getAllChecksByEmpl(principal.getName()));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(List.of());
+        }
+    }
+
     @RequestMapping(value = {"/get_checks_with_sales_between_time"}, method = RequestMethod.GET)
     public ResponseEntity<List<Check>> get_checks_with_sales_between_time(@RequestParam String date_start, @RequestParam String date_end) {
         try{

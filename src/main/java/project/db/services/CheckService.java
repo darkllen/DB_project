@@ -108,4 +108,9 @@ public class CheckService {
     public List<CheckRepo.ChecksWithEmpl> getAllChecksWithEmplByEmpl(String name) {
         return  checkRepo.getAllChecksWithEmplByEmpl(name);
     }
+
+    @Transactional
+    public List<Check> getAllChecksByEmpl(String name) {
+        return checkRepo.getAllChecksByEmpl(name);
+    }
 }
