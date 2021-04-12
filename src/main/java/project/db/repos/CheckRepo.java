@@ -97,9 +97,9 @@ public interface CheckRepo extends JpaRepository<Check, String> {
     Double get_sum_all_recipes_between_time(Date date_start, Date date_end);
 
     @Query(value = "SELECT SUM(product_number)  " +
-            "FROM Recipe INNER JOIN Sale ON Sale.check_number=Recipe.check_number " +
-            "WHERE print_date>=?2 AND print_date<=?3 " ,nativeQuery = true)
-    Integer get_num_product_saled_between_time(Date date_start, Date date_end);
+            "FROM Recipe INNER JOIN Sale ON Sale.check_number=Recipe.check_number INNER JOIN Store_Product ON Sale.UPC=Store_Product.UPC INNER JOIN Product ON Product.id_product=Store_Product.id_product " +
+            "WHERE print_date>=?2 AND print_date<=?3 AND Product.id_product=?1 " ,nativeQuery = true)
+    Integer get_num_product_saled_between_time(int id_product, Date date_start, Date date_end);
 
     interface ChecksWithEmpl {
         String getCheck_number();
