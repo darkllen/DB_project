@@ -89,4 +89,9 @@ public class ProductService {
     public List<String> get_all_products_name() {
         return productRepo.get_all_products_name();
     }
+
+    @Transactional
+    public List<Product> get_products_by_check_number(int check_number) {
+        return productRepo.get_products_by_check_number(check_number);
+    }
 }

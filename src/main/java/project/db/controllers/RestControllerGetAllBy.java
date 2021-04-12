@@ -151,4 +151,15 @@ public class RestControllerGetAllBy {
             return ResponseEntity.status(500).header("error","error").body(null);
         }
     }
+
+    @RequestMapping(value = {"/get_products_by_check_number"}, method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> get_products_by_check_number(@RequestParam int check_number) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(productService.get_products_by_check_number(check_number));
+        } catch (Exception e){
+            return ResponseEntity.status(500).header("error","error").body(null);
+        }
+    }
+
+
 }

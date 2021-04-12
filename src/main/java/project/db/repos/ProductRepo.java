@@ -97,6 +97,12 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
             "ORDER BY product_name", nativeQuery = true)
     List<String> get_all_products_name();
 
+    @Query(value = "SELECT DISTINCT (Product.id_product AS id_product, catefory_number, product_name, `characteristics`) " +
+            "FROM Sale INNER JOIN Store_Product ON Sale.UPC=Store_Product.UPC " +
+            "          INNER JOIN Product ON Store_Product.id_product=Product.id_product " +
+            "WHERE Sale.check_number=?1", nativeQuery = true)
+    List<Product> get_products_by_check_number(int check_number);
+
     interface ProductInfo{
         int getId_product();
         double getSelling_price();
