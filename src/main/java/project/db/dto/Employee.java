@@ -75,8 +75,6 @@ public class Employee implements NotEmptyF{
     private String zip_code;
 
     @Column(name = "password")
-    @NotEmpty
-    @NotNull
     private String password;
 
 

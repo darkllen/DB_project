@@ -45,7 +45,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         "/*not_promo_store_products_sorted_nun_name",
                         "/*products_by_check_number",
                         "/*product_info_by_upc",
-                        "/*current_employee"
+                        "/*current_employee",
+                        "/check_kassir"
                 ).hasAuthority("KASSIR")
                 .antMatchers(
                         "/add*",
@@ -73,7 +74,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         "/*product_info_by_upc",
                         "/*check_by_check_number",
                         "/*customers_by_surname",
-                        "/*current_employee"
+                        "/*current_employee",
+                        "/check"
                         ).hasAuthority("MANAGER")
 
                 //.requestMatchers()
