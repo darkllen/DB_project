@@ -13,6 +13,7 @@ import project.db.repos.SaleRepo;
 import project.db.repos.StoreProductRepo;
 import project.db.services.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -40,6 +41,10 @@ public class RestControllerGetAllAddInfo {
     @RequestMapping(value = {"/get_all_checks_with_empl"}, method = RequestMethod.GET)
     public ResponseEntity<List<CheckRepo.ChecksWithEmpl>> get_all_checks_with_empl(){
         return ResponseEntity.status(HttpStatus.OK).body(checkService.getAllChecksWithEmpl());
+    }
+    @RequestMapping(value = {"/get_all_checks_with_empl_by_current_empl"}, method = RequestMethod.GET)
+    public ResponseEntity<List<CheckRepo.ChecksWithEmpl>> get_all_checks_with_empl_by_current_empl(Principal principal){
+        return ResponseEntity.status(HttpStatus.OK).body(checkService.getAllChecksWithEmplByEmpl(principal.getName()));
     }
 
     @RequestMapping(value = {"/get_all_sales_with_product_name_by_check_number"}, method = RequestMethod.GET)
