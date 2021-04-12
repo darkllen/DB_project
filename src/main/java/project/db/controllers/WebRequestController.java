@@ -97,6 +97,13 @@ public class WebRequestController {
         return "requests/check/sum_all_recipes_between_time";
     }
 
+    @RequestMapping(value = {"/num_product_saled_between_time"}, method = RequestMethod.GET)
+    public String num_product_saled_between_time(){
+        return "requests/product/num_product_saled_between_time";
+    }
+
+
+
 
     @RequestMapping(value = {"/all_customers_contacts"}, method = RequestMethod.GET)
     public String all_customers_contacts(){

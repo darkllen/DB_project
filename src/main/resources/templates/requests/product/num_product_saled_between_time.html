@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get total sum of product saled between time</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/table_style.css" type="text/css">
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: head}"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+<div class="col2">
+    <h1>Get total sum of product saled between time</h1>
+
+    <form id="form">
+
+        <p>Product name: </p>
+        <select id='st_pr_id' name='st_pr_id'>
+        </select>
+
+        <p>Date of start : </p>
+        <input type="date" placeholder="Date of start" name="em_date_start">
+        <p>Date of end : </p>
+        <input type="date" placeholder="Date of birth" name="em_date_end">
+
+
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+
+    <div id="result"></div>
+
+</div>
+
+
+<script>
+    var $products = $('#table_body');
+
+    $(function() {
+        $.ajax({
+            url: '/get_all_products',
+            type: "get",
+            success: function (response) {
+                document.getElementById("st_pr_id").innerHTML= '';
+                response.forEach(function (pr) {
+                    var i=0;
+                    if(i==0) {
+                        document.getElementById("st_pr_id").innerHTML+= '<option selected="selected" value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
+                        i++;
+                    }else
+                        document.getElementById("st_pr_id").innerHTML+= '<option value="'+pr.id_product+'">'+pr.product_name+' (id = '+pr.id_product+') '+'</option>';
+
+                });
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+
+
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            $products.empty();
+            var date_of_start = new Date($(this).find('[name=em_date_start]').val()).toLocaleDateString('en-CA');
+            var date_of_end = new Date($(this).find('[name=em_date_end]').val()).toLocaleDateString('en-CA');
+
+            var data = {
+                id_product: $(this).find('[name=st_pr_id]').val(),
+                date_start: date_of_start,
+                date_end: date_of_end
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: '/get_num_product_saled_between_time',
+                dataType: 'json',
+                data: data,
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                },
+                success: function (response) {
+                    document.getElementById("result").innerHTML= "Sum = "+response;
+
+                }
+            });
+        });
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>

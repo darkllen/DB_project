@@ -43,7 +43,9 @@
     getAll($table);
 
     function formTableRow(customer){
-        return '<tr class = "table_row">' +
+        if(customer.street==null)customer.street='';
+        if(customer.zip_code==null)customer.zip_code='';
+        return '<tr class = "table_row">'
             +'<td>' + customer.card_number + '</td>'+
             '<td>' + customer.cust_surname + '</td>'
             +'<td>' + customer.cust_name + '</td>'
