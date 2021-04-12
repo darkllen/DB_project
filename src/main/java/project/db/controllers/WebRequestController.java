@@ -51,6 +51,11 @@ public class WebRequestController {
         return "requests/product/store_product/product_by_upc";
     }
 
+    @RequestMapping(value = {"/product_info_by_upc"}, method = RequestMethod.GET)
+    public String product_info_by_upc(){
+        return "requests/product/store_product/product_info_by_upc";
+    }
+
     @RequestMapping(value = {"/promo_store_products_sorted_name_num"}, method = RequestMethod.GET)
     public String promo_store_products_sorted_name_num(){
         return "requests/product/store_product/promo_store_products_sorted_name_num";
