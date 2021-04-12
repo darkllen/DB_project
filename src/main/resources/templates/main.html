@@ -24,7 +24,9 @@
 <div class="my-group-main-2 btn-group btn-group-justified">
     <a href="/product" class="btn btn-warning">Product</a>
     <a href="/store_product" class="btn btn-warning">Store product</a>
-    <a href="/check" class="btn btn-warning">Check</a>
+    <a th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" href="/check" class="btn btn-warning">Check</a>
+    <a th:if="${#authorization.expression('hasAuthority(''KASSIR'')')}" href="/check_kassir" class="btn btn-warning">Check</a>
+
 </div>
 
 <h2 class="main_h2">Get information about</h2>

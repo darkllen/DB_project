@@ -47,6 +47,10 @@ public class WebController {
     public String check(){
         return "view/check";
     }
+    @RequestMapping(value = {"/check_kassir"}, method = RequestMethod.GET)
+    public String check_kassir(){
+        return "view/check_kassir";
+    }
 //    @RequestMapping(value = {"/sale/{check_id}"}, method = RequestMethod.GET)
 //    public String employee(Model model, @PathVariable int check_id){
 //        model.addAttribute("check_id", check_id);
