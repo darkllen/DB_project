@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -19,18 +21,27 @@ public class Customer_Card {
 
     @Id
     @Column(name = "card_number")
+    @NotEmpty
     private String card_number;
 
     @Column(name = "cust_surname")
+    @NotEmpty
+    @NotNull
     private String cust_surname;
 
     @Column(name = "cust_name")
+    @NotEmpty
+    @NotNull
     private String cust_name;
 
     @Column(name = "cust_patronymic")
+    @NotEmpty
+    @NotNull
     private String cust_patronymic;
 
     @Column(name = "phone_number")
+    @NotEmpty
+    @NotNull
     private String phone_number;
 
     @Column(name = "city")
@@ -43,6 +54,7 @@ public class Customer_Card {
     private String zip_code;
 
     @Column(name = "percent")
+    @NotNull
     private Integer percent;
 }
 

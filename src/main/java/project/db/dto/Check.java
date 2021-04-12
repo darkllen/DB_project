@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -19,25 +21,34 @@ public class Check {
 
     @Id
     @Column(name = "check_number")
+    @NotEmpty
+    @NotNull
     private String check_number;
 
     @Column(name = "id_employee")
+    @NotEmpty
+    @NotNull
     private String id_employee;
 
     @Column(name = "card_number")
     private String card_number;
 
     @Column(name = "print_date")
+    @NotNull
     private Date print_date;
 
     @Column(name = "sum_total")
+    @NotNull
     private double sum_total;
 
     @Column(name = "vat")
+    @NotNull
     private double vat;
 
     public void countVat() {
         vat = (sum_total*0.2)/1.2;
         sum_total+=vat;
     }
+
+
 }
