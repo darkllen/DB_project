@@ -27,9 +27,9 @@ create table Employee
 );
 
 insert into Employee (id_employee, empl_surname, empl_name, empl_patronymic, role, salary, date_of_birth, date_of_start, phone_number, city, street, zip_code, password) values
-('aaaa', 'Cvetkova', 'Marina', 'Vladislavivna', 'KASSIR', '5000', CURDATE(), CURDATE(), '0660123590', 'Kyiv', 'Skovorodi', '03903', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi'),
-('bbbb', 'Sirov', 'Volodimir', 'Tarasovich', 'KASSIR', '10000', CURDATE(), CURDATE(), '0661234243', 'Odessa', 'Deribasivska', '93402', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi'),
-('cccc', 'Retova', 'Inna', 'Denisovna', 'MANAGER', '30000', CURDATE(), CURDATE(), '0665462356', 'Odessa', 'Great Arnautska', '42144', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi');
+('aaaa', 'Cvetkova', 'Marina', 'Vladislavivna', 'KASSIR', '5000', '2000-01-03', CURDATE(), '0660123590', 'Kyiv', 'Skovorodi', '03903', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi'),
+('bbbb', 'Sirov', 'Volodimir', 'Tarasovich', 'KASSIR', '10000', '1998-05-03', CURDATE(), '0661234243', 'Odessa', 'Deribasivska', '93402', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi'),
+('cccc', 'Retova', 'Inna', 'Denisovna', 'MANAGER', '30000', '1987-12-06', CURDATE(), '0665462356', 'Odessa', 'Great Arnautska', '42144', '$2a$10$.MNgzVZB2.s.cNbOlpdC8OIJD3bucuIbf/LVZamwNOT25AariYTAi');
 
 
 create table Customer_Card
