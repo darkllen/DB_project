@@ -74,13 +74,13 @@
             success: function (response) {
 
                 document.getElementById("st_pr_id").innerHTML= '';
-                response.forEach(function (card) {
+                response.forEach(function (sur) {
                     var i=0;
                     if(i==0) {
-                        document.getElementById("st_pr_id").innerHTML += '<option selected="selected" value="' + card.cust_surname + '">' + card.cust_surname + '</option>';
+                        document.getElementById("st_pr_id").innerHTML += '<option selected="selected" value="' + sur + '">' + sur + '</option>';
                         i++;
                     }else
-                        document.getElementById("st_pr_id").innerHTML += '<option selected="selected" value="' + card.cust_surname + '">' + card.cust_surname + '</option>';
+                        document.getElementById("st_pr_id").innerHTML += '<option value="' + sur + '">' + sur + '</option>';
                 });
             },
             error: function(err){
@@ -95,7 +95,7 @@
             $table.empty();
 
             var data = {
-                cust_surname: $(this).find('[name=cust_percent]').val()
+                cust_surname: $(this).find('[name=st_pr_id]').val()
             };
 
             $.ajax({
