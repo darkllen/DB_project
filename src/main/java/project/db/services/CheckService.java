@@ -95,10 +95,10 @@ public class CheckService {
     }
 
     @Transactional
-    public Integer get_num_product_saled_between_time(String date_start, String date_end) throws ParseException {
+    public Integer get_num_product_saled_between_time(int id_product, String date_start, String date_end) throws ParseException {
         Date date_s = new SimpleDateFormat("yyyy-MM-dd").parse(date_start);
         Date date_e = new SimpleDateFormat("yyyy-MM-dd").parse(date_end);
-        return  checkRepo.get_num_product_saled_between_time(date_s, date_e);
+        return  checkRepo.get_num_product_saled_between_time(id_product, date_s, date_e);
     }
 
 
