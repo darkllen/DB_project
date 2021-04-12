@@ -35,6 +35,7 @@ public class StoreProductService {
 
     @Transactional
     public void editStoreProduct(Store_Product store_product, String prev_upc) {
+        store_product.changeEmpty();
         storeProductRepo.editStoreProduct(
                 prev_upc,
                 store_product.getUpc(),
@@ -48,6 +49,7 @@ public class StoreProductService {
 
     @Transactional
     public void addStoreProduct(Store_Product store_product) {
+        store_product.changeEmpty();
         storeProductRepo.addStoreProduct(
                 store_product.getUpc(),
                 store_product.getUpc_prom(),

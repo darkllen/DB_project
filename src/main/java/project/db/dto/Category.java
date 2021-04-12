@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Table(name = "Category")
-public class Category {
+public class Category implements NotEmptyF{
 
     @Id
     @Column(name = "category_number")
@@ -22,6 +22,7 @@ public class Category {
     @NotEmpty
     @NotNull
     private String category_name;
+
 
 
 }

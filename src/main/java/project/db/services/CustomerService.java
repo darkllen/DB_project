@@ -51,6 +51,7 @@ public class CustomerService {
 
     @Transactional
     public void editCustomerCard(Customer_Card customer_card, String prev_card_number) {
+        customer_card.changeEmpty();
         customerRepo.editCustomerCard(prev_card_number,
                 customer_card.getCard_number(),
                 customer_card.getCust_name(),
@@ -65,6 +66,7 @@ public class CustomerService {
 
     @Transactional
     public void addCustomerCard(Customer_Card customer) {
+        customer.changeEmpty();
         customerRepo.addCustomerCard(
                 customer.getCard_number(),
                 customer.getCust_surname(),

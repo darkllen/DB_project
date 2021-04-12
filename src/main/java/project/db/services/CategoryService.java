@@ -31,6 +31,7 @@ public class CategoryService {
 
     @Transactional
     public void addCategory(Category category){
+        category.changeEmpty();
         categoryRepo.addCategory(category.getCategory_name());
     };
 
@@ -51,7 +52,7 @@ public class CategoryService {
 
     @Transactional
     public void editCategory(Category category) {
-
+        category.changeEmpty();
         categoryRepo.editCategory(category.getCategory_number(), category.getCategory_name());
     }
 

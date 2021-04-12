@@ -54,6 +54,7 @@ public class SaleService {
 
     @Transactional
     public void editSale(Sale sale) {
+        sale.changeEmpty();
         Store_Product product = store_product.getStoreProductByUPC(sale.getUpc());
         Sale old = saleRepo.getSaleByUpcCheckNumber(sale.getUpc(), sale.getCheck_number());
 
@@ -81,6 +82,7 @@ public class SaleService {
 
     @Transactional
     public void addSale(Sale sale) {
+        sale.changeEmpty();
         Store_Product product = store_product.getStoreProductByUPC(sale.getUpc());
         int numLeft = product.getProducts_number()-sale.getProduct_number();
         if (numLeft<0){

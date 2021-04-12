@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 @ToString
 @Table(name = "Recipe")
-public class Check {
+public class Check implements NotEmptyF{
 
     @Id
     @Column(name = "check_number")
@@ -50,5 +50,7 @@ public class Check {
         sum_total+=vat;
     }
 
-
+    public void changeEmpty(){
+        if (card_number.isEmpty()) card_number=null;
+    }
 }

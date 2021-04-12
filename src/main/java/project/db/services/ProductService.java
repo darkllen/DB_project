@@ -48,6 +48,7 @@ public class ProductService {
 
     @Transactional
     public void editProduct(Product product) {
+        product.changeEmpty();
         productRepo.editProduct(
                 product.getId_product(),
                 product.getProduct_name(),
@@ -58,6 +59,7 @@ public class ProductService {
 
     @Transactional
     public void addProduct(Product product) {
+        product.changeEmpty();
         productRepo.addProduct(
                 product.getProduct_name(),
                 product.getCategory_number(),

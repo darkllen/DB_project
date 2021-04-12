@@ -78,6 +78,7 @@ public class EmployeeService {
 
     @Transactional
     public void addEmployee(Employee employee) {
+        employee.changeEmpty();
         String pass = passwordEncoder.encode(employee.getPassword());
 
         employeeRepo.addEmployee(
@@ -99,6 +100,7 @@ public class EmployeeService {
 
     @Transactional
     public void editEmployeeWithoutPass(Employee employee, String prev_id_employee) {
+        employee.changeEmpty();
         employeeRepo.editEmployee(
                 prev_id_employee,
                 employee.getId_employee(),

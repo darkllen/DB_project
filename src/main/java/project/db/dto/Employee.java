@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 @ToString
 @Table(name = "Employee")
-public class Employee {
+public class Employee implements NotEmptyF{
 
     @Id
     @Column(name = "id_employee")
@@ -78,4 +78,6 @@ public class Employee {
     @NotEmpty
     @NotNull
     private String password;
+
+
 }

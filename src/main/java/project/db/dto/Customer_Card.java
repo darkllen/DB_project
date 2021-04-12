@@ -17,11 +17,12 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 @Table(name = "Customer_Card")
-public class Customer_Card {
+public class Customer_Card implements NotEmptyF{
 
     @Id
     @Column(name = "card_number")
     @NotEmpty
+    @NotNull
     private String card_number;
 
     @Column(name = "cust_surname")
@@ -56,5 +57,11 @@ public class Customer_Card {
     @Column(name = "percent")
     @NotNull
     private Integer percent;
+
+    public void changeEmpty(){
+        if (city.isEmpty()) city=null;
+        if (street.isEmpty()) street=null;
+        if (zip_code.isEmpty()) zip_code=null;
+    }
 }
 
