@@ -37,6 +37,10 @@ h1{
 }
 
 @media print {
+    @page {
+        size: auto;   /* auto is the initial value */
+        margin-bottom: 0;  /* this affects the margin in the printer settings */
+    }
 
     p,input,button,h1,h2,h3,select,textarea{
         visibility: hidden;

@@ -63,7 +63,9 @@ public class RestControllerAdd {
 
     @RequestMapping(value = {"/add_employee"}, method = RequestMethod.POST)
     public ResponseEntity<Employee> add_employee(@Valid @RequestBody Employee employee){
+
         try{
+            if (employee.getPassword().isEmpty()) throw new Exception("empty pass");
             employeeService.addEmployee(employee);
         }catch ( Exception e){
             return ResponseEntity.status(500).header("error","can not be added").body(null);

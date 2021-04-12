@@ -77,6 +77,7 @@ public class EmployeeService {
     @Transactional
     public void addEmployee(Employee employee) {
         employee.changeEmpty();
+
         String pass = passwordEncoder.encode(employee.getPassword());
 
         employeeRepo.addEmployee(
