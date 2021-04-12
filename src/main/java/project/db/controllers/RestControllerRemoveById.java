@@ -55,7 +55,7 @@ public class RestControllerRemoveById {
     @RequestMapping(value = {"/remove_store_product"}, method = RequestMethod.POST)
     public ResponseEntity<String > remove_store_product(@RequestBody Map<String,String> map){
         try {
-            storeProductService.removeStoreProductByUPC(map.get("UPC"));
+            storeProductService.removeStoreProductByUPC(map.get("upc"));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","can not be removed").body("");
@@ -65,7 +65,7 @@ public class RestControllerRemoveById {
     @RequestMapping(value = {"/remove_sale"}, method = RequestMethod.POST)
     public ResponseEntity<String > remove_sale(@RequestBody Map<String,String> map){
         try {
-            saleService.removeSaleByUpcCheckNumber(map.get("UPC"), map.get("check_number"));
+            saleService.removeSaleByUpcCheckNumber(map.get("upc"), map.get("check_number"));
             return ResponseEntity.ok().body("{\"removed\":\"removed\"}");
         } catch (Exception e){
             return ResponseEntity.status(500).header("error","can not be removed").body("");

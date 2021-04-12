@@ -41,8 +41,8 @@ public class RestControllerGetAllById {
     }
 
     @RequestMapping(value = {"/get_store_product_by_upc"}, method = RequestMethod.GET)
-    public ResponseEntity<Store_Product> get_store_product_by_upc(@RequestParam String UPC){
-        return ResponseEntity.status(HttpStatus.OK).body(storeProductService.getStoreProductByUPC(UPC));
+    public ResponseEntity<Store_Product> get_store_product_by_upc(@RequestParam String upc){
+        return ResponseEntity.status(HttpStatus.OK).body(storeProductService.getStoreProductByUPC(upc));
     }
 
     @RequestMapping(value = {"/get_sale_by_upc_check_number"}, method = RequestMethod.GET)
