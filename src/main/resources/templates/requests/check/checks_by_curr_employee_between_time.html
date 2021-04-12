@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Get checks by current employee between time</title>
+    <title>Get checks with sales between time</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/table_style.css" type="text/css">
@@ -15,7 +15,7 @@
 
 
 <div class="col2">
-    <h1>Get checks by current employee between time</h1>
+    <h1>Get checks with sales by current employee between time</h1>
 
     <form id="form">
 
@@ -28,7 +28,26 @@
         <button class="btn btn-success" type="submit">Search</button>
     </form>
 
-    <div id="result"></div>
+
+    <table id="table" class="table table-hover table-bordered" style="visibility: hidden;">
+        <thead>
+        <th>CHECK NUMBER</th>
+        <th>CARD NUMBER</th>
+        <th>EMPLOYEE ID</th>
+        <th>PRINT DATE</th>
+        <th>TOTAL</th>
+        <th>VAT</th>
+        <th>VIEW</th>
+        </thead>
+        <tbody id="table_body">
+        <tr class = "table_row" >
+
+        </tr>
+        </tbody>
+    </table>
+
+    <h3 id="no_results" style="visibility: hidden">No results found</h3>
+
 
 </div>
 
@@ -36,8 +55,18 @@
 <script>
     var $products = $('#table_body');
 
-    $(function() {
+    function formTableRow(check){
+        return '<tr class = "table_row" id="'+check.check_number+'"><td>' + check.check_number + '</td>' +
+            '<td>' + check.card_number + '</td>' +
+            '<td>' + check.id_employee + '</td>' +
+            '<td>' + check.print_date + '</td>' +
+            '<td>' + check.sum_total + '</td>' +
+            '<td>' + check.vat + '</td>' +
+            '<td><button class="view_button edit_button btn btn-success" value="'+check.check_number+'" type="submit">View</button></td>' +
+            '</tr>';
+    }
 
+    $(function() {
 
         $('#form').submit(function(e) {
             e.preventDefault();
@@ -61,9 +90,29 @@
                     xhr.setRequestHeader('Content-Type', 'application/json')
                 },
                 success: function (response) {
-                    document.getElementById("result").innerHTML= "Sum = "+response;
+                    // $('input').val('');
+                    if(response.length == 0){
+                        document.getElementById("table").style.visibility = 'hidden';
+                        document.getElementById("no_results").style.visibility = 'visible';
+                    }
+                    else {
+                        document.getElementById("table").style.visibility = 'visible';
+                        document.getElementById("no_results").style.visibility = 'hidden';
+                        response.forEach(function (prod) {
+                            $products.append(formTableRow(prod));
+                        });
+                    }
+
 
                 }
+            });
+        });
+
+        $(document).ready(function() {
+
+
+            $(document).on("click",".view_button",function() {
+                window.location.href = "/view_sale/"+$(this).val();
             });
         });
 

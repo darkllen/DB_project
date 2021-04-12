@@ -18,7 +18,7 @@
 <div class="col2">
     <h1>Get current employee info</h1>
 
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered" style="margin-left: 0px; width: 100%">
         <thead>
         <th>EMPLOYEE ID</th>
         <th>EMPLOYEE NAME</th>
@@ -47,7 +47,7 @@
     var $empl = $('#table_body');
     getAll($empl);
 
-    function formTableRow(empl){
+    function formTableRow(e){
         return '<tr class = "table_row">' +
             '<td>' + e.id_employee + '</td>' +
             '<td>' + e.empl_surname + '</td>' +
@@ -70,9 +70,7 @@
             url: '/get_current_employee',
 
             success: function (response) {
-                response.forEach(function (empl) {
-                    $empl.append(formTableRow(empl));
-                });
+                    $empl.append(formTableRow(response));
 
             }
         });
