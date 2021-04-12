@@ -120,6 +120,22 @@ public class WebRequestController {
         return "requests/customer/customers_by_percent";
     }
 
+    @RequestMapping(value = {"/checks_by_curr_employee_between_time"}, method = RequestMethod.GET)
+    public String checks_by_curr_employee_between_time(){
+        return "requests/check/checks_by_curr_employee_between_time";
+    }
+    @RequestMapping(value = {"/check_by_check_number"}, method = RequestMethod.GET)
+    public String check_by_check_number(){
+        return "requests/check/check_by_check_number";
+    }
+
+    @RequestMapping(value = {"/customers_by_surname"}, method = RequestMethod.GET)
+    public String customers_by_surname(){
+        return "requests/customer/customers_by_surname";
+    }
+
+
+
 
 
 
