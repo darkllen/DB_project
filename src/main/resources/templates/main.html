@@ -10,8 +10,8 @@
 <div th:insert="~{fragments/header :: head}"></div>
 
 <!--<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="btn-group btn-group-justified">-->
-<h2 class="main_h2">Add info</h2>
-<div class="my-group-main my-group btn-group btn-group-justified" style="margin-top: 15px;">
+<h2 th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="main_h2">Add info</h2>
+<div th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}" class="my-group-main my-group btn-group btn-group-justified" style="margin-top: 15px;">
     <a href="/add" class="btn btn-warning">Add</a>
 </div>
 

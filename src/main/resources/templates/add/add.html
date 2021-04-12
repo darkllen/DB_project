@@ -395,10 +395,10 @@
 
         $('#employee').submit(function(e) {
             e.preventDefault();
-            var password = $(this).find('[name=em_pas]').val();
 
 
             var data = {id_employee: $(this).find('[name=em_id]').val()
+                    , password: $(this).find('[name=em_pas]').val()
                     , empl_surname: $(this).find('[name=em_surname]').val()
                     , empl_name: $(this).find('[name=em_name]').val()
                     , empl_patronymic: $(this).find('[name=em_patron]').val()
@@ -410,11 +410,6 @@
                     , city: $(this).find('[name=em_city]').val()
                     , street: $(this).find('[name=em_street]').val()
                     , zip_code: $(this).find('[name=em_zipcode]').val()};
-
-            if(password!='') data["password"] = password;
-
-            console.log(data);
-
 
 
                 $.ajax({

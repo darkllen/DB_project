@@ -103,6 +103,8 @@
             $('#employee').submit(function(e) {
                 e.preventDefault();
 
+                var password = $(this).find('[name=em_pas]').val();
+
                 var data = {
                       id_employee: $(this).find('[name=em_id]').val()
                     , password: $(this).find('[name=em_pas]').val()
@@ -117,6 +119,10 @@
                     , city: $(this).find('[name=em_city]').val()
                     , street: $(this).find('[name=em_street]').val()
                     , zip_code: $(this).find('[name=em_zipcode]').val()};
+
+                if(password!='') data["password"] = password;
+
+
                 $.ajax({
                     type: 'POST',
                     url: '/edit_employee/'+id,
