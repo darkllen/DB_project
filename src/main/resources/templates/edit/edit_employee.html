@@ -83,7 +83,6 @@
                     var date_of_birth = new Date(response.date_of_birth).toLocaleDateString('en-CA');
                     var date_of_start = new Date(response.date_of_start).toLocaleDateString('en-CA');
                     $("input[name='em_id']").val(response.id_employee);
-                    $("input[name='em_pas']").val(response.password);
                     $("input[name='em_surname']").val(response.empl_surname);
                     $("input[name='em_name']").val(response.empl_name);
                     $("input[name='em_patron']").val(response.empl_patronymic);
