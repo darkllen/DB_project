@@ -23,8 +23,8 @@
         <th>EMPLOYEE SURNAME</th>
         <th>EMPLOYEE NAME</th>
         <th>EMPLOYEE ID</th>
-        <th>EDIT</th>
-        <th>REMOVE</th>
+        <th id="manager" th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}">EDIT</th>
+        <th th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}">REMOVE</th>
         </thead>
         <tbody id="table_body">
         <tr class = "table_row" >
@@ -40,12 +40,15 @@
     getAll($table);
 
     function formTableRow(empl){
-        return '<tr class = "table_row"><td>' + empl.empl_surname + '</td>' +
+        var ans = '<tr class = "table_row"><td>' + empl.empl_surname + '</td>' +
             '<td>' + empl.empl_name + '</td>' +
-            '<td>' + empl.id_employee + '</td>' +
+            '<td>' + empl.id_employee + '</td>';
+        if(document.getElementById("manager")!=null)
+            ans+=
             '<td><button class="edit_button btn btn-success" value="'+empl.id_employee+'" type="submit">Edit</button></td>' +
-            '<td><button class="remove_button btn btn-danger" value="'+empl.id_employee+'" type="submit">Remove</button></td>' +
-            '</tr>';
+            '<td><button class="remove_button btn btn-danger" value="'+empl.id_employee+'" type="submit">Remove</button></td>';
+        ans+='</tr>';
+        return ans;
     }
 
 

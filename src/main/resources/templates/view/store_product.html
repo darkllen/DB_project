@@ -22,8 +22,8 @@
         <thead>
         <th>PRODUCT UPC</th>
         <th>PRODUCT NAME</th>
-        <th>EDIT</th>
-        <th>REMOVE</th>
+        <th id="manager" th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}">EDIT</th>
+        <th th:if="${#authorization.expression('hasAuthority(''MANAGER'')')}">REMOVE</th>
         </thead>
         <tbody id="table_body">
         <tr class = "table_row" >
@@ -39,11 +39,14 @@
     getAll($table);
 
     function formTableRow(product){
-        return '<tr class = "table_row"><td>' + product.upc + '</td>' +
-            '<td>' + product.product_name + '</td>' +
+        var ans = '<tr class = "table_row"><td>' + product.upc + '</td>' +
+            '<td>' + product.product_name + '</td>';
+        if(document.getElementById("manager")!=null)
+            ans+=
             '<td><button class="edit_button btn btn-success" value="'+product.upc+'" type="submit">Edit</button></td>' +
-            '<td><button class="remove_button btn btn-danger" value="'+product.upc+'" type="submit">Remove</button></td>' +
-            '</tr>';
+            '<td><button class="remove_button btn btn-danger" value="'+product.upc+'" type="submit">Remove</button></td>';
+        ans+= '</tr>';
+        return ans;
     }
 
 
