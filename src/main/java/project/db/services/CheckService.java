@@ -40,6 +40,7 @@ public class CheckService {
 
     @Transactional
     public void editCheck(Check check, String prev_check_number) {
+        check.changeEmpty();
         checkRepo.editCheck(prev_check_number,
                 check.getCheck_number(),
                 check.getId_employee(),
@@ -51,6 +52,7 @@ public class CheckService {
 
     @Transactional
     public void addCheck(Check check) {
+        check.changeEmpty();
         checkRepo.addCheck(
                 check.getCheck_number(),
                 check.getId_employee(),

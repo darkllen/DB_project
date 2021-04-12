@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 @Table(name = "Store_Product")
-public class Store_Product {
+public class Store_Product implements NotEmptyF{
 
     @Id
     @Column(name = "UPC")
@@ -42,4 +42,8 @@ public class Store_Product {
     @Column(name = "promotional_product")
     @NotNull
     private boolean promotional_product;
+
+    public void changeEmpty(){
+        if (upc_prom.isEmpty()) upc_prom=null;
+    }
 }

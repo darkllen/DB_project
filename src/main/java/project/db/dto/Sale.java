@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Table(name = "Sale")
 @IdClass(SaleId.class)
-public class Sale {
+public class Sale implements NotEmptyF{
 
     @Id
     @Column(name = "UPC")
