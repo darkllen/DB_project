@@ -30,8 +30,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authenticationProvider(authProvider())
                 .authorizeRequests()
                 .antMatchers("/*").authenticated()
+                .antMatchers("/edit_check/*").authenticated()
                 .antMatchers(
-                        "/edit_check/*",
                         "/edit_customer_card/*",
                         "/*checks_by_curr_employee_between_time",
                         "/*check_by_check_number",
@@ -49,8 +49,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         "/check_kassir"
                 ).hasAuthority("KASSIR")
                 .antMatchers(
-                        "/add*",
                         "/edit*/*",
+                        "/add*",
                         "/remove*",
                         "/*all_categories_sorted_name",
                         "/*cassiers_sorted_surname",
